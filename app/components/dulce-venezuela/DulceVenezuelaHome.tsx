@@ -1,4 +1,17 @@
 import Image from "next/image";
+import { Mail, PartyPopper } from "lucide-react";
+import {
+  buildMesaDulceMailto,
+  buildWhatsAppContactHref,
+  isWhatsAppWebHref,
+} from "@/lib/contact-public";
+import { AddToCartButton } from "@/app/components/cart/AddToCartButton";
+import { formatEuroES } from "@/lib/format-euro";
+import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
+import { BottomNav } from "./BottomNav";
+import { CategoryFilterSection } from "./CategoryFilterSection";
+import { TopNav } from "./TopNav";
+import { WhatsAppBrandIcon } from "./WhatsAppBrandIcon";
 
 const IMAGES = {
   tresLeches:
@@ -7,258 +20,278 @@ const IMAGES = {
     "https://lh3.googleusercontent.com/aida-public/AB6AXuBUB_AGOwQgL52Xg3CwB83ZFYQfG-zJifRhdwJFlJ9dM39n8fIj0GniyNqWC-m19F_RSJKdH9VpJDwo6631jQrIvQYIJKEhTjRx0kClGyRwiO-XXFVbDlTBkp0gXIeIIIv2iviGVa0D3i5Jo-3julr878RUeYoJoedGJLohilauls5QInC5OShek6TpNnYlqupSq0BI-kDmF3upBDUAcbUGgg9OGYhQ5RkTqlxn4ZTHHvTvK7OYnNBaNThkvWCg764kzkRz_YKazDvH",
   quesillo:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuBozKqZoogbgijyV8-KJUFC5-7LZRILIGALzyZ3H8Rb8GPNANMlpSNOWDvmDKdLPkDHmU7WuWmX3lT21vdBM_6_QdJsOXnVSPIHPk76JdyHh7paE-NAcVoXLNcZImV7IZY81wSPiOYSNfwMNdIFB53UvYN1grgxgAuas_rrsfAzSOwFvfTkgEk9IhJZ8luaXDh1jqEgAT5Ey_ShNMt62MpeiVx_O5bbzlqinGoU0372LZlH6LNs6zZI2DTdGWMEs-k6hlVyPMaKz1Yv",
-  /** Imagen de respaldo: la URL de Stitch para golfeados venía truncada */
+  /**
+   * Rollos en bandeja (referencia visual tipo golfeado / canela) — luz suave y fondo neutro.
+   * Unsplash: photo-1694632288834-17d86b340745
+   */
   golfeados:
-    "https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=1200&q=80",
+    "https://images.unsplash.com/photo-1694632288834-17d86b340745?w=1600&q=88&auto=format&fit=crop",
 } as const;
 
-const FILTER_TAGS = [
-  "Todos",
-  "Golfeados",
-  "Cachitos",
-  "Postres Fríos",
-  "Quesillos",
-] as const;
+/** Contenedor de foto: misma altura en tarjetas lista + recorte limpio */
+const catalogProductImageSlotBase =
+  "catalog-product-image-slot relative isolate w-full shrink-0 overflow-hidden bg-slate-200/80 dark:bg-slate-800/90";
 
-function TopNav() {
+const catalogProductThumbHeight = "h-56 sm:h-64 md:h-64";
+
+/**
+ * Misma gradación y encuadre en todas las fotos del catálogo (relleno total + cover).
+ */
+const catalogPhotoClass =
+  "h-full w-full min-h-0 min-w-0 max-h-none object-cover object-center brightness-[1.04] contrast-[1.02] saturate-[1.05] transition-transform duration-700 ease-out group-hover:scale-[1.02]";
+
+/** Velo ligero cálido + viñeta para igualar iluminación entre fuentes distintas */
+function CatalogImageVeil() {
   return (
-    <nav className="sticky top-0 z-50 border-b border-white/40 bg-white/70 shadow-sm backdrop-blur-xl transition-all duration-300 dark:border-slate-700/40 dark:bg-slate-900/70">
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-4">
-          <button
-            type="button"
-            className="text-blue-800 transition-opacity duration-200 hover:opacity-80 active:scale-95 dark:text-blue-400"
-            aria-label="Abrir menú"
+    <div
+      className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(24,18,14,0.12)_82%,rgba(12,8,6,0.22)_100%),linear-gradient(to_top,rgba(28,20,16,0.12)_0%,transparent_45%,rgba(255,248,240,0.1)_100%)]"
+      aria-hidden
+    />
+  );
+}
+
+/** Precio: mismo bloque en todas las tarjetas para lectura rápida */
+const priceDisplayClass =
+  "inline-flex min-h-[3.25rem] min-w-[6.5rem] items-center justify-center rounded-2xl border border-primary/25 bg-white px-4 text-xl font-extrabold tabular-nums tracking-tight text-primary shadow-[0_1px_0_rgba(255,255,255,0.9)_inset,0_2px_8px_-2px_rgba(12,36,99,0.12)] sm:min-w-[7rem] sm:text-2xl dark:border-primary/35 dark:bg-slate-900 dark:text-slate-50 dark:shadow-[0_1px_0_rgba(255,255,255,0.06)_inset]";
+
+/** Etiquetas de confianza / novedad para orientar la compra */
+type CatalogBadgeKind = "nuevo" | "masVendido" | "favorito";
+
+const BADGE_LABEL: Record<CatalogBadgeKind, string> = {
+  nuevo: "Nuevo",
+  masVendido: "Más vendido",
+  favorito: "Favorito",
+};
+
+function productBadgeClass(kind: CatalogBadgeKind): string {
+  const base =
+    "inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest shadow-md ring-1 backdrop-blur-sm sm:px-3 sm:py-1 sm:text-[11px]";
+  if (kind === "nuevo") {
+    return `${base} bg-emerald-600/95 text-white ring-white/25`;
+  }
+  if (kind === "masVendido") {
+    return `${base} bg-amber-500/95 text-white ring-white/30`;
+  }
+  return `${base} bg-secondary-container text-on-secondary-container ring-black/12`;
+}
+
+function ProductBadgeStrip({ badges }: { badges: CatalogBadgeKind[] }) {
+  if (badges.length === 0) return null;
+  return (
+    <ul
+      className="flex max-w-[min(100%,22rem)] flex-wrap gap-2"
+      aria-label="Destacados del producto"
+    >
+      {badges.map((kind) => (
+        <li key={kind}>
+          <span className={productBadgeClass(kind)}>{BADGE_LABEL[kind]}</span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** Elevación al pasar el ratón: sombra más definida, menos “nublado” */
+const cardHoverLiftClass =
+  "transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-0.5 hover:border-primary/22 hover:shadow-[0_1px_0_rgba(255,255,255,0.75)_inset,0_12px_36px_-14px_rgba(12,36,99,0.16),0_4px_14px_-6px_rgba(28,29,38,0.08)] dark:hover:border-slate-500/55 dark:hover:shadow-[0_1px_0_rgba(255,255,255,0.05)_inset,0_16px_40px_-12px_rgba(0,0,0,0.45)]";
+
+/** Hero de entrada: bloque claro con foto, copy breve y acciones */
+function LandingHero() {
+  const waContactHref = buildWhatsAppContactHref();
+  const openWhatsAppInNewTab = isWhatsAppWebHref(waContactHref);
+
+  return (
+    <section
+      className="overflow-hidden rounded-3xl border border-outline-variant/55 bg-white shadow-card-soft ring-1 ring-black/[0.03] dark:border-slate-600/50 dark:bg-slate-950 dark:ring-white/[0.06]"
+      aria-labelledby="hero-heading"
+    >
+      <div className="grid lg:grid-cols-2 lg:items-stretch">
+        <div className="order-2 flex flex-col justify-center gap-5 px-6 py-8 sm:gap-6 sm:px-10 sm:py-10 lg:order-1 lg:px-12 lg:py-14">
+          <h1
+            id="hero-heading"
+            className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight text-primary sm:text-4xl lg:text-[2.45rem] lg:leading-[1.08]"
           >
-            <span className="material-symbols-outlined">menu</span>
-          </button>
-          <div className="group relative overflow-hidden rounded-lg px-4 py-1">
-            <div className="absolute inset-0 flex flex-col opacity-20 transition-opacity group-hover:opacity-30">
-              <div className="h-1/3 bg-[#fed721]" />
-              <div className="h-1/3 bg-[#0033a0]" />
-              <div className="h-1/3 bg-[#ba1a1a]" />
-            </div>
-            <div className="absolute inset-0 glass-panel opacity-40" />
-            <span className="relative text-2xl font-black tracking-tighter text-primary drop-shadow-sm dark:text-blue-400">
-              Dulce Venezuela
-            </span>
+            Repostería venezolana, hecha hoy.
+          </h1>
+          <p className="max-w-md text-base leading-relaxed text-on-surface-variant sm:text-lg">
+            Para llevar y mesas dulces bajo encargo.
+          </p>
+          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <a
+              href="#catalogo"
+              className="shadow-card-soft inline-flex h-12 min-h-12 items-center justify-center rounded-full bg-primary-container px-8 text-sm font-semibold text-white ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-primary hover:shadow-md active:scale-[0.98]"
+            >
+              Ver catálogo
+            </a>
+            <a
+              href={waContactHref}
+              target={openWhatsAppInNewTab ? "_blank" : undefined}
+              rel={openWhatsAppInNewTab ? "noopener noreferrer" : undefined}
+              className="inline-flex h-12 min-h-12 items-center justify-center rounded-full border-2 border-primary/28 bg-white px-6 text-sm font-semibold text-primary shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-surface-container-low active:scale-[0.98] dark:bg-slate-900/70 dark:hover:bg-slate-800/90"
+            >
+              <WhatsAppBrandIcon className="mr-1.5 size-[22px] shrink-0" />
+              WhatsApp
+            </a>
           </div>
         </div>
-
-        <div className="hidden items-center space-x-8 md:flex">
-          <a
-            className="font-sans font-light tracking-tight text-slate-500 transition-opacity hover:opacity-80"
-            href="#"
-          >
-            Inicio
-          </a>
-          <a
-            className="font-sans font-bold tracking-tight text-blue-800 transition-opacity hover:opacity-80"
-            href="#"
-          >
-            Tienda
-          </a>
-          <a
-            className="font-sans font-light tracking-tight text-slate-500 transition-opacity hover:opacity-80"
-            href="#"
-          >
-            Favoritos
-          </a>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <button
-            type="button"
-            className="relative text-blue-800 transition-opacity duration-200 hover:opacity-80 active:scale-95 dark:text-blue-400"
-            aria-label="Carrito, 3 artículos"
-          >
-            <span className="material-symbols-outlined">shopping_cart</span>
-            <span className="absolute -right-1 -top-1 rounded-full bg-secondary-container px-1.5 text-[10px] font-bold text-on-secondary-container">
-              3
-            </span>
-          </button>
+        <div className="relative order-1 aspect-[16/11] min-h-[200px] w-full sm:aspect-[16/10] sm:min-h-[240px] lg:aspect-auto lg:min-h-[300px]">
+          <Image
+            src={IMAGES.tresLeches}
+            alt="Tarta tres leches con merengue y canela"
+            fill
+            className="object-cover object-center"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            priority
+          />
+          <div
+            className="pointer-events-none absolute inset-0 bg-linear-to-tr from-black/10 via-transparent to-white/10"
+            aria-hidden
+          />
         </div>
       </div>
-    </nav>
+    </section>
+  );
+}
+
+function VenezuelaFlagBackground() {
+  const stars = [
+    { x: 160, y: 170 },
+    { x: 245, y: 132 },
+    { x: 335, y: 112 },
+    { x: 430, y: 104 },
+    { x: 525, y: 112 },
+    { x: 615, y: 132 },
+    { x: 700, y: 170 },
+  ] as const;
+
+  return (
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div className="absolute inset-0 opacity-[0.38]">
+        <div className="h-1/3 bg-linear-to-b from-[#ffdd33] via-[#f7cb18] to-[#e5b700]" />
+        <div className="h-1/3 bg-linear-to-b from-[#0a3db4] via-[#0033a0] to-[#00297f]" />
+        <div className="h-1/3 bg-linear-to-b from-[#d22a2a] via-[#ba1a1a] to-[#971010]" />
+      </div>
+
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_20%,rgba(255,255,255,0.12),transparent_42%),radial-gradient(circle_at_78%_72%,rgba(255,255,255,0.08),transparent_40%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_35%,rgba(0,0,0,0.08)_100%)]" />
+
+      <svg
+        viewBox="0 0 860 300"
+        className="absolute left-1/2 top-1/2 w-[min(88vw,920px)] max-w-[920px] -translate-x-1/2 -translate-y-[44%] opacity-[0.22]"
+        aria-hidden="true"
+      >
+        {stars.map((star) => (
+          <text
+            key={`${star.x}-${star.y}`}
+            x={star.x}
+            y={star.y}
+            fill="#ffffff"
+            fontSize="34"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            style={{
+              filter: "drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2))",
+            }}
+          >
+            ★
+          </text>
+        ))}
+      </svg>
+
+      <div className="absolute inset-0 bg-background/88 backdrop-blur-[3px] saturate-[1.02]" />
+      <div className="absolute inset-0 bg-linear-to-b from-white/35 via-transparent to-white/28" />
+    </div>
   );
 }
 
 function HeroHeader() {
   return (
-    <header className="space-y-8">
-      <div className="max-w-2xl">
-        <h1 className="mb-4 text-5xl font-black leading-tight tracking-tighter text-primary">
-          Sabores que cuentan historias.
-        </h1>
-        <p className="text-lg font-light leading-relaxed text-on-surface-variant">
-          Nuestra repostería es un puente entre la tradición venezolana y el
-          refinamiento contemporáneo.
+    <header className="space-y-6 sm:space-y-7">
+      <div className="max-w-2xl space-y-1.5">
+        <h2 className="text-lg font-semibold tracking-tight text-primary sm:text-xl">
+          Explorar dulces
+        </h2>
+        <p className="text-sm leading-relaxed text-on-surface-variant sm:text-base sm:leading-relaxed">
+          Busca por nombre o elige una categoría.
         </p>
       </div>
 
-      <div className="flex flex-col items-center gap-6 md:flex-row">
-        <div className="relative w-full md:max-w-md">
-          <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">
-            search
-          </span>
+      <div className="flex flex-col items-stretch gap-5 md:flex-row md:items-end md:gap-5 lg:gap-6">
+        <div className="relative w-full md:max-w-md md:shrink-0 lg:max-w-lg">
+          <label htmlFor="catalog-search" className="sr-only">
+            Buscar en el catálogo
+          </label>
           <input
+            id="catalog-search"
             type="search"
-            placeholder="Buscar delicias..."
-            className="w-full rounded-2xl border-none bg-surface-container-low py-4 pl-12 pr-4 font-light placeholder:text-outline-variant transition-all focus:ring-2 focus:ring-primary-container"
+            placeholder="Buscar delicias…"
+            autoComplete="off"
+            className="shadow-card-soft w-full rounded-3xl border border-outline-variant/60 bg-white py-3.5 pl-5 pr-5 text-base font-normal text-on-surface placeholder:text-on-surface-variant/70 transition duration-200 placeholder:font-normal hover:border-primary/40 hover:shadow-[0_8px_28px_-12px_rgba(12,36,99,0.14)] focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/18 dark:border-slate-600/50 dark:bg-slate-950 dark:text-white dark:hover:border-primary/45 dark:placeholder:text-slate-500"
           />
         </div>
-        <div className="no-scrollbar flex flex-wrap gap-3 overflow-x-auto pb-2">
-          {FILTER_TAGS.map((tag) => (
-            <span
-              key={tag}
-              className={
-                tag === "Todos"
-                  ? "cursor-pointer rounded-full bg-primary-container px-6 py-2 text-sm font-medium text-white transition-all"
-                  : "glass-panel cursor-pointer rounded-full px-6 py-2 text-sm font-medium text-on-surface-variant transition-all hover:bg-surface-container-high"
-              }
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
+        <CategoryFilterSection />
       </div>
     </header>
   );
 }
 
-function ProductGrid() {
+function OccasionsCallout() {
+  const mailtoHref = buildMesaDulceMailto();
+  const waContactHref = buildWhatsAppContactHref();
+  const openWhatsAppInNewTab = isWhatsAppWebHref(waContactHref);
+
   return (
-    <section className="grid grid-cols-1 gap-8 pb-12 md:grid-cols-12">
-      <div className="glass-panel group relative h-[500px] overflow-hidden rounded-[2rem] shadow-[0_20px_50px_rgba(0,51,160,0.06)] md:col-span-8">
-        <Image
-          src={IMAGES.tresLeches}
-          alt="Tarta Tres Leches"
-          fill
-          className="object-cover transition-transform duration-700 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 66vw"
-          priority
+    <section
+      className={`glass-panel shadow-card-soft rounded-3xl px-6 py-7 sm:px-8 sm:py-8 ${cardHoverLiftClass}`}
+      aria-labelledby="occasions-heading"
+    >
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
+        <PartyPopper
+          className="size-10 shrink-0 text-primary sm:size-12"
+          strokeWidth={LUCIDE_ICON_STROKE}
+          aria-hidden
         />
-        <div className="absolute inset-0 bg-linear-to-t from-primary/60 via-transparent to-transparent" />
-        <div className="absolute bottom-0 left-0 flex w-full items-end justify-between p-10">
-          <div className="space-y-2 text-white">
-            <span className="rounded-full bg-secondary-container px-3 py-1 text-xs font-bold uppercase tracking-widest text-on-secondary-container">
-              Favorito de la Casa
-            </span>
-            <h3 className="text-4xl font-bold">Tarta Tres Leches</h3>
-            <p className="max-w-sm font-light text-white/80">
-              Bizcocho esponjoso bañado en tres tipos de leche, coronado con
-              merengue suizo y canela.
-            </p>
-          </div>
-          <button
-            type="button"
-            className="rounded-xl bg-primary-container px-8 py-4 font-bold text-white shadow-xl transition-all hover:scale-105 active:scale-95"
+        <div className="min-w-0 flex-1">
+          <h2
+            id="occasions-heading"
+            className="text-xl font-semibold leading-snug tracking-tight text-primary sm:text-2xl"
           >
-            $8.50
-          </button>
-        </div>
-      </div>
-
-      <div className="glass-panel group relative flex flex-col overflow-hidden rounded-[2rem] shadow-[0_20px_50px_rgba(0,51,160,0.06)] md:col-span-4">
-        <div className="relative h-64 overflow-hidden">
-          <Image
-            src={IMAGES.cachitos}
-            alt="Cachitos de Jamón"
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 33vw"
-          />
-          <div className="absolute right-4 top-4">
-            <button
-              type="button"
-              className="glass-panel flex h-10 w-10 items-center justify-center rounded-full text-primary transition-colors hover:bg-white"
-              aria-label="Añadir a favoritos"
+            Preparamos tu mesa dulce
+          </h2>
+          <p className="mt-3 text-base font-normal leading-relaxed text-on-surface sm:text-lg sm:leading-relaxed">
+            Diseñamos bandejas y mesas de postres para{" "}
+            <strong className="font-semibold text-on-surface">bodas</strong>,{" "}
+            <strong className="font-semibold text-on-surface">cumpleaños</strong>,
+            una{" "}
+            <strong className="font-semibold text-on-surface">reunión</strong> con
+            amigos,{" "}
+            <strong className="font-semibold text-on-surface">celebraciones</strong>{" "}
+            en familia,{" "}
+            <strong className="font-semibold text-on-surface">eventos</strong> más
+            formales y, en general,{" "}
+            <strong className="font-semibold text-on-surface">
+              todo tipo de celebración
+            </strong>
+            . Cuéntanos fecha, número de comensales y estilo, y te proponemos una
+            selección equilibrada de nuestros dulces.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
+            <a
+              href={mailtoHref}
+              className="shadow-card-soft inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary-container px-6 text-sm font-semibold text-white ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-primary hover:shadow-md hover:ring-white/25 active:translate-y-0 active:scale-[0.98]"
             >
-              <span className="material-symbols-outlined">favorite</span>
-            </button>
-          </div>
-        </div>
-        <div className="flex flex-grow flex-col justify-between space-y-4 p-8">
-          <div>
-            <h3 className="text-2xl font-bold text-primary">
-              Cachitos de Jamón
-            </h3>
-            <p className="mt-2 text-sm font-light text-on-surface-variant">
-              Pan suave relleno de jamón ahumado y tocineta, horneado al
-              momento.
-            </p>
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <span className="text-xl font-black text-primary">$3.50</span>
-            <button
-              type="button"
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-container text-white transition-all hover:scale-110 active:scale-90"
-              aria-label="Añadir al carrito"
+              <Mail className="size-[22px] shrink-0" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
+              Pedir presupuesto
+            </a>
+            <a
+              href={waContactHref}
+              target={openWhatsAppInNewTab ? "_blank" : undefined}
+              rel={openWhatsAppInNewTab ? "noopener noreferrer" : undefined}
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-full border-2 border-primary/30 bg-white px-6 text-sm font-semibold text-primary shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-surface-container-low hover:shadow-md active:translate-y-0 active:scale-[0.98] dark:border-primary/35 dark:bg-slate-950 dark:hover:bg-slate-900"
             >
-              <span className="material-symbols-outlined">add</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="glass-panel group relative flex flex-col overflow-hidden rounded-[2rem] shadow-[0_20px_50px_rgba(0,51,160,0.06)] md:col-span-4">
-        <div className="relative h-64 overflow-hidden">
-          <Image
-            src={IMAGES.quesillo}
-            alt="Quesillo Tradicional"
-            fill
-            className="object-cover transition-transform duration-700 group-hover:scale-105"
-            sizes="(max-width: 768px) 100vw, 33vw"
-          />
-        </div>
-        <div className="flex flex-grow flex-col justify-between space-y-4 p-8">
-          <div>
-            <h3 className="text-2xl font-bold text-primary">Quesillo</h3>
-            <p className="mt-2 text-sm font-light text-on-surface-variant">
-              Nuestra versión del flan con el toque perfecto de ron y vainilla.
-            </p>
-          </div>
-          <div className="mt-6 flex items-center justify-between">
-            <span className="text-xl font-black text-primary">$5.00</span>
-            <button
-              type="button"
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-container text-white transition-all hover:scale-110 active:scale-90"
-              aria-label="Añadir al carrito"
-            >
-              <span className="material-symbols-outlined">add</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div className="glass-panel group relative h-[400px] overflow-hidden rounded-[2rem] shadow-[0_20px_50px_rgba(0,51,160,0.06)] md:col-span-8">
-        <div className="absolute inset-0 flex">
-          <div className="z-10 flex w-1/2 flex-col justify-center space-y-6 p-12">
-            <span className="text-xs font-bold uppercase tracking-widest text-secondary-fixed-dim">
-              Receta de la Abuela
-            </span>
-            <h3 className="text-3xl font-bold leading-tight text-primary">
-              Golfeados con Queso de Mano
-            </h3>
-            <p className="font-light text-on-surface-variant">
-              Rollos de canela y papelón con un toque de anís dulce, servidos
-              con queso fresco fundido.
-            </p>
-            <button
-              type="button"
-              className="w-fit rounded-full border border-primary px-8 py-3 font-bold text-primary transition-all hover:bg-primary hover:text-white"
-            >
-              Descubrir Sabor
-            </button>
-          </div>
-          <div className="relative w-1/2">
-            <Image
-              src={IMAGES.golfeados}
-              alt="Golfeados"
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 50vw, 40vw"
-            />
+              <WhatsAppBrandIcon className="size-[22px] shrink-0" />
+              Por WhatsApp
+            </a>
           </div>
         </div>
       </div>
@@ -266,51 +299,164 @@ function ProductGrid() {
   );
 }
 
-function BottomNav() {
+function ProductGrid() {
   return (
-    <nav className="pb-safe fixed bottom-0 left-0 z-50 flex w-full justify-around rounded-t-2xl border-t border-white/20 bg-white/80 px-4 pt-2 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] backdrop-blur-2xl dark:bg-slate-900/80 md:hidden">
-      <div className="tap-highlight-none flex flex-col items-center justify-center text-blue-800 transition-transform active:scale-90 dark:text-blue-300">
-        <span
-          className="material-symbols-outlined"
-          style={{ fontVariationSettings: "'FILL' 1" }}
+    <section
+      id="catalogo"
+      className="scroll-mt-24 grid grid-cols-1 gap-8 pb-14 sm:gap-10 sm:scroll-mt-28 md:grid-cols-12 md:gap-12 md:pb-16"
+      aria-label="Catálogo de productos"
+    >
+      <div
+        className={`catalog-product-image-slot glass-panel shadow-card-soft group relative min-h-[22rem] h-[min(70vh,32rem)] overflow-hidden rounded-3xl sm:min-h-[26rem] md:col-span-8 md:h-[500px] md:min-h-0 ${cardHoverLiftClass}`}
+      >
+        <Image
+          src={IMAGES.tresLeches}
+          alt="Tarta Tres Leches"
+          fill
+          className={catalogPhotoClass}
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 66vw, 800px"
+        />
+        <CatalogImageVeil />
+        <div className="absolute inset-0 bg-linear-to-t from-[#040814]/90 via-[#040814]/35 via-45% to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-br from-black/25 to-transparent opacity-80" />
+        <div className="absolute left-4 top-4 z-[12] sm:left-5 sm:top-5">
+          <ProductBadgeStrip badges={["masVendido", "favorito"]} />
+        </div>
+        <div className="absolute inset-x-0 bottom-0 flex flex-col gap-6 p-6 sm:flex-row sm:items-end sm:justify-between sm:p-10">
+          <div className="max-w-xl space-y-3 rounded-3xl border border-white/25 bg-black/50 px-5 py-4 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.5)] backdrop-blur-md backdrop-saturate-125 sm:space-y-3 sm:px-6 sm:py-5">
+            <h3 className="text-3xl font-bold leading-tight tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] sm:text-4xl">
+              Tarta Tres Leches
+            </h3>
+            <p className="max-w-md text-base font-normal leading-relaxed text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.55)] sm:text-lg sm:leading-relaxed">
+              Bizcocho esponjoso bañado en tres tipos de leche, coronado con
+              merengue suizo y canela.
+            </p>
+          </div>
+          <div className="flex shrink-0 flex-row flex-wrap items-center justify-end gap-3 sm:gap-4">
+            <span className={priceDisplayClass}>{formatEuroES(8.5)}</span>
+            <AddToCartButton productId="tres-leches" />
+          </div>
+        </div>
+      </div>
+
+      <div
+        className={`glass-panel shadow-card-soft group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass}`}
+      >
+        <div
+          className={`${catalogProductImageSlotBase} ${catalogProductThumbHeight}`}
         >
-          home
-        </span>
-        <span className="mt-1 text-[10px] font-bold uppercase tracking-widest">
-          Inicio
-        </span>
+          <Image
+            src={IMAGES.cachitos}
+            alt="Cachitos de Jamón"
+            fill
+            className={catalogPhotoClass}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 400px"
+          />
+          <CatalogImageVeil />
+          <div className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
+            <ProductBadgeStrip badges={["masVendido"]} />
+          </div>
+        </div>
+        <div className="flex flex-grow flex-col justify-between space-y-4 p-5 sm:p-8">
+          <div>
+            <h3 className="text-xl font-semibold tracking-tight text-primary sm:text-2xl">
+              Cachitos de Jamón
+            </h3>
+            <p className="mt-2 text-[15px] font-normal leading-relaxed text-on-surface-variant sm:text-base">
+              Pan suave relleno de jamón ahumado y tocineta, horneado al
+              momento.
+            </p>
+          </div>
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+            <span className={priceDisplayClass}>{formatEuroES(3.5)}</span>
+            <AddToCartButton productId="cachitos" />
+          </div>
+        </div>
       </div>
-      <div className="tap-highlight-none flex flex-col items-center justify-center text-slate-400 transition-transform active:scale-90">
-        <span className="material-symbols-outlined">storefront</span>
-        <span className="mt-1 text-[10px] font-bold uppercase tracking-widest">
-          Tienda
-        </span>
+
+      <div
+        className={`glass-panel shadow-card-soft group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass}`}
+      >
+        <div
+          className={`${catalogProductImageSlotBase} ${catalogProductThumbHeight}`}
+        >
+          <Image
+            src={IMAGES.quesillo}
+            alt="Quesillo Tradicional"
+            fill
+            className={catalogPhotoClass}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 400px"
+          />
+          <CatalogImageVeil />
+          <div className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
+            <ProductBadgeStrip badges={["nuevo"]} />
+          </div>
+        </div>
+        <div className="flex flex-grow flex-col justify-between space-y-4 p-5 sm:p-8">
+          <div>
+            <h3 className="text-xl font-semibold tracking-tight text-primary sm:text-2xl">
+              Quesillo tradicional de Venezuela
+            </h3>
+          </div>
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+            <span className={priceDisplayClass}>{formatEuroES(5)}</span>
+            <AddToCartButton productId="quesillo" />
+          </div>
+        </div>
       </div>
-      <div className="tap-highlight-none flex flex-col items-center justify-center text-slate-400 transition-transform active:scale-90">
-        <span className="material-symbols-outlined">favorite</span>
-        <span className="mt-1 text-[10px] font-bold uppercase tracking-widest">
-          Favoritos
-        </span>
+
+      <div
+        className={`glass-panel shadow-card-soft group relative overflow-hidden rounded-3xl md:col-span-8 md:min-h-[24rem] lg:min-h-[26rem] ${cardHoverLiftClass}`}
+      >
+        <div className="flex flex-col md:absolute md:inset-0 md:min-h-[24rem] md:flex-row md:items-stretch lg:min-h-[26rem]">
+          <div className="z-10 order-1 flex w-full flex-col justify-center gap-4 p-6 sm:gap-5 sm:p-8 md:order-none md:min-h-0 md:w-1/2 md:justify-between md:gap-6 md:p-10 lg:p-12">
+            <div className="space-y-4 sm:space-y-5">
+              <h3 className="text-2xl font-semibold leading-tight tracking-tight text-primary sm:text-3xl">
+                Golfeado con queso blanco latino
+              </h3>
+              <p className="text-[15px] font-normal leading-relaxed text-on-surface-variant sm:text-base">
+                Rollos de canela y papelón con un toque de anís dulce, servidos
+                con queso fresco fundido.
+              </p>
+            </div>
+            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 md:mt-0">
+              <span className={priceDisplayClass}>{formatEuroES(4.2)}</span>
+              <AddToCartButton productId="golfeados" />
+            </div>
+          </div>
+          <div
+            className={`${catalogProductImageSlotBase} order-2 h-56 w-full shrink-0 sm:h-64 md:order-none md:h-full md:min-h-0 md:w-1/2 md:flex-1`}
+          >
+            <Image
+              src={IMAGES.golfeados}
+              alt="Golfeado venezolano con queso blanco rallado por encima"
+              fill
+              className={catalogPhotoClass}
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 45vw, 520px"
+            />
+            <CatalogImageVeil />
+            <div className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
+              <ProductBadgeStrip badges={["nuevo", "favorito"]} />
+            </div>
+          </div>
+        </div>
       </div>
-      <div className="tap-highlight-none flex flex-col items-center justify-center text-slate-400 transition-transform active:scale-90">
-        <span className="material-symbols-outlined">shopping_bag</span>
-        <span className="mt-1 text-[10px] font-bold uppercase tracking-widest">
-          Carrito
-        </span>
-      </div>
-    </nav>
+    </section>
   );
 }
 
 export function DulceVenezuelaHome() {
   return (
-    <>
+    <div className="relative isolate min-h-screen">
+      <VenezuelaFlagBackground />
       <TopNav />
-      <main className="mx-auto max-w-7xl space-y-16 px-6 pt-12">
+      <main className="mx-auto max-w-7xl space-y-10 px-4 pt-8 sm:space-y-12 sm:px-6 sm:pt-10 md:space-y-14 md:pt-12 lg:space-y-16 lg:px-8">
+        <LandingHero />
         <HeroHeader />
+        <OccasionsCallout />
         <ProductGrid />
       </main>
       <BottomNav />
-    </>
+    </div>
   );
 }

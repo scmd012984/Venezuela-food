@@ -5,8 +5,6 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
         darkMode: "class",
@@ -84,9 +82,6 @@
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.4);
         }
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
-        }
         body { font-family: 'Inter', sans-serif; }
     </style>
 <style>
@@ -101,7 +96,7 @@
 <div class="flex justify-between items-center px-6 py-4 w-full max-w-7xl mx-auto">
 <div class="flex items-center gap-4">
 <button class="text-blue-800 dark:text-blue-400 hover:opacity-80 transition-opacity active:scale-95 duration-200">
-<span class="material-symbols-outlined" data-icon="menu">menu</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="M4 5h16"/><path d="M4 12h16"/><path d="M4 19h16"/></svg>
 </button>
 <div class="relative px-4 py-1 overflow-hidden rounded-lg group">
 <!-- Stylized Flag Background -->
@@ -123,9 +118,9 @@
 <a class="text-slate-500 hover:opacity-80 transition-opacity font-sans tracking-tight font-light" href="#">Favoritos</a>
 </div>
 <div class="flex items-center gap-4">
-<button class="text-blue-800 dark:text-blue-400 hover:opacity-80 transition-opacity active:scale-95 duration-200 relative">
-<span class="material-symbols-outlined" data-icon="shopping_cart">shopping_cart</span>
-<span class="absolute -top-1 -right-1 bg-secondary-container text-on-secondary-container text-[10px] font-bold px-1.5 rounded-full">3</span>
+<button type="button" class="relative flex size-11 items-center justify-center rounded-full border-2 border-primary/30 bg-white text-primary shadow-[0_2px_12px_rgba(0,33,110,0.12)] transition-all hover:border-primary/50 active:scale-[0.98] dark:border-primary/40 dark:bg-slate-900/90 dark:text-blue-300" aria-label="Carrito, 3 artículos">
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+<span class="absolute -right-1.5 -top-1.5 flex min-w-[1.25rem] items-center justify-center rounded-full bg-secondary-container px-1 py-0.5 text-[10px] font-bold leading-none text-on-secondary-container ring-2 ring-white dark:ring-slate-900">3</span>
 </button>
 </div>
 </div>
@@ -139,9 +134,8 @@
 </div>
 <!-- Search and Filters -->
 <div class="flex flex-col md:flex-row gap-6 items-center">
-<div class="relative w-full md:max-w-md">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
-<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-none focus:ring-2 focus:ring-primary-container rounded-2xl placeholder:text-outline-variant font-light transition-all" placeholder="Buscar delicias..." type="text"/>
+<div class="relative w-full md:max-w-lg">
+<input autocomplete="off" class="w-full rounded-2xl border-2 border-primary/25 bg-white py-4 pl-5 pr-5 text-base shadow-[0_4px_24px_rgba(0,33,110,0.12)] placeholder:text-outline placeholder:font-light transition-all focus:border-primary-container focus:outline-none focus:ring-4 focus:ring-primary-container/25" placeholder="Buscar delicias..." type="text"/>
 </div>
 <div class="flex flex-wrap gap-3 overflow-x-auto pb-2 no-scrollbar">
 <span class="px-6 py-2 rounded-full bg-primary-container text-white font-medium text-sm transition-all cursor-pointer">Todos</span>
@@ -165,7 +159,7 @@
 <p class="text-white/80 font-light max-w-sm">Bizcocho esponjoso bañado en tres tipos de leche, coronado con merengue suizo y canela.</p>
 </div>
 <button class="bg-primary-container text-white px-8 py-4 rounded-xl font-bold shadow-xl hover:scale-105 active:scale-95 transition-all">
-                        $8.50
+                        8,50&nbsp;€
                     </button>
 </div>
 </div>
@@ -173,11 +167,6 @@
 <div class="md:col-span-4 group relative overflow-hidden rounded-[2rem] glass-panel shadow-[0_20px_50px_rgba(0,51,160,0.06)] flex flex-col">
 <div class="h-64 relative overflow-hidden">
 <img alt="Cachitos de Jamón" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="A professional studio shot of golden-brown Venezuelan Cachitos de Jamón arranged on a sleek glass platter. The lighting highlights the glossy, buttery crust and the soft texture of the bread. The background is a soft, out-of-focus modern kitchen with clean lines and a royal blue accent wall. The overall image exudes a gourmet, artisanal feel with high-end food photography standards." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUB_AGOwQgL52Xg3CwB83ZFYQfG-zJifRhdwJFlJ9dM39n8fIj0GniyNqWC-m19F_RSJKdH9VpJDwo6631jQrIvQYIJKEhTjRx0kClGyRwiO-XXFVbDlTBkp0gXIeIIIv2iviGVa0D3i5Jo-3julr878RUeYoJoedGJLohilauls5QInC5OShek6TpNnYlqupSq0BI-kDmF3upBDUAcbUGgg9OGYhQ5RkTqlxn4ZTHHvTvK7OYnNBaNThkvWCg764kzkRz_YKazDvH"/>
-<div class="absolute top-4 right-4">
-<button class="w-10 h-10 rounded-full glass-panel flex items-center justify-center text-primary hover:bg-white transition-colors">
-<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
-</button>
-</div>
 </div>
 <div class="p-8 space-y-4 flex-grow flex flex-col justify-between">
 <div>
@@ -185,9 +174,9 @@
 <p class="text-on-surface-variant font-light text-sm mt-2">Pan suave relleno de jamón ahumado y tocineta, horneado al momento.</p>
 </div>
 <div class="flex items-center justify-between mt-6">
-<span class="text-xl font-black text-primary">$3.50</span>
+<span class="text-xl font-black text-primary">3,50&nbsp;€</span>
 <button class="w-12 h-12 rounded-full bg-primary-container text-white flex items-center justify-center hover:scale-110 active:scale-90 transition-all">
-<span class="material-symbols-outlined" data-icon="add">add</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
 </button>
 </div>
 </div>
@@ -199,13 +188,12 @@
 </div>
 <div class="p-8 space-y-4 flex-grow flex flex-col justify-between">
 <div>
-<h3 class="text-2xl font-bold text-primary">Quesillo</h3>
-<p class="text-on-surface-variant font-light text-sm mt-2">Nuestra versión del flan con el toque perfecto de ron y vainilla.</p>
+<h3 class="text-2xl font-bold text-primary">Quesillo tradicional de Venezuela</h3>
 </div>
 <div class="flex items-center justify-between mt-6">
-<span class="text-xl font-black text-primary">$5.00</span>
+<span class="text-xl font-black text-primary">5,00&nbsp;€</span>
 <button class="w-12 h-12 rounded-full bg-primary-container text-white flex items-center justify-center hover:scale-110 active:scale-90 transition-all">
-<span class="material-symbols-outlined" data-icon="add">add</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg>
 </button>
 </div>
 </div>
@@ -219,8 +207,9 @@
 <p class="text-on-surface-variant font-light">Rollos de canela y papelón con un toque de anís dulce, servidos con queso fresco fundido.</p>
 <button class="w-fit px-8 py-3 rounded-full border border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all">Descubrir Sabor</button>
 </div>
-<div class="w-1/2 relative">
-<img alt="Golfeados" class="absolute inset-0 w-full h-full object-cover" data-alt="A macro shot of a warm Venezuelan Golfeado roll, dripping with golden papelón syrup and topped with a generous amount of grated white cheese (queso rallado). The image captures the steam rising from the pastry in a high-end, minimalist kitchen setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAn_S5S6f6K31eL7aW_E-57o6R4v2v08Zf905S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8S6N56v8"/>
+<div class="w-1/2 relative overflow-hidden">
+<img alt="Golfeado venezolano con queso blanco rallado por encima" class="absolute inset-0 h-full w-full object-cover object-center brightness-[1.03] contrast-[0.97] saturate-[1.06] transition-transform duration-700 ease-out group-hover:scale-105" src="https://images.unsplash.com/photo-1694632288834-17d86b340745?w=1600&amp;q=88&amp;auto=format&amp;fit=crop"/>
+<div aria-hidden="true" class="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(24,18,14,0.22)_88%,rgba(12,8,6,0.38)_100%),linear-gradient(to_top,rgba(28,20,16,0.2)_0%,transparent_42%,rgba(255,248,240,0.12)_100%)]"></div>
 </div>
 </div>
 </div>
@@ -229,20 +218,23 @@
 <!-- BottomNavBar Section -->
 <nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pb-safe pt-2 px-4 bg-white/80 dark:bg-slate-900/80 backdrop-blur-2xl border-t border-white/20 shadow-[0_-10px_40px_rgba(0,0,0,0.05)] rounded-t-2xl z-50 md:hidden">
 <div class="flex flex-col items-center justify-center text-blue-800 dark:text-blue-300 tap-highlight-none transition-transform active:scale-90">
-<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
 <span class="text-[10px] uppercase tracking-widest font-bold mt-1">Inicio</span>
 </div>
 <div class="flex flex-col items-center justify-center text-slate-400 tap-highlight-none transition-transform active:scale-90">
-<span class="material-symbols-outlined" data-icon="storefront">storefront</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="M15 21v-5a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v5"/><path d="M17.774 10.31a1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.451 0 1.12 1.12 0 0 0-1.548 0 2.5 2.5 0 0 1-3.452 0 1.12 1.12 0 0 0-1.549 0 2.5 2.5 0 0 1-3.77-3.248l2.889-4.184A2 2 0 0 1 7 2h10a2 2 0 0 1 1.653.873l2.895 4.192a2.5 2.5 0 0 1-3.774 3.244"/><path d="M4 10.95V19a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8.05"/></svg>
 <span class="text-[10px] uppercase tracking-widest font-bold mt-1">Tienda</span>
 </div>
 <div class="flex flex-col items-center justify-center text-slate-400 tap-highlight-none transition-transform active:scale-90">
-<span class="material-symbols-outlined" data-icon="favorite">favorite</span>
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" class="shrink-0" aria-hidden="true"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>
 <span class="text-[10px] uppercase tracking-widest font-bold mt-1">Favoritos</span>
 </div>
-<div class="flex flex-col items-center justify-center text-slate-400 tap-highlight-none transition-transform active:scale-90">
-<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
-<span class="text-[10px] uppercase tracking-widest font-bold mt-1">Carrito</span>
+<div class="relative flex flex-col items-center justify-center text-slate-400 tap-highlight-none transition-transform active:scale-90" aria-label="Carrito, 3 artículos">
+<span class="relative inline-flex">
+<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+<span class="absolute -right-1.5 -top-1 flex min-w-[1rem] items-center justify-center rounded-full bg-secondary-container px-1 text-[9px] font-bold leading-none text-on-secondary-container">3</span>
+</span>
+<span class="sr-only">Carrito</span>
 </div>
 </nav>
 </body></html>
