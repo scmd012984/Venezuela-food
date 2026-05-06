@@ -63,28 +63,31 @@ export default function Navbar() {
         </ul>
       </nav>
 
-      {isMobileMenuOpen ? (
-        <div id="mobile-nav-menu" className="border-t border-outline-variant/40 px-4 py-3 md:hidden">
-          <ul className="flex flex-col gap-2">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  aria-current={isActiveRoute(item.href) ? "page" : undefined}
-                  className={`block rounded-md px-3 py-2 text-sm font-medium transition ${
-                    isActiveRoute(item.href)
-                      ? "bg-primary/10 text-primary"
-                      : "text-on-surface/80 hover:bg-surface-container-low hover:text-primary"
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ) : null}
+      <div
+        id="mobile-nav-menu"
+        className={`border-t border-outline-variant/40 px-4 py-3 transition md:hidden ${
+          isMobileMenuOpen ? "block" : "hidden"
+        }`}
+      >
+        <ul className="flex flex-col gap-2">
+          {NAV_ITEMS.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                aria-current={isActiveRoute(item.href) ? "page" : undefined}
+                className={`block rounded-md px-3 py-2 text-sm font-medium transition ${
+                  isActiveRoute(item.href)
+                    ? "bg-primary/10 text-primary"
+                    : "text-on-surface/80 hover:bg-surface-container-low hover:text-primary"
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </header>
   );
 }
