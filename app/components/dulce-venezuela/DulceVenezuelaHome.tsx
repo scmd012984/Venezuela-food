@@ -14,6 +14,15 @@ import { CategoryFilterSection } from "./CategoryFilterSection";
 import { TopNav } from "./TopNav";
 import { WhatsAppBrandIcon } from "./WhatsAppBrandIcon";
 
+type CtaLink = {
+  href: string;
+  label: string;
+  className: string;
+  target?: "_blank";
+  rel?: "noopener noreferrer";
+  icon?: "whatsapp" | "mail";
+};
+
 const IMAGES = {
   tresLeches:
     "https://lh3.googleusercontent.com/aida-public/AB6AXuA_WxSLnUZb2xvF8ZuSn8IIPvQHS9pyBah-phM5iWfv5oHIk2zg9m9skLQ50quxvnxpFGZy8gjHQlONPK7_-hHY2szP9raCWYPHEVj8y1wexaeF_iN9YiYMibnswosvOHFvB_chpb3t9_NVfvizsefTno6elkwpOmXdRUJC-IsPfLaUASWKMGitHpU2J6U1splxxl0n4U1Sg16RCRllkf7sgs8KY0_x7BmSxUcfh3YPOR3UItNA_U9ZbhAR3MikvvWBH55-1MqylaM4",
@@ -100,6 +109,23 @@ const cardHoverLiftClass =
 function LandingHero() {
   const waContactHref = buildWhatsAppContactHref();
   const openWhatsAppInNewTab = isWhatsAppWebHref(waContactHref);
+  const heroCtas: CtaLink[] = [
+    {
+      href: "#catalogo",
+      label: "Ver catálogo",
+      className:
+        "shadow-card-soft inline-flex h-12 min-h-12 items-center justify-center rounded-full bg-primary-container px-8 text-sm font-semibold text-white ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-primary hover:shadow-md active:scale-[0.98]",
+    },
+    {
+      href: waContactHref,
+      label: "WhatsApp",
+      icon: "whatsapp",
+      target: openWhatsAppInNewTab ? "_blank" : undefined,
+      rel: openWhatsAppInNewTab ? "noopener noreferrer" : undefined,
+      className:
+        "inline-flex h-12 min-h-12 items-center justify-center rounded-full border-2 border-primary/28 bg-white px-6 text-sm font-semibold text-primary shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-surface-container-low active:scale-[0.98] dark:bg-slate-900/70 dark:hover:bg-slate-800/90",
+    },
+  ];
 
   return (
     <section
@@ -118,21 +144,20 @@ function LandingHero() {
             Para llevar y mesas dulces bajo encargo.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <Link
-              href="#catalogo"
-              className="shadow-card-soft inline-flex h-12 min-h-12 items-center justify-center rounded-full bg-primary-container px-8 text-sm font-semibold text-white ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-primary hover:shadow-md active:scale-[0.98]"
-            >
-              Ver catálogo
-            </Link>
-            <Link
-              href={waContactHref}
-              target={openWhatsAppInNewTab ? "_blank" : undefined}
-              rel={openWhatsAppInNewTab ? "noopener noreferrer" : undefined}
-              className="inline-flex h-12 min-h-12 items-center justify-center rounded-full border-2 border-primary/28 bg-white px-6 text-sm font-semibold text-primary shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-surface-container-low active:scale-[0.98] dark:bg-slate-900/70 dark:hover:bg-slate-800/90"
-            >
-              <WhatsAppBrandIcon className="mr-1.5 size-[22px] shrink-0" />
-              WhatsApp
-            </Link>
+            {heroCtas.map((cta) => (
+              <Link
+                key={cta.label}
+                href={cta.href}
+                target={cta.target}
+                rel={cta.rel}
+                className={cta.className}
+              >
+                {cta.icon === "whatsapp" ? (
+                  <WhatsAppBrandIcon className="mr-1.5 size-[22px] shrink-0" />
+                ) : null}
+                {cta.label}
+              </Link>
+            ))}
           </div>
         </div>
         <div className="relative order-1 aspect-[16/11] min-h-[200px] w-full sm:aspect-[16/10] sm:min-h-[240px] lg:aspect-auto lg:min-h-[300px]">
@@ -240,6 +265,24 @@ function OccasionsCallout() {
   const mailtoHref = buildMesaDulceMailto();
   const waContactHref = buildWhatsAppContactHref();
   const openWhatsAppInNewTab = isWhatsAppWebHref(waContactHref);
+  const occasionCtas: CtaLink[] = [
+    {
+      href: mailtoHref,
+      label: "Pedir presupuesto",
+      icon: "mail",
+      className:
+        "shadow-card-soft inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary-container px-6 text-sm font-semibold text-white ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-primary hover:shadow-md hover:ring-white/25 active:translate-y-0 active:scale-[0.98]",
+    },
+    {
+      href: waContactHref,
+      label: "Por WhatsApp",
+      icon: "whatsapp",
+      target: openWhatsAppInNewTab ? "_blank" : undefined,
+      rel: openWhatsAppInNewTab ? "noopener noreferrer" : undefined,
+      className:
+        "inline-flex h-12 items-center justify-center gap-2 rounded-full border-2 border-primary/30 bg-white px-6 text-sm font-semibold text-primary shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-surface-container-low hover:shadow-md active:translate-y-0 active:scale-[0.98] dark:border-primary/35 dark:bg-slate-950 dark:hover:bg-slate-900",
+    },
+  ];
 
   return (
     <section
@@ -277,22 +320,27 @@ function OccasionsCallout() {
             selección equilibrada de nuestros dulces.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
-            <Link
-              href={mailtoHref}
-              className="shadow-card-soft inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary-container px-6 text-sm font-semibold text-white ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-primary hover:shadow-md hover:ring-white/25 active:translate-y-0 active:scale-[0.98]"
-            >
-              <Mail className="size-[22px] shrink-0" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
-              Pedir presupuesto
-            </Link>
-            <Link
-              href={waContactHref}
-              target={openWhatsAppInNewTab ? "_blank" : undefined}
-              rel={openWhatsAppInNewTab ? "noopener noreferrer" : undefined}
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full border-2 border-primary/30 bg-white px-6 text-sm font-semibold text-primary shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-surface-container-low hover:shadow-md active:translate-y-0 active:scale-[0.98] dark:border-primary/35 dark:bg-slate-950 dark:hover:bg-slate-900"
-            >
-              <WhatsAppBrandIcon className="size-[22px] shrink-0" />
-              Por WhatsApp
-            </Link>
+            {occasionCtas.map((cta) => (
+              <Link
+                key={cta.label}
+                href={cta.href}
+                target={cta.target}
+                rel={cta.rel}
+                className={cta.className}
+              >
+                {cta.icon === "mail" ? (
+                  <Mail
+                    className="size-[22px] shrink-0"
+                    strokeWidth={LUCIDE_ICON_STROKE}
+                    aria-hidden
+                  />
+                ) : null}
+                {cta.icon === "whatsapp" ? (
+                  <WhatsAppBrandIcon className="size-[22px] shrink-0" />
+                ) : null}
+                {cta.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
