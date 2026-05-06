@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
   { href: "/", label: "Inicio" },
@@ -8,6 +11,13 @@ const NAV_ITEMS = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+
+  const isActiveRoute = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
+
   return (
     <header className="border-b border-outline-variant/50 bg-white/95 backdrop-blur">
       <nav
@@ -26,7 +36,12 @@ export default function Navbar() {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="rounded-md px-3 py-2 text-sm font-medium text-on-surface/80 transition hover:bg-surface-container-low hover:text-primary"
+                aria-current={isActiveRoute(item.href) ? "page" : undefined}
+                className={`rounded-md px-3 py-2 text-sm font-medium transition ${
+                  isActiveRoute(item.href)
+                    ? "bg-primary/10 text-primary"
+                    : "text-on-surface/80 hover:bg-surface-container-low hover:text-primary"
+                }`}
               >
                 {item.label}
               </Link>
