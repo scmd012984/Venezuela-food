@@ -1,6 +1,7 @@
 "use client";
 
 import { Menu, ShoppingCart, X } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 import { useCart } from "@/app/contexts/cart-context";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
@@ -59,7 +60,7 @@ export function TopNav() {
                 <Menu className="size-6" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
               )}
             </button>
-            <a
+            <Link
               href="#"
               aria-label="Dulce Venezuela, repostería artesanal"
               className="shadow-card-soft group relative flex h-9 max-w-[min(100%,15.5rem)] min-h-9 min-w-0 shrink-0 items-center overflow-hidden rounded-xl border border-outline-variant/45 px-2.5 ring-1 ring-white/45 sm:max-w-[18rem] sm:rounded-2xl sm:px-3 dark:border-slate-600/50 dark:ring-slate-800/60"
@@ -75,7 +76,7 @@ export function TopNav() {
               <span className="relative z-[1] max-w-full truncate bg-linear-to-r from-[#001550] via-[#0033a0] to-[#3456c1] bg-clip-text text-base font-black leading-none tracking-[-0.03em] text-transparent drop-shadow-[0_1px_6px_rgba(0,0,0,0.12)] min-[380px]:text-lg sm:text-xl md:text-2xl dark:from-blue-100 dark:via-blue-300 dark:to-blue-500">
                 Dulce Venezuela
               </span>
-            </a>
+            </Link>
           </div>
 
           <div
@@ -85,9 +86,13 @@ export function TopNav() {
           >
             <div className="flex max-w-full items-center gap-1 sm:gap-2 lg:gap-3">
               {NAV_LINKS.map((link) => (
-                <a key={link.label} className={linkClass(!!link.active)} href={link.href}>
+                <Link
+                  key={link.label}
+                  className={linkClass(!!link.active)}
+                  href={link.href}
+                >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -150,7 +155,7 @@ export function TopNav() {
           </div>
           <nav className="flex flex-1 flex-col gap-0.5 p-2" aria-label="Secciones">
             {NAV_LINKS.map((link) => (
-              <a
+              <Link
                 key={link.label}
                 href={link.href}
                 className={`rounded-lg px-3 py-3 text-base transition-colors ${
@@ -161,7 +166,7 @@ export function TopNav() {
                 onClick={() => setMenuOpen(false)}
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <button
               type="button"

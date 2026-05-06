@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Mail, PartyPopper } from "lucide-react";
 import {
   buildMesaDulceMailto,
@@ -117,13 +118,13 @@ function LandingHero() {
             Para llevar y mesas dulces bajo encargo.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <a
+            <Link
               href="#catalogo"
               className="shadow-card-soft inline-flex h-12 min-h-12 items-center justify-center rounded-full bg-primary-container px-8 text-sm font-semibold text-white ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-primary hover:shadow-md active:scale-[0.98]"
             >
               Ver catálogo
-            </a>
-            <a
+            </Link>
+            <Link
               href={waContactHref}
               target={openWhatsAppInNewTab ? "_blank" : undefined}
               rel={openWhatsAppInNewTab ? "noopener noreferrer" : undefined}
@@ -131,7 +132,7 @@ function LandingHero() {
             >
               <WhatsAppBrandIcon className="mr-1.5 size-[22px] shrink-0" />
               WhatsApp
-            </a>
+            </Link>
           </div>
         </div>
         <div className="relative order-1 aspect-[16/11] min-h-[200px] w-full sm:aspect-[16/10] sm:min-h-[240px] lg:aspect-auto lg:min-h-[300px]">
@@ -276,14 +277,14 @@ function OccasionsCallout() {
             selección equilibrada de nuestros dulces.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
-            <a
+            <Link
               href={mailtoHref}
               className="shadow-card-soft inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary-container px-6 text-sm font-semibold text-white ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-primary hover:shadow-md hover:ring-white/25 active:translate-y-0 active:scale-[0.98]"
             >
               <Mail className="size-[22px] shrink-0" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
               Pedir presupuesto
-            </a>
-            <a
+            </Link>
+            <Link
               href={waContactHref}
               target={openWhatsAppInNewTab ? "_blank" : undefined}
               rel={openWhatsAppInNewTab ? "noopener noreferrer" : undefined}
@@ -291,7 +292,7 @@ function OccasionsCallout() {
             >
               <WhatsAppBrandIcon className="size-[22px] shrink-0" />
               Por WhatsApp
-            </a>
+            </Link>
           </div>
         </div>
       </div>
