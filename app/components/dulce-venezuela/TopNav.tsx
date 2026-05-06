@@ -48,7 +48,7 @@ export function TopNav() {
           <div className="flex min-h-0 min-w-0 shrink-0 items-center gap-2 sm:gap-2.5">
             <button
               type="button"
-              className="flex size-9 shrink-0 items-center justify-center rounded-lg text-primary transition hover:bg-surface-container-low active:scale-95 lg:hidden dark:text-blue-400 dark:hover:bg-slate-800/60"
+              className="flex size-9 shrink-0 items-center justify-center rounded-lg text-primary transition hover:bg-surface-container-low active:scale-95 md:hidden dark:text-blue-400 dark:hover:bg-slate-800/60"
               aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={menuOpen}
               aria-controls={menuId}
@@ -131,7 +131,7 @@ export function TopNav() {
         role="dialog"
         aria-modal="true"
         aria-label="Menú de navegación"
-        className={`fixed inset-0 z-[100] lg:hidden ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
+        className={`fixed inset-0 z-[100] md:hidden ${menuOpen ? "pointer-events-auto" : "pointer-events-none"}`}
       >
         <button
           type="button"
@@ -154,7 +154,7 @@ export function TopNav() {
             </button>
           </div>
           <nav
-            className="flex flex-1 flex-row flex-nowrap items-center gap-1 overflow-x-auto p-2"
+            className="flex flex-1 flex-col items-stretch gap-1 overflow-y-auto p-2"
             aria-label="Secciones"
           >
             {NAV_LINKS.map((link) => (
@@ -173,7 +173,7 @@ export function TopNav() {
             ))}
             <button
               type="button"
-              className="mt-1 flex items-center gap-2 rounded-lg px-3 py-2 text-left text-sm font-medium text-on-surface hover:bg-surface-container-low dark:hover:bg-slate-800/80"
+              className="mt-1 flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm font-medium text-on-surface hover:bg-surface-container-low dark:hover:bg-slate-800/80"
               aria-label={
                 itemCount === 0
                   ? "Abrir carrito"
