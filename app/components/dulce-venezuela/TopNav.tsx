@@ -153,12 +153,15 @@ export function TopNav() {
               <X className="size-5" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
             </button>
           </div>
-          <nav className="flex flex-1 flex-col gap-0.5 p-2" aria-label="Secciones">
+          <nav
+            className="flex flex-1 flex-row flex-nowrap items-center gap-1 overflow-x-auto p-2"
+            aria-label="Secciones"
+          >
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className={`rounded-lg px-3 py-3 text-base transition-colors ${
+                className={`rounded-lg px-3 py-2 text-sm transition-colors ${
                   link.active
                     ? "bg-primary-container/12 font-semibold text-primary"
                     : "font-normal text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-slate-800/80"
@@ -170,7 +173,7 @@ export function TopNav() {
             ))}
             <button
               type="button"
-              className="mt-1 flex w-full items-center gap-3 rounded-lg px-3 py-3 text-left font-medium text-on-surface hover:bg-surface-container-low dark:hover:bg-slate-800/80"
+              className="mt-1 flex items-center gap-2 rounded-lg px-3 py-2 text-left text-sm font-medium text-on-surface hover:bg-surface-container-low dark:hover:bg-slate-800/80"
               aria-label={
                 itemCount === 0
                   ? "Abrir carrito"
