@@ -9,9 +9,7 @@ import {
 import { AddToCartButton } from "@/app/components/cart/AddToCartButton";
 import { formatEuroES } from "@/lib/format-euro";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
-import { BottomNav } from "./BottomNav";
 import { CategoryFilterSection } from "./CategoryFilterSection";
-import { TopNav } from "./TopNav";
 import { WhatsAppBrandIcon } from "./WhatsAppBrandIcon";
 
 type CtaLink = {
@@ -499,14 +497,12 @@ export function DulceVenezuelaHome() {
   return (
     <div className="relative isolate min-h-screen">
       <VenezuelaFlagBackground />
-      <TopNav />
       <main className="mx-auto max-w-7xl space-y-10 px-4 pt-8 sm:space-y-12 sm:px-6 sm:pt-10 md:space-y-14 md:pt-12 lg:space-y-16 lg:px-8">
         <LandingHero />
         <HeroHeader />
         <OccasionsCallout />
         <ProductGrid />
       </main>
-      <BottomNav />
     </div>
   );
 }
