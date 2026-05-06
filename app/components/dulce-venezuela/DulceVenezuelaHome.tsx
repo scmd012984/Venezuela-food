@@ -356,6 +356,7 @@ function ProductGrid() {
       aria-label="Catálogo de productos"
     >
       <div
+        id="favoritos"
         className={`catalog-product-image-slot glass-panel shadow-card-soft group relative min-h-[22rem] h-[min(70vh,32rem)] overflow-hidden rounded-3xl sm:min-h-[26rem] md:col-span-8 md:h-[500px] md:min-h-0 ${cardHoverLiftClass}`}
       >
         <Image

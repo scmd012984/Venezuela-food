@@ -9,9 +9,9 @@ import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
 type NavLink = { href: string; label: string; active?: boolean };
 
 const NAV_LINKS: NavLink[] = [
-  { href: "#", label: "Inicio" },
-  { href: "#", label: "Tienda", active: true },
-  { href: "#", label: "Favoritos" },
+  { href: "/", label: "Inicio" },
+  { href: "/#catalogo", label: "Tienda", active: true },
+  { href: "/#favoritos", label: "Favoritos" },
 ];
 
 export function TopNav() {
