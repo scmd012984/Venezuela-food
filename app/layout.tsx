@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import Navbar from "@/components/Navbar";
 import { Providers } from "./providers";
 import "./globals.css";
 
@@ -30,7 +31,10 @@ export default function RootLayout({
   return (
     <html lang="es" className={`light ${inter.variable} antialiased`}>
       <body className="flex min-h-screen flex-col bg-background pb-24 font-sans text-base font-normal text-on-surface md:pb-6">
-        <Providers>{children}</Providers>
+        <Providers>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+        </Providers>
       </body>
     </html>
   );
