@@ -61,7 +61,7 @@ export function TopNav() {
               )}
             </button>
             <Link
-              href="#"
+              href="/"
               aria-label="Dulce Venezuela, repostería artesanal"
               className="shadow-card-soft group relative flex h-9 max-w-[min(100%,15.5rem)] min-h-9 min-w-0 shrink-0 items-center overflow-hidden rounded-xl border border-outline-variant/45 px-2.5 ring-1 ring-white/45 sm:max-w-[18rem] sm:rounded-2xl sm:px-3 dark:border-slate-600/50 dark:ring-slate-800/60"
             >
