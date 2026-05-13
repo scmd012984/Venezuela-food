@@ -40,7 +40,7 @@ export function LandingHero() {
         <div className="order-2 flex flex-col justify-center gap-5 px-6 py-8 sm:gap-6 sm:px-10 sm:py-10 lg:order-1 lg:px-12 lg:py-14">
           <h1
             id="hero-heading"
-            className="text-balance text-3xl font-extrabold leading-[1.1] tracking-tight text-primary sm:text-4xl lg:text-[2.45rem] lg:leading-[1.08]"
+            className="font-headline text-balance text-3xl font-semibold leading-[1.12] tracking-tight text-primary sm:text-4xl sm:leading-[1.1] lg:text-[2.45rem] lg:leading-[1.08]"
           >
             Repostería venezolana, hecha hoy.
           </h1>

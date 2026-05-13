@@ -53,7 +53,7 @@ export function CartDrawer() {
         <div className="flex items-center justify-between border-b border-outline-variant/45 px-4 py-3 dark:border-slate-700/60">
           <h2
             id="cart-drawer-title"
-            className="text-lg font-semibold tracking-tight text-primary"
+            className="font-headline text-lg font-semibold tracking-tight text-primary"
           >
             Carrito
           </h2>
@@ -81,7 +81,7 @@ export function CartDrawer() {
                 >
                   <div className="flex items-start justify-between gap-2">
                     <div className="min-w-0 flex-1">
-                      <p className="font-semibold leading-snug text-on-surface dark:text-slate-100">
+                      <p className="font-headline font-semibold leading-snug text-on-surface dark:text-slate-100">
                         {line.name}
                       </p>
                       <p className="mt-0.5 text-sm text-on-surface-variant">

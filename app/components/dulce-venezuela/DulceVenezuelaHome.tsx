@@ -1,3 +1,4 @@
+import { ClientTestimonials } from "./ClientTestimonials";
 import { HeroHeader } from "./HeroHeader";
 import { LandingHero } from "./LandingHero";
 import { OccasionsCallout } from "./OccasionsCallout";
@@ -14,6 +15,7 @@ export function DulceVenezuelaHome() {
           <LandingHero />
           <HeroHeader />
           <OccasionsCallout />
+          <ClientTestimonials />
           <ProductGrid />
         </main>
       </CatalogSearchProvider>

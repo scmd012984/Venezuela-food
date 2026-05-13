@@ -13,7 +13,7 @@ export function HeroHeader() {
       className="scroll-mt-24 space-y-6 sm:scroll-mt-28 sm:space-y-7"
     >
       <div className="max-w-2xl space-y-1.5">
-        <h2 className="text-lg font-semibold tracking-tight text-primary sm:text-xl">
+        <h2 className="font-headline text-lg font-semibold tracking-tight text-primary sm:text-xl">
           Explorar dulces
         </h2>
         <p className="text-sm leading-relaxed text-on-surface-variant sm:text-base sm:leading-relaxed">

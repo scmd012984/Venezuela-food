@@ -46,26 +46,23 @@ export function OccasionsCallout() {
         <div className="min-w-0 flex-1">
           <h2
             id="occasions-heading"
-            className="text-xl font-semibold leading-snug tracking-tight text-primary sm:text-2xl"
+            className="font-headline text-2xl font-semibold leading-[1.15] tracking-tight text-primary sm:text-3xl md:text-[2.125rem] md:leading-[1.12]"
           >
             Preparamos tu mesa dulce
           </h2>
-          <p className="mt-3 text-base font-normal leading-relaxed text-on-surface sm:text-lg sm:leading-relaxed">
-            Diseñamos bandejas y mesas de postres para{" "}
+          <p className="mt-3 text-base font-normal leading-relaxed text-on-surface sm:mt-4 sm:text-lg sm:leading-relaxed">
+            Diseñamos bandejas y{" "}
+            <strong className="font-semibold text-on-surface">mesas de postres</strong>{" "}
+            para{" "}
             <strong className="font-semibold text-on-surface">bodas</strong>,{" "}
             <strong className="font-semibold text-on-surface">cumpleaños</strong>,
-            una{" "}
-            <strong className="font-semibold text-on-surface">reunión</strong> con
-            amigos,{" "}
-            <strong className="font-semibold text-on-surface">celebraciones</strong>{" "}
-            en familia,{" "}
-            <strong className="font-semibold text-on-surface">eventos</strong> más
-            formales y, en general,{" "}
+            reuniones con amigos, celebraciones en familia, eventos más formales y
+            cualquier otra ocasión. Cuéntanos{" "}
             <strong className="font-semibold text-on-surface">
-              todo tipo de celebración
+              fecha, número de comensales y estilo
             </strong>
-            . Cuéntanos fecha, número de comensales y estilo, y te proponemos una
-            selección equilibrada de nuestros dulces.
+            , y te proponemos una selección equilibrada de nuestros{" "}
+            <strong className="font-semibold text-on-surface">dulces</strong>.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
             {occasionCtas.map((cta) => (

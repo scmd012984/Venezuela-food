@@ -11,6 +11,7 @@ type NavLink = { href: string; label: string; active?: boolean };
 const NAV_LINKS: NavLink[] = [
   { href: "/", label: "Inicio" },
   { href: "/#catalogo", label: "Tienda", active: true },
+  { href: "/#testimonios", label: "Testimonios" },
   { href: "/#favoritos", label: "Favoritos" },
 ];
 
@@ -73,7 +74,7 @@ export function TopNav() {
               <div className="absolute inset-0 bg-white/62 backdrop-blur-[1px] dark:bg-slate-900/35" />
               <div className="pointer-events-none absolute inset-0 bg-linear-to-r from-white/35 via-transparent to-white/20" />
               <div className="pointer-events-none absolute -left-[40%] top-[-60%] h-[230%] w-[34%] rotate-12 bg-linear-to-r from-transparent via-white/85 to-transparent opacity-0 transition-all duration-700 group-hover:left-[125%] group-hover:opacity-100" />
-              <span className="relative z-[1] max-w-full truncate bg-linear-to-r from-[#001550] via-[#0033a0] to-[#3456c1] bg-clip-text text-base font-black leading-none tracking-[-0.03em] text-transparent drop-shadow-[0_1px_6px_rgba(0,0,0,0.12)] min-[380px]:text-lg sm:text-xl md:text-2xl dark:from-blue-100 dark:via-blue-300 dark:to-blue-500">
+              <span className="relative z-[1] max-w-full truncate bg-linear-to-r from-[#001550] via-[#0033a0] to-[#3456c1] bg-clip-text font-headline text-base font-black leading-none tracking-[-0.02em] text-transparent drop-shadow-[0_1px_6px_rgba(0,0,0,0.12)] min-[380px]:text-lg sm:text-xl md:text-2xl dark:from-blue-100 dark:via-blue-300 dark:to-blue-500">
                 Dulce Venezuela
               </span>
             </Link>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Fraunces, Inter } from "next/font/google";
 import { BottomNav } from "@/app/components/dulce-venezuela/BottomNav";
 import { TopNav } from "@/app/components/dulce-venezuela/TopNav";
 import { Providers } from "./providers";
@@ -9,6 +9,14 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+/** Serif con carácter (repostería artesanal) — titulares; cuerpo sigue en Inter. */
+const fraunces = Fraunces({
+  variable: "--font-fraunces",
+  subsets: ["latin"],
+  weight: ["500", "600", "700", "800", "900"],
   display: "swap",
 });
 
@@ -30,7 +38,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`light ${inter.variable} antialiased`}>
+    <html
+      lang="es"
+      className={`light ${inter.variable} ${fraunces.variable} antialiased`}
+    >
       <body className="texture-page-warm flex min-h-screen flex-col bg-background pb-24 font-sans text-base font-normal text-on-surface md:pb-6">
         <Providers>
           <TopNav />

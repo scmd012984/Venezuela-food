@@ -1,6 +1,6 @@
 "use client";
 
-import { Heart, Home, ShoppingCart, Store } from "lucide-react";
+import { Heart, Home, ShoppingCart, Star, Store } from "lucide-react";
 import Link from "next/link";
 import { useCart } from "@/app/contexts/cart-context";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
@@ -26,6 +26,16 @@ export function BottomNav() {
         <Store className="size-6" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
         <span className="mt-1 text-[10px] font-semibold uppercase tracking-widest">
           Tienda
+        </span>
+      </Link>
+      <Link
+        href="/#testimonios"
+        aria-label="Reseñas y testimonios de clientes"
+        className="tap-highlight-none flex min-w-[3.5rem] flex-col items-center justify-center rounded-2xl px-1.5 py-1.5 text-on-surface-variant/75 transition duration-200 hover:bg-primary/8 hover:text-primary active:scale-95"
+      >
+        <Star className="size-6" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
+        <span className="mt-1 max-w-[4.25rem] text-center text-[9px] font-semibold uppercase leading-tight tracking-widest sm:text-[10px]">
+          Reseñas
         </span>
       </Link>
       <Link

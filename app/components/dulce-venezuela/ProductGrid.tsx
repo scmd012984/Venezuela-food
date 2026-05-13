@@ -131,7 +131,7 @@ export function ProductGrid() {
         </div>
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-6 p-6 sm:flex-row sm:items-end sm:justify-between sm:p-10">
           <div className="max-w-xl space-y-3 rounded-3xl border border-white/25 bg-black/50 px-5 py-4 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.5)] backdrop-blur-md backdrop-saturate-125 sm:space-y-3 sm:px-6 sm:py-5">
-            <h3 className="text-3xl font-bold leading-tight tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] sm:text-4xl">
+            <h3 className="font-headline text-3xl font-semibold leading-tight tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] sm:text-4xl">
               {tresLeches.name}
             </h3>
             <p className="max-w-md text-base font-normal leading-relaxed text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.55)] sm:text-lg sm:leading-relaxed">
@@ -168,7 +168,7 @@ export function ProductGrid() {
         </div>
         <div className="flex flex-grow flex-col justify-between space-y-4 p-5 sm:p-8">
           <div>
-            <h3 className="text-xl font-semibold tracking-tight text-primary sm:text-2xl">
+            <h3 className="font-headline text-xl font-semibold tracking-tight text-primary sm:text-2xl">
               {cachitos.name}
             </h3>
             <p className="mt-2 text-[15px] font-normal leading-relaxed text-on-surface-variant sm:text-base">
@@ -205,7 +205,7 @@ export function ProductGrid() {
         </div>
         <div className="flex flex-grow flex-col justify-between space-y-4 p-5 sm:p-8">
           <div>
-            <h3 className="text-xl font-semibold tracking-tight text-primary sm:text-2xl">
+            <h3 className="font-headline text-xl font-semibold tracking-tight text-primary sm:text-2xl">
               {quesillo.name}
             </h3>
             {quesillo.description ? (
@@ -230,7 +230,7 @@ export function ProductGrid() {
         <div className="flex flex-col md:absolute md:inset-0 md:min-h-[24rem] md:flex-row md:items-stretch lg:min-h-[26rem]">
           <div className="z-10 order-1 flex w-full flex-col justify-center gap-4 p-6 sm:gap-5 sm:p-8 md:order-none md:min-h-0 md:w-1/2 md:justify-between md:gap-6 md:p-10 lg:p-12">
             <div className="space-y-4 sm:space-y-5">
-              <h3 className="text-2xl font-semibold leading-tight tracking-tight text-primary sm:text-3xl">
+              <h3 className="font-headline text-2xl font-semibold leading-tight tracking-tight text-primary sm:text-3xl">
                 {golfeados.name}
               </h3>
               <p className="text-[15px] font-normal leading-relaxed text-on-surface-variant sm:text-base">
