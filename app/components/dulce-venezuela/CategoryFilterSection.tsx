@@ -7,6 +7,7 @@ import {
 } from "@/lib/catalog-categories";
 import { CategoryProductsPanel } from "./CategoryProductsPanel";
 import { useCatalogSearch } from "./catalog-search-context";
+import { useCategoryPanelBridge } from "./category-panel-bridge";
 
 const CLOSE_MS = 320;
 
@@ -26,6 +27,7 @@ const panelGridClass =
 
 export function CategoryFilterSection() {
   const { debouncedSearchQuery } = useCatalogSearch();
+  const { setOpenCatalogCategory } = useCategoryPanelBridge();
   const [activeCategory, setActiveCategory] =
     useState<CategoryLabel>("Todos");
   const [panelCategory, setPanelCategory] = useState<CategoryLabel | null>(
@@ -67,6 +69,22 @@ export function CategoryFilterSection() {
     },
     [panelCategory, panelOpen, clearCloseTimer, closePanel],
   );
+
+  /** Desde accesos rápidos: siempre abre la categoría (no alterna cierre). */
+  const openCatalogCategoryForced = useCallback(
+    (tag: CategoryLabel) => {
+      setActiveCategory(tag);
+      clearCloseTimer();
+      setPanelCategory(tag);
+      setPanelOpen(true);
+    },
+    [clearCloseTimer],
+  );
+
+  useEffect(() => {
+    setOpenCatalogCategory(openCatalogCategoryForced);
+    return () => setOpenCatalogCategory(null);
+  }, [setOpenCatalogCategory, openCatalogCategoryForced]);
 
   useEffect(() => {
     const q = debouncedSearchQuery.trim();

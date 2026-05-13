@@ -13,6 +13,7 @@ const NAV_LINKS: NavLink[] = [
   { href: "/#catalogo", label: "Tienda", active: true },
   { href: "/#testimonios", label: "Testimonios" },
   { href: "/#favoritos", label: "Favoritos" },
+  { href: "/#instagram", label: "Instagram" },
 ];
 
 export function TopNav() {
@@ -118,7 +119,7 @@ export function TopNav() {
                 Carrito
               </span>
               {itemCount > 0 ? (
-                <span className="absolute -right-1 -top-1 flex min-w-[1.125rem] items-center justify-center rounded-full bg-secondary-container px-1 py-0.5 text-[9px] font-semibold leading-none text-on-secondary-container ring-2 ring-white dark:ring-slate-900 sm:-right-0.5 sm:top-0 sm:text-[10px]">
+                <span className="absolute -right-1 -top-1 flex min-w-[1.125rem] items-center justify-center rounded-full bg-cta-warm px-1 py-0.5 text-[9px] font-semibold leading-none text-on-cta-warm ring-2 ring-white shadow-[0_2px_10px_rgba(229,52,106,0.45)] dark:ring-slate-900 sm:-right-0.5 sm:top-0 sm:text-[10px]">
                   {itemCount > 99 ? "99+" : itemCount}
                 </span>
               ) : null}
@@ -192,7 +193,7 @@ export function TopNav() {
               />
               <span>Carrito</span>
               {itemCount > 0 ? (
-                <span className="ml-auto flex min-w-[1.5rem] items-center justify-center rounded-full bg-secondary-container px-2 py-0.5 text-xs font-semibold text-on-secondary-container">
+                <span className="ml-auto flex min-w-[1.5rem] items-center justify-center rounded-full bg-cta-warm px-2 py-0.5 text-xs font-semibold text-on-cta-warm ring-1 ring-white/30 shadow-[0_2px_10px_rgba(229,52,106,0.4)]">
                   {itemCount > 99 ? "99+" : itemCount}
                 </span>
               ) : null}

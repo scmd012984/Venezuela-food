@@ -64,7 +64,7 @@ export function BottomNav() {
             aria-hidden
           />
           {itemCount > 0 ? (
-            <span className="absolute -right-1.5 -top-1 flex min-w-[1rem] items-center justify-center rounded-full bg-secondary-container px-1 text-[9px] font-semibold leading-none text-on-secondary-container">
+            <span className="absolute -right-1.5 -top-1 flex min-w-[1rem] items-center justify-center rounded-full bg-cta-warm px-1 text-[9px] font-semibold leading-none text-on-cta-warm ring-2 ring-white shadow-[0_2px_10px_rgba(229,52,106,0.45)] dark:ring-slate-900">
               {itemCount > 99 ? "99+" : itemCount}
             </span>
           ) : null}
