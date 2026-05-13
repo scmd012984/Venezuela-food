@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Static export artifacts kept as references, not source code.
+    "Dulce Venezuela_files/**",
   ]),
 ]);
 

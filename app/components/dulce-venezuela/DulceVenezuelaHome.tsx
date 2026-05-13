@@ -7,6 +7,7 @@ import {
   isWhatsAppWebHref,
 } from "@/lib/contact-public";
 import { AddToCartButton } from "@/app/components/cart/AddToCartButton";
+import { CATALOG_PRODUCTS, type CatalogProductBadge } from "@/lib/catalog";
 import { formatEuroES } from "@/lib/format-euro";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
 import { CategoryFilterSection } from "./CategoryFilterSection";
@@ -20,21 +21,6 @@ type CtaLink = {
   rel?: "noopener noreferrer";
   icon?: "whatsapp" | "mail";
 };
-
-const IMAGES = {
-  tresLeches:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuA_WxSLnUZb2xvF8ZuSn8IIPvQHS9pyBah-phM5iWfv5oHIk2zg9m9skLQ50quxvnxpFGZy8gjHQlONPK7_-hHY2szP9raCWYPHEVj8y1wexaeF_iN9YiYMibnswosvOHFvB_chpb3t9_NVfvizsefTno6elkwpOmXdRUJC-IsPfLaUASWKMGitHpU2J6U1splxxl0n4U1Sg16RCRllkf7sgs8KY0_x7BmSxUcfh3YPOR3UItNA_U9ZbhAR3MikvvWBH55-1MqylaM4",
-  cachitos:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBUB_AGOwQgL52Xg3CwB83ZFYQfG-zJifRhdwJFlJ9dM39n8fIj0GniyNqWC-m19F_RSJKdH9VpJDwo6631jQrIvQYIJKEhTjRx0kClGyRwiO-XXFVbDlTBkp0gXIeIIIv2iviGVa0D3i5Jo-3julr878RUeYoJoedGJLohilauls5QInC5OShek6TpNnYlqupSq0BI-kDmF3upBDUAcbUGgg9OGYhQ5RkTqlxn4ZTHHvTvK7OYnNBaNThkvWCg764kzkRz_YKazDvH",
-  quesillo:
-    "https://lh3.googleusercontent.com/aida-public/AB6AXuBozKqZoogbgijyV8-KJUFC5-7LZRILIGALzyZ3H8Rb8GPNANMlpSNOWDvmDKdLPkDHmU7WuWmX3lT21vdBM_6_QdJsOXnVSPIHPk76JdyHh7paE-NAcVoXLNcZImV7IZY81wSPiOYSNfwMNdIFB53UvYN1grgxgAuas_rrsfAzSOwFvfTkgEk9IhJZ8luaXDh1jqEgAT5Ey_ShNMt62MpeiVx_O5bbzlqinGoU0372LZlH6LNs6zZI2DTdGWMEs-k6hlVyPMaKz1Yv",
-  /**
-   * Rollos en bandeja (referencia visual tipo golfeado / canela) — luz suave y fondo neutro.
-   * Unsplash: photo-1694632288834-17d86b340745
-   */
-  golfeados:
-    "https://images.unsplash.com/photo-1694632288834-17d86b340745?w=1600&q=88&auto=format&fit=crop",
-} as const;
 
 /** Contenedor de foto: misma altura en tarjetas lista + recorte limpio */
 const catalogProductImageSlotBase =
@@ -63,15 +49,13 @@ const priceDisplayClass =
   "inline-flex min-h-[3.25rem] min-w-[6.5rem] items-center justify-center rounded-2xl border border-primary/25 bg-white px-4 text-xl font-extrabold tabular-nums tracking-tight text-primary shadow-[0_1px_0_rgba(255,255,255,0.9)_inset,0_2px_8px_-2px_rgba(12,36,99,0.12)] sm:min-w-[7rem] sm:text-2xl dark:border-primary/35 dark:bg-slate-900 dark:text-slate-50 dark:shadow-[0_1px_0_rgba(255,255,255,0.06)_inset]";
 
 /** Etiquetas de confianza / novedad para orientar la compra */
-type CatalogBadgeKind = "nuevo" | "masVendido" | "favorito";
-
-const BADGE_LABEL: Record<CatalogBadgeKind, string> = {
+const BADGE_LABEL: Record<CatalogProductBadge, string> = {
   nuevo: "Nuevo",
   masVendido: "Más vendido",
   favorito: "Favorito",
 };
 
-function productBadgeClass(kind: CatalogBadgeKind): string {
+function productBadgeClass(kind: CatalogProductBadge): string {
   const base =
     "inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest shadow-md ring-1 backdrop-blur-sm sm:px-3 sm:py-1 sm:text-[11px]";
   if (kind === "nuevo") {
@@ -83,7 +67,11 @@ function productBadgeClass(kind: CatalogBadgeKind): string {
   return `${base} bg-secondary-container text-on-secondary-container ring-black/12`;
 }
 
-function ProductBadgeStrip({ badges }: { badges: CatalogBadgeKind[] }) {
+function ProductBadgeStrip({
+  badges,
+}: {
+  badges: readonly CatalogProductBadge[];
+}) {
   if (badges.length === 0) return null;
   return (
     <ul
@@ -105,6 +93,7 @@ const cardHoverLiftClass =
 
 /** Hero de entrada: bloque claro con foto, copy breve y acciones */
 function LandingHero() {
+  const heroProduct = CATALOG_PRODUCTS["tres-leches"];
   const waContactHref = buildWhatsAppContactHref();
   const openWhatsAppInNewTab = isWhatsAppWebHref(waContactHref);
   const heroCtas: CtaLink[] = [
@@ -160,7 +149,7 @@ function LandingHero() {
         </div>
         <div className="relative order-1 aspect-[16/11] min-h-[200px] w-full sm:aspect-[16/10] sm:min-h-[240px] lg:aspect-auto lg:min-h-[300px]">
           <Image
-            src={IMAGES.tresLeches}
+            src={heroProduct.imageUrl}
             alt="Tarta tres leches con merengue y canela"
             fill
             className="object-cover object-center"
@@ -347,6 +336,11 @@ function OccasionsCallout() {
 }
 
 function ProductGrid() {
+  const tresLeches = CATALOG_PRODUCTS["tres-leches"];
+  const cachitos = CATALOG_PRODUCTS.cachitos;
+  const quesillo = CATALOG_PRODUCTS.quesillo;
+  const golfeados = CATALOG_PRODUCTS.golfeados;
+
   return (
     <section
       id="catalogo"
@@ -358,8 +352,8 @@ function ProductGrid() {
         className={`catalog-product-image-slot glass-panel shadow-card-soft group relative min-h-[22rem] h-[min(70vh,32rem)] overflow-hidden rounded-3xl sm:min-h-[26rem] md:col-span-8 md:h-[500px] md:min-h-0 ${cardHoverLiftClass}`}
       >
         <Image
-          src={IMAGES.tresLeches}
-          alt="Tarta Tres Leches"
+          src={tresLeches.imageUrl}
+          alt={tresLeches.name}
           fill
           className={catalogPhotoClass}
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 66vw, 800px"
@@ -368,20 +362,21 @@ function ProductGrid() {
         <div className="absolute inset-0 bg-linear-to-t from-[#040814]/90 via-[#040814]/35 via-45% to-transparent" />
         <div className="absolute inset-0 bg-linear-to-br from-black/25 to-transparent opacity-80" />
         <div className="absolute left-4 top-4 z-[12] sm:left-5 sm:top-5">
-          <ProductBadgeStrip badges={["masVendido", "favorito"]} />
+          <ProductBadgeStrip badges={tresLeches.badges} />
         </div>
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-6 p-6 sm:flex-row sm:items-end sm:justify-between sm:p-10">
           <div className="max-w-xl space-y-3 rounded-3xl border border-white/25 bg-black/50 px-5 py-4 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.5)] backdrop-blur-md backdrop-saturate-125 sm:space-y-3 sm:px-6 sm:py-5">
             <h3 className="text-3xl font-bold leading-tight tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] sm:text-4xl">
-              Tarta Tres Leches
+              {tresLeches.name}
             </h3>
             <p className="max-w-md text-base font-normal leading-relaxed text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.55)] sm:text-lg sm:leading-relaxed">
-              Bizcocho esponjoso bañado en tres tipos de leche, coronado con
-              merengue suizo y canela.
+              {tresLeches.description}
             </p>
           </div>
           <div className="flex shrink-0 flex-row flex-wrap items-center justify-end gap-3 sm:gap-4">
-            <span className={priceDisplayClass}>{formatEuroES(8.5)}</span>
+            <span className={priceDisplayClass}>
+              {formatEuroES(tresLeches.unitPriceEuro)}
+            </span>
             <AddToCartButton productId="tres-leches" />
           </div>
         </div>
@@ -394,29 +389,30 @@ function ProductGrid() {
           className={`${catalogProductImageSlotBase} ${catalogProductThumbHeight}`}
         >
           <Image
-            src={IMAGES.cachitos}
-            alt="Cachitos de Jamón"
+            src={cachitos.imageUrl}
+            alt={cachitos.name}
             fill
             className={catalogPhotoClass}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 400px"
           />
           <CatalogImageVeil />
           <div className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
-            <ProductBadgeStrip badges={["masVendido"]} />
+            <ProductBadgeStrip badges={cachitos.badges} />
           </div>
         </div>
         <div className="flex flex-grow flex-col justify-between space-y-4 p-5 sm:p-8">
           <div>
             <h3 className="text-xl font-semibold tracking-tight text-primary sm:text-2xl">
-              Cachitos de Jamón
+              {cachitos.name}
             </h3>
             <p className="mt-2 text-[15px] font-normal leading-relaxed text-on-surface-variant sm:text-base">
-              Pan suave relleno de jamón ahumado y tocineta, horneado al
-              momento.
+              {cachitos.description}
             </p>
           </div>
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-            <span className={priceDisplayClass}>{formatEuroES(3.5)}</span>
+            <span className={priceDisplayClass}>
+              {formatEuroES(cachitos.unitPriceEuro)}
+            </span>
             <AddToCartButton productId="cachitos" />
           </div>
         </div>
@@ -429,25 +425,32 @@ function ProductGrid() {
           className={`${catalogProductImageSlotBase} ${catalogProductThumbHeight}`}
         >
           <Image
-            src={IMAGES.quesillo}
-            alt="Quesillo Tradicional"
+            src={quesillo.imageUrl}
+            alt={quesillo.name}
             fill
             className={catalogPhotoClass}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 400px"
           />
           <CatalogImageVeil />
           <div className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
-            <ProductBadgeStrip badges={["nuevo"]} />
+            <ProductBadgeStrip badges={quesillo.badges} />
           </div>
         </div>
         <div className="flex flex-grow flex-col justify-between space-y-4 p-5 sm:p-8">
           <div>
             <h3 className="text-xl font-semibold tracking-tight text-primary sm:text-2xl">
-              Quesillo tradicional de Venezuela
+              {quesillo.name}
             </h3>
+            {quesillo.description ? (
+              <p className="mt-2 text-[15px] font-normal leading-relaxed text-on-surface-variant sm:text-base">
+                {quesillo.description}
+              </p>
+            ) : null}
           </div>
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-            <span className={priceDisplayClass}>{formatEuroES(5)}</span>
+            <span className={priceDisplayClass}>
+              {formatEuroES(quesillo.unitPriceEuro)}
+            </span>
             <AddToCartButton productId="quesillo" />
           </div>
         </div>
@@ -460,15 +463,16 @@ function ProductGrid() {
           <div className="z-10 order-1 flex w-full flex-col justify-center gap-4 p-6 sm:gap-5 sm:p-8 md:order-none md:min-h-0 md:w-1/2 md:justify-between md:gap-6 md:p-10 lg:p-12">
             <div className="space-y-4 sm:space-y-5">
               <h3 className="text-2xl font-semibold leading-tight tracking-tight text-primary sm:text-3xl">
-                Golfeado con queso blanco latino
+                {golfeados.name}
               </h3>
               <p className="text-[15px] font-normal leading-relaxed text-on-surface-variant sm:text-base">
-                Rollos de canela y papelón con un toque de anís dulce, servidos
-                con queso fresco fundido.
+                {golfeados.description}
               </p>
             </div>
             <div className="mt-6 flex flex-wrap items-center justify-between gap-3 md:mt-0">
-              <span className={priceDisplayClass}>{formatEuroES(4.2)}</span>
+              <span className={priceDisplayClass}>
+                {formatEuroES(golfeados.unitPriceEuro)}
+              </span>
               <AddToCartButton productId="golfeados" />
             </div>
           </div>
@@ -476,15 +480,15 @@ function ProductGrid() {
             className={`${catalogProductImageSlotBase} order-2 h-56 w-full shrink-0 sm:h-64 md:order-none md:h-full md:min-h-0 md:w-1/2 md:flex-1`}
           >
             <Image
-              src={IMAGES.golfeados}
-              alt="Golfeado venezolano con queso blanco rallado por encima"
+              src={golfeados.imageUrl}
+              alt={golfeados.name}
               fill
               className={catalogPhotoClass}
               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 45vw, 520px"
             />
             <CatalogImageVeil />
             <div className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
-              <ProductBadgeStrip badges={["nuevo", "favorito"]} />
+              <ProductBadgeStrip badges={golfeados.badges} />
             </div>
           </div>
         </div>

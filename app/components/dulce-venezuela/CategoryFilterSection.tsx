@@ -60,7 +60,6 @@ export function CategoryFilterSection() {
 
   useEffect(() => {
     if (panelCategory === null) {
-      setPanelOpen(false);
       closingRef.current = false;
       return;
     }

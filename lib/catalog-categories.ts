@@ -1,4 +1,9 @@
-import type { CatalogProductId } from "./catalog";
+import {
+  CATALOG_PRODUCTS,
+  type CatalogProductDefinition,
+  type CatalogProductCategory,
+  type CatalogProductId,
+} from "./catalog";
 
 export const CATEGORY_LABELS = [
   "Todos",
@@ -10,17 +15,30 @@ export const CATEGORY_LABELS = [
 
 export type CategoryLabel = (typeof CATEGORY_LABELS)[number];
 
-/** Productos visibles al explorar cada categoría (puede ser [] para categorías vacías). */
+const CATALOG_PRODUCT_ENTRIES = Object.entries(CATALOG_PRODUCTS) as Array<
+  [CatalogProductId, CatalogProductDefinition]
+>;
+
+function isProductCategory(
+  label: CategoryLabel,
+): label is CatalogProductCategory {
+  return label !== "Todos";
+}
+
+/** Productos visibles al explorar cada categoría, derivados del catálogo. */
 export const PRODUCT_IDS_BY_CATEGORY: Record<
   CategoryLabel,
   CatalogProductId[]
-> = {
-  Todos: ["tres-leches", "cachitos", "quesillo", "golfeados"],
-  Golfeados: ["golfeados"],
-  Cachitos: ["cachitos"],
-  "Postres Fríos": ["tres-leches"],
-  Quesillos: ["quesillo"],
-};
+> = CATEGORY_LABELS.reduce(
+  (acc, label) => {
+    acc[label] = CATALOG_PRODUCT_ENTRIES.filter(([, product]) => {
+      if (!isProductCategory(label)) return true;
+      return product.categories.includes(label);
+    }).map(([id]) => id);
+    return acc;
+  },
+  {} as Record<CategoryLabel, CatalogProductId[]>,
+);
 
 export function getProductIdsForCategory(
   label: CategoryLabel,
