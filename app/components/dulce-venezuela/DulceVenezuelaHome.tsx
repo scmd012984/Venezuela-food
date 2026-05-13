@@ -219,7 +219,10 @@ function VenezuelaFlagBackground() {
 
 function HeroHeader() {
   return (
-    <header className="space-y-6 sm:space-y-7">
+    <section
+      aria-label="Explorar catálogo"
+      className="space-y-6 sm:space-y-7"
+    >
       <div className="max-w-2xl space-y-1.5">
         <h2 className="text-lg font-semibold tracking-tight text-primary sm:text-xl">
           Explorar dulces
@@ -244,7 +247,7 @@ function HeroHeader() {
         </div>
         <CategoryFilterSection />
       </div>
-    </header>
+    </section>
   );
 }
 
