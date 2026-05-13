@@ -1,53 +1,53 @@
-/* Tema Dulce Venezuela — paleta cohesionada (grises azulados + acentos) */
+/* Tema Dulce Venezuela — fondo crema orgánico (#FFFDF5) + acentos */
 
 @theme {
-  /* Neutros alineados al tinte del fondo */
-  --color-surface-dim: #d8d7e2;
+  /* Neutros cálidos (papel / crema, sin gris azulado) */
+  --color-surface-dim: #cfc5b6;
   --color-on-error: #ffffff;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-high: #e6e5ef;
+  --color-surface-container-lowest: #fffdf8;
+  --color-surface-container-high: #e5dccf;
   --color-on-primary-container: #9eb2ff;
-  --color-surface-container-highest: #e0dfe9;
+  --color-surface-container-highest: #dbd1c2;
   --color-on-secondary-container: #5a4d00;
   --color-primary-fixed: #dce1ff;
   --color-on-tertiary-fixed-variant: #8f0012;
-  --color-outline-variant: #c8c9d8;
-  --color-on-background: #1a1b22;
+  --color-outline-variant: #cec5b8;
+  --color-on-background: #1c1a17;
   --color-on-primary: #ffffff;
   --color-tertiary-fixed: #ffdad7;
-  --color-surface-variant: #e4e3ed;
+  --color-surface-variant: #eae2d6;
   --color-on-secondary-fixed: #221b00;
-  --color-inverse-on-surface: #f1f0f9;
+  --color-inverse-on-surface: #faf7f0;
   --color-on-primary-fixed: #001550;
   --color-tertiary: #5a0009;
   --color-inverse-primary: #b6c4ff;
-  --color-surface-container-low: #f5f4fa;
-  --color-outline: #8b8c9a;
+  --color-surface-container-low: #f8f3ea;
+  --color-outline: #887f72;
   --color-on-primary-fixed-variant: #133ca8;
   --color-primary-fixed-dim: #b6c4ff;
   --color-error-container: #ffdad6;
-  --color-background: #f8f7fc;
-  --color-surface: #f8f7fc;
+  --color-background: #fffdf5;
+  --color-surface: #fffdf5;
   --color-on-error-container: #93000a;
   --color-primary: #0c2463;
   --color-secondary: #6b5a00;
   --color-on-tertiary: #ffffff;
   --color-error: #b3261e;
   --color-secondary-fixed-dim: #e0bc00;
-  --color-surface-container: #ebeaf3;
-  --color-surface-bright: #faf9ff;
-  --color-inverse-surface: #2f3037;
-  --color-on-surface: #1c1d26;
+  --color-surface-container: #efe7db;
+  --color-surface-bright: #fffef8;
+  --color-inverse-surface: #2c2925;
+  --color-on-surface: #1c1a17;
   --color-on-secondary-fixed-variant: #544600;
   --color-on-tertiary-fixed: #410004;
   --color-tertiary-container: #7a0010;
   --color-tertiary-fixed-dim: #ffb3ae;
   --color-secondary-container: #f2d84a;
-  --color-on-surface-variant: #56586a;
+  --color-on-surface-variant: #585046;
   --color-on-secondary: #ffffff;
   --color-secondary-fixed: #ffe789;
   --color-primary-container: #1a3a8f;
-  --color-surface-tint: #3d5ab8;
+  --color-surface-tint: #6b5d4c;
   --color-on-tertiary-container: #ff9a94;
 
   /* CTA repostería: coral-frambuesa (dulzor + urgencia suave, alto contraste con blanco) */

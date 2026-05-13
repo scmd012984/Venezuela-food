@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { ChevronUp, X } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { AddToCartButton } from "@/app/components/cart/AddToCartButton";
 import { formatEuroES } from "@/lib/format-euro";
 import { getCatalogProduct } from "@/lib/catalog";
+import { getMatchingProductIds } from "@/lib/catalog-search";
 import type { CategoryLabel } from "@/lib/catalog-categories";
 import { getProductIdsForCategory } from "@/lib/catalog-categories";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
@@ -13,11 +14,14 @@ import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
 type CategoryProductsPanelProps = {
   category: CategoryLabel;
   onClose: () => void;
+  /** Si no está vacío, solo se listan productos de esta categoría que coincidan con la búsqueda. */
+  searchFilterQuery?: string;
 };
 
 export function CategoryProductsPanel({
   category,
   onClose,
+  searchFilterQuery = "",
 }: CategoryProductsPanelProps) {
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -27,9 +31,16 @@ export function CategoryProductsPanel({
     return () => document.removeEventListener("keydown", onKey);
   }, [onClose]);
 
-  const ids = getProductIdsForCategory(category);
+  const filterTrim = searchFilterQuery.trim();
+  const ids = useMemo(() => {
+    const base = getProductIdsForCategory(category);
+    if (!filterTrim) return base;
+    const matched = new Set(getMatchingProductIds(filterTrim));
+    return base.filter((id) => matched.has(id));
+  }, [category, filterTrim]);
 
   const multiColumn = ids.length > 1;
+  const isSearchFiltered = filterTrim.length > 0;
 
   return (
     <div
@@ -69,14 +80,29 @@ export function CategoryProductsPanel({
               strokeWidth={LUCIDE_ICON_STROKE}
               aria-hidden
             />
-            <p className="text-base font-medium text-on-surface">
-              Aún no hay nada en esta categoría
-            </p>
-            <p className="max-w-sm text-sm leading-relaxed text-on-surface-variant">
-              Pronto añadiremos productos aquí. Mientras tanto, revisa{" "}
-              <strong className="font-semibold text-on-surface">Todos</strong> u
-              otra categoría en la lista.
-            </p>
+            {isSearchFiltered ? (
+              <>
+                <p className="text-base font-medium text-on-surface">
+                  Ningún resultado en{" "}
+                  <span className="font-semibold">{category}</span>
+                </p>
+                <p className="max-w-sm text-sm leading-relaxed text-on-surface-variant">
+                  No encontramos «{filterTrim}» entre los dulces de esta categoría.
+                  Prueba otras palabras o elige otra categoría.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="text-base font-medium text-on-surface">
+                  Aún no hay nada en esta categoría
+                </p>
+                <p className="max-w-sm text-sm leading-relaxed text-on-surface-variant">
+                  Pronto añadiremos productos aquí. Mientras tanto, revisa{" "}
+                  <strong className="font-semibold text-on-surface">Todos</strong>{" "}
+                  u otra categoría en la lista.
+                </p>
+              </>
+            )}
           </div>
         ) : (
           <ul

@@ -1,8 +1,16 @@
+"use client";
+
 import Image from "next/image";
+import { useMemo } from "react";
 import { AddToCartButton } from "@/app/components/cart/AddToCartButton";
-import { CATALOG_PRODUCTS, type CatalogProductBadge } from "@/lib/catalog";
+import {
+  CATALOG_PRODUCTS,
+  type CatalogProductBadge,
+  type CatalogProductId,
+} from "@/lib/catalog";
 import { formatEuroES } from "@/lib/format-euro";
 import { cardHoverLiftClass } from "./home-shared";
+import { useCatalogSearch } from "./catalog-search-context";
 
 /** Contenedor de foto: misma altura en tarjetas lista + recorte limpio */
 const catalogProductImageSlotBase =
@@ -19,6 +27,12 @@ const catalogPhotoClass =
 /** Precio: mismo bloque en todas las tarjetas para lectura rápida */
 const priceDisplayClass =
   "inline-flex min-h-[3.25rem] min-w-[6.5rem] items-center justify-center rounded-2xl border border-primary/25 bg-white px-4 text-xl font-extrabold tabular-nums tracking-tight text-primary shadow-[0_1px_0_rgba(255,255,255,0.9)_inset,0_2px_8px_-2px_rgba(12,36,99,0.12)] sm:min-w-[7rem] sm:text-2xl dark:border-primary/35 dark:bg-slate-900 dark:text-slate-50 dark:shadow-[0_1px_0_rgba(255,255,255,0.06)_inset]";
+
+function matchHighlightClass(active: boolean): string {
+  return active
+    ? "z-[2] ring-2 ring-cta-warm/75 ring-offset-2 ring-offset-background shadow-[0_0_0_1px_rgba(229,52,106,0.18)] transition-shadow duration-300"
+    : "";
+}
 
 /** Etiquetas de confianza / novedad para orientar la compra */
 const BADGE_LABEL: Record<CatalogProductBadge, string> = {
@@ -70,6 +84,11 @@ function ProductBadgeStrip({
 }
 
 export function ProductGrid() {
+  const { query, matchingIds } = useCatalogSearch();
+  const q = query.trim();
+  const matchSet = useMemo(() => new Set(matchingIds), [matchingIds]);
+  const active = (id: CatalogProductId) => q.length > 0 && matchSet.has(id);
+
   const tresLeches = CATALOG_PRODUCTS["tres-leches"];
   const cachitos = CATALOG_PRODUCTS.cachitos;
   const quesillo = CATALOG_PRODUCTS.quesillo;
@@ -81,9 +100,20 @@ export function ProductGrid() {
       className="scroll-mt-24 grid grid-cols-1 gap-8 pb-14 sm:gap-10 sm:scroll-mt-28 md:grid-cols-12 md:gap-12 md:pb-16"
       aria-label="Catálogo de productos"
     >
+      {q.length > 0 && matchingIds.length === 0 ? (
+        <p
+          className="col-span-full rounded-2xl border border-outline-variant/50 bg-surface-container-low/90 px-4 py-3 text-center text-sm text-on-surface-variant md:col-span-12"
+          role="status"
+          aria-live="polite"
+        >
+          No encontramos coincidencias para{" "}
+          <span className="font-semibold text-on-surface">«{query.trim()}»</span>.
+          Prueba otras palabras o navega por las tarjetas.
+        </p>
+      ) : null}
       <div
         id="favoritos"
-        className={`catalog-product-image-slot glass-panel shadow-card-soft group relative min-h-[22rem] h-[min(70vh,32rem)] overflow-hidden rounded-3xl sm:min-h-[26rem] md:col-span-8 md:h-[500px] md:min-h-0 ${cardHoverLiftClass}`}
+        className={`catalog-product-image-slot glass-panel shadow-card-soft group relative min-h-[22rem] h-[min(70vh,32rem)] overflow-hidden rounded-3xl sm:min-h-[26rem] md:col-span-8 md:h-[500px] md:min-h-0 ${cardHoverLiftClass} ${matchHighlightClass(active("tres-leches"))}`}
       >
         <Image
           src={tresLeches.imageUrl}
@@ -118,7 +148,8 @@ export function ProductGrid() {
       </div>
 
       <div
-        className={`glass-panel shadow-card-soft group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass}`}
+        id="catalog-product-cachitos"
+        className={`glass-panel shadow-card-soft group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass} ${matchHighlightClass(active("cachitos"))}`}
       >
         <div
           className={`${catalogProductImageSlotBase} ${catalogProductThumbHeight}`}
@@ -154,7 +185,8 @@ export function ProductGrid() {
       </div>
 
       <div
-        className={`glass-panel shadow-card-soft group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass}`}
+        id="catalog-product-quesillo"
+        className={`glass-panel shadow-card-soft group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass} ${matchHighlightClass(active("quesillo"))}`}
       >
         <div
           className={`${catalogProductImageSlotBase} ${catalogProductThumbHeight}`}
@@ -192,7 +224,8 @@ export function ProductGrid() {
       </div>
 
       <div
-        className={`glass-panel shadow-card-soft group relative overflow-hidden rounded-3xl md:col-span-8 md:min-h-[24rem] lg:min-h-[26rem] ${cardHoverLiftClass}`}
+        id="catalog-product-golfeados"
+        className={`glass-panel shadow-card-soft group relative overflow-hidden rounded-3xl md:col-span-8 md:min-h-[24rem] lg:min-h-[26rem] ${cardHoverLiftClass} ${matchHighlightClass(active("golfeados"))}`}
       >
         <div className="flex flex-col md:absolute md:inset-0 md:min-h-[24rem] md:flex-row md:items-stretch lg:min-h-[26rem]">
           <div className="z-10 order-1 flex w-full flex-col justify-center gap-4 p-6 sm:gap-5 sm:p-8 md:order-none md:min-h-0 md:w-1/2 md:justify-between md:gap-6 md:p-10 lg:p-12">

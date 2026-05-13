@@ -6,6 +6,7 @@ import {
   type CategoryLabel,
 } from "@/lib/catalog-categories";
 import { CategoryProductsPanel } from "./CategoryProductsPanel";
+import { useCatalogSearch } from "./catalog-search-context";
 
 const CLOSE_MS = 320;
 
@@ -24,6 +25,7 @@ const panelGridClass =
   "grid min-h-0 transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none motion-reduce:duration-0";
 
 export function CategoryFilterSection() {
+  const { debouncedSearchQuery } = useCatalogSearch();
   const [activeCategory, setActiveCategory] =
     useState<CategoryLabel>("Todos");
   const [panelCategory, setPanelCategory] = useState<CategoryLabel | null>(
@@ -65,6 +67,15 @@ export function CategoryFilterSection() {
     },
     [panelCategory, panelOpen, clearCloseTimer, closePanel],
   );
+
+  useEffect(() => {
+    const q = debouncedSearchQuery.trim();
+    if (!q) return;
+    clearCloseTimer();
+    setActiveCategory("Todos");
+    setPanelCategory("Todos");
+    setPanelOpen(true);
+  }, [debouncedSearchQuery, clearCloseTimer]);
 
   return (
     <div className="flex min-w-0 flex-1 flex-col gap-1.5">
@@ -109,6 +120,7 @@ export function CategoryFilterSection() {
               <CategoryProductsPanel
                 key={panelCategory}
                 category={panelCategory}
+                searchFilterQuery={debouncedSearchQuery}
                 onClose={closePanel}
               />
             </div>

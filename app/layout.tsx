@@ -31,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`light ${inter.variable} antialiased`}>
-      <body className="flex min-h-screen flex-col bg-background pb-24 font-sans text-base font-normal text-on-surface md:pb-6">
+      <body className="texture-page-warm flex min-h-screen flex-col bg-background pb-24 font-sans text-base font-normal text-on-surface md:pb-6">
         <Providers>
           <TopNav />
           <main className="flex-1">{children}</main>
