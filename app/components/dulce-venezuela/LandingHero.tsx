@@ -18,7 +18,7 @@ export function LandingHero() {
       href: "#catalogo",
       label: "Ver catálogo",
       className:
-        "shadow-card-soft inline-flex h-12 min-h-12 items-center justify-center rounded-full bg-primary-container px-8 text-sm font-semibold text-white ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-primary hover:shadow-md active:scale-[0.98]",
+        "shadow-card-soft inline-flex h-12 min-h-12 items-center justify-center rounded-full bg-cta-warm px-8 text-sm font-semibold text-on-cta-warm ring-1 ring-white/25 transition duration-200 hover:-translate-y-0.5 hover:bg-cta-warm-hover hover:shadow-[0_12px_32px_-10px_rgba(196,29,82,0.48)] active:scale-[0.98]",
     },
     {
       href: waContactHref,
@@ -27,7 +27,7 @@ export function LandingHero() {
       target: openWhatsAppInNewTab ? "_blank" : undefined,
       rel: openWhatsAppInNewTab ? "noopener noreferrer" : undefined,
       className:
-        "inline-flex h-12 min-h-12 items-center justify-center rounded-full border-2 border-primary/28 bg-white px-6 text-sm font-semibold text-primary shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-primary/45 hover:bg-surface-container-low active:scale-[0.98] dark:bg-slate-900/70 dark:hover:bg-slate-800/90",
+        "inline-flex h-12 min-h-12 items-center justify-center rounded-full border-2 border-cta-warm/32 bg-white px-6 text-sm font-semibold text-cta-warm shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-cta-warm/50 hover:bg-cta-warm-soft active:scale-[0.98] dark:bg-slate-900/70 dark:hover:bg-slate-800/90",
     },
   ];
 

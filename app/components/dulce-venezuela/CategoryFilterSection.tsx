@@ -12,9 +12,9 @@ const CLOSE_MS = 320;
 const filterTrackClass =
   "w-full rounded-2xl border-2 border-outline-variant/65 bg-surface-container p-1 shadow-[inset_0_2px_8px_rgba(28,29,38,0.08)] dark:border-slate-600/55 dark:bg-slate-800/85";
 
-/** Categoría seleccionada: azul oscuro de marca (#0c2463) + texto blanco */
+/** Categoría activa: toque cálido sutil (no relleno coral; jerarquía por debajo de CTAs) */
 const filterActiveClass =
-  "cursor-pointer rounded-xl border-2 border-primary bg-primary px-3 py-2 text-xs font-semibold text-white shadow-[0_2px_10px_rgba(12,36,99,0.35)] transition duration-200 hover:border-primary-container hover:bg-primary-container hover:shadow-[0_4px_14px_rgba(12,36,99,0.4)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 active:scale-[0.98] sm:px-4 sm:py-2.5 sm:text-sm dark:border-primary dark:bg-primary dark:text-white dark:hover:bg-primary-container dark:hover:border-primary-container";
+  "cursor-pointer rounded-xl border-2 border-cta-warm/55 bg-cta-warm-soft px-3 py-2 text-xs font-semibold text-cta-warm-hover shadow-[0_2px_10px_-4px_rgba(229,52,106,0.16)] transition duration-200 hover:border-cta-warm hover:bg-white hover:shadow-[0_3px_14px_-4px_rgba(229,52,106,0.22)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta-warm/35 focus-visible:ring-offset-2 active:scale-[0.98] sm:px-4 sm:py-2.5 sm:text-sm dark:border-cta-warm/45 dark:bg-slate-900/92 dark:text-rose-100 dark:shadow-[0_2px_12px_-4px_rgba(229,52,106,0.2)] dark:hover:border-cta-warm/65 dark:hover:bg-slate-800/95";
 
 /** Resto: borde fino, fondo casi neutro */
 const filterInactiveClass =

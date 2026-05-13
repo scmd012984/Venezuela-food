@@ -50,6 +50,12 @@
   --color-surface-tint: #3d5ab8;
   --color-on-tertiary-container: #ff9a94;
 
+  /* CTA repostería: coral-frambuesa (dulzor + urgencia suave, alto contraste con blanco) */
+  --color-cta-warm: #e5346a;
+  --color-cta-warm-hover: #c41d52;
+  --color-cta-warm-soft: #fff0f5;
+  --color-on-cta-warm: #ffffff;
+
   --radius-DEFAULT: 0.25rem;
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;

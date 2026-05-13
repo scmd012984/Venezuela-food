@@ -19,7 +19,7 @@ export function OccasionsCallout() {
       label: "Pedir presupuesto",
       icon: "mail",
       className:
-        "shadow-card-soft inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary-container px-6 text-sm font-semibold text-white ring-1 ring-white/15 transition duration-200 hover:-translate-y-0.5 hover:bg-primary hover:shadow-md hover:ring-white/25 active:translate-y-0 active:scale-[0.98]",
+        "shadow-card-soft inline-flex h-12 items-center justify-center gap-2 rounded-full bg-cta-warm px-6 text-sm font-semibold text-on-cta-warm ring-1 ring-white/25 transition duration-200 hover:-translate-y-0.5 hover:bg-cta-warm-hover hover:shadow-[0_12px_32px_-10px_rgba(196,29,82,0.48)] hover:ring-white/35 active:translate-y-0 active:scale-[0.98]",
     },
     {
       href: waContactHref,
@@ -28,7 +28,7 @@ export function OccasionsCallout() {
       target: openWhatsAppInNewTab ? "_blank" : undefined,
       rel: openWhatsAppInNewTab ? "noopener noreferrer" : undefined,
       className:
-        "inline-flex h-12 items-center justify-center gap-2 rounded-full border-2 border-primary/30 bg-white px-6 text-sm font-semibold text-primary shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-primary/50 hover:bg-surface-container-low hover:shadow-md active:translate-y-0 active:scale-[0.98] dark:border-primary/35 dark:bg-slate-950 dark:hover:bg-slate-900",
+        "inline-flex h-12 items-center justify-center gap-2 rounded-full border-2 border-cta-warm/35 bg-white px-6 text-sm font-semibold text-cta-warm shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-cta-warm/55 hover:bg-cta-warm-soft hover:shadow-md active:translate-y-0 active:scale-[0.98] dark:border-cta-warm/40 dark:bg-slate-950 dark:hover:bg-slate-900",
     },
   ];
 
