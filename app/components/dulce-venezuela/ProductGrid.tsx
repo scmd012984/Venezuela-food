@@ -34,9 +34,9 @@ function productBadgeClass(kind: CatalogProductBadge): string {
     return `${base} bg-emerald-600/95 text-white ring-white/25`;
   }
   if (kind === "masVendido") {
-    return `${base} bg-amber-500/95 text-white ring-white/30`;
+    return `${base} bg-cta-warm text-on-cta-warm ring-white/30 shadow-[0_2px_12px_rgba(229,52,106,0.4)]`;
   }
-  return `${base} bg-secondary-container text-on-secondary-container ring-black/12`;
+  return `${base} bg-cta-warm-soft/95 text-cta-warm-hover ring-cta-warm/45 shadow-[0_1px_8px_rgba(229,52,106,0.18)]`;
 }
 
 /** Velo ligero cálido + viñeta para igualar iluminación entre fuentes distintas */
