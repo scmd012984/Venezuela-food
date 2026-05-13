@@ -1,4 +1,4 @@
-import type { InstagramFeedData } from "@/lib/instagram-feed";
+import { instagramFeedImageAlt, type InstagramFeedData } from "@/lib/instagram-feed";
 
 const PLACEHOLDER_SLOTS = 6;
 
@@ -67,7 +67,7 @@ export function InstagramFeedSection({ data }: InstagramFeedSectionProps) {
 
       <div className="mt-6 grid grid-cols-2 gap-2 sm:mt-8 sm:grid-cols-3 sm:gap-3 md:grid-cols-6">
         {hasPhotos
-          ? items.map((item) => (
+          ? items.map((item, index) => (
               <a
                 key={item.id}
                 href={item.permalink}
@@ -78,7 +78,12 @@ export function InstagramFeedSection({ data }: InstagramFeedSectionProps) {
                 {/* CDN de Instagram: <img> evita lista fija de hostnames en next/image */}
                 <img
                   src={item.imageSrc}
-                  alt=""
+                  alt={instagramFeedImageAlt({
+                    handle,
+                    caption: item.caption,
+                    position: index + 1,
+                    total: items.length,
+                  })}
                   className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]"
                   loading="lazy"
                   decoding="async"

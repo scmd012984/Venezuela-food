@@ -5,6 +5,7 @@ import {
   isWhatsAppWebHref,
 } from "@/lib/contact-public";
 import { CATALOG_PRODUCTS } from "@/lib/catalog";
+import { catalogProductImageAlt } from "@/lib/catalog-image-alt";
 import type { CtaLink } from "./home-shared";
 import { WhatsAppBrandIcon } from "./WhatsAppBrandIcon";
 
@@ -67,7 +68,7 @@ export function LandingHero() {
         <div className="relative order-1 aspect-[16/11] min-h-[200px] w-full sm:aspect-[16/10] sm:min-h-[240px] lg:aspect-auto lg:min-h-[300px]">
           <Image
             src={heroProduct.imageUrl}
-            alt="Tarta tres leches con merengue y canela"
+            alt={catalogProductImageAlt(heroProduct)}
             fill
             className="object-cover object-center"
             sizes="(max-width: 1024px) 100vw, 50vw"

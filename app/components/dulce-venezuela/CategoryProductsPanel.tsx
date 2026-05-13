@@ -5,6 +5,7 @@ import { ChevronUp, X } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { AddToCartButton } from "@/app/components/cart/AddToCartButton";
 import { formatEuroES } from "@/lib/format-euro";
+import { catalogProductImageAlt } from "@/lib/catalog-image-alt";
 import { getCatalogProduct } from "@/lib/catalog";
 import { getMatchingProductIds } from "@/lib/catalog-search";
 import type { CategoryLabel } from "@/lib/catalog-categories";
@@ -124,7 +125,7 @@ export function CategoryProductsPanel({
                   <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-outline-variant/35 bg-slate-200/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] min-[380px]:h-[5.25rem] min-[380px]:w-[5.25rem] min-[380px]:rounded-xl sm:h-24 sm:w-24 md:h-[7.25rem] md:w-[7.25rem] md:rounded-2xl lg:h-32 lg:w-32 dark:border-slate-600/50 dark:bg-slate-800/90">
                     <Image
                       src={p.imageUrl}
-                      alt=""
+                      alt={catalogProductImageAlt(p)}
                       fill
                       className="object-cover object-center brightness-[1.03] contrast-[1.02] saturate-[1.04]"
                       sizes="(max-width: 379px) 80px, (max-width: 639px) 84px, (max-width: 767px) 96px, (max-width: 1023px) 116px, 128px"

@@ -21,7 +21,7 @@ export const CLIENT_TESTIMONIALS: readonly ClientTestimonial[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=720&q=82&auto=format&fit=crop",
     imageDescription:
-      "Grupo de personas celebrando alrededor de una mesa con comida y bebidas.",
+      "Celebración con invitados alrededor de una mesa con postres y bebidas; ejemplo de mesa dulce y catering con Dulce Venezuela.",
   },
   {
     id: "2",
@@ -32,7 +32,7 @@ export const CLIENT_TESTIMONIALS: readonly ClientTestimonial[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=720&q=82&auto=format&fit=crop",
     imageDescription:
-      "Manos encendiendo velas sobre un pastel de cumpleaños en una celebración.",
+      "Pastel de cumpleaños con velas encendidas en celebración familiar; encargos de repostería Dulce Venezuela.",
   },
   {
     id: "3",
@@ -43,6 +43,6 @@ export const CLIENT_TESTIMONIALS: readonly ClientTestimonial[] = [
     imageUrl:
       "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=720&q=82&auto=format&fit=crop",
     imageDescription:
-      "Varias personas brindando con copas en una mesa compartida festiva.",
+      "Brindis en mesa compartida en evento de empresa; surtido dulce y repostería venezolana Dulce Venezuela.",
   },
 ] as const;

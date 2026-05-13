@@ -2,7 +2,36 @@ export type InstagramFeedItem = {
   id: string;
   imageSrc: string;
   permalink: string;
+  /** Leyenda de la publicación (Graph API); mejora el atributo `alt`. */
+  caption?: string;
 };
+
+const ALT_CAPTION_MAX = 118;
+
+/**
+ * Texto alternativo para miniaturas del feed de Instagram.
+ * Prioriza la leyenda real; si no hay, usa un texto fijo por posición (evita `alt` duplicados).
+ */
+export function instagramFeedImageAlt(options: {
+  handle: string;
+  caption?: string;
+  position: number;
+  total: number;
+}): string {
+  const { handle, caption, position, total } = options;
+  const at = `@${handle}`;
+
+  if (caption) {
+    const oneLine = caption.replace(/\s+/g, " ").trim();
+    const trimmed =
+      oneLine.length > ALT_CAPTION_MAX
+        ? `${oneLine.slice(0, ALT_CAPTION_MAX - 1)}…`
+        : oneLine;
+    return `${trimmed} — Dulce Venezuela, ${at} en Instagram.`;
+  }
+
+  return `Foto de Instagram de Dulce Venezuela (${at}): repostería venezolana y dulces artesanales. Galería ${position} de ${total}.`;
+}
 
 export type InstagramFeedData = {
   items: InstagramFeedItem[];
@@ -45,7 +74,11 @@ function mapMediaEntry(raw: Record<string, unknown>): InstagramFeedItem | null {
   }
 
   if (!imageSrc) return null;
-  return { id, imageSrc, permalink };
+
+  const rawCaption = typeof raw.caption === "string" ? raw.caption.trim() : "";
+  const caption = rawCaption.length > 0 ? rawCaption : undefined;
+
+  return { id, imageSrc, permalink, caption };
 }
 
 /**
@@ -70,7 +103,7 @@ export async function getInstagramFeedData(): Promise<InstagramFeedData> {
   );
   url.searchParams.set(
     "fields",
-    "id,media_type,media_url,permalink,thumbnail_url",
+    "id,media_type,media_url,permalink,thumbnail_url,caption",
   );
   url.searchParams.set("limit", "6");
   url.searchParams.set("access_token", token);

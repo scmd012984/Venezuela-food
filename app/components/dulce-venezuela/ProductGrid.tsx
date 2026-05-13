@@ -8,6 +8,7 @@ import {
   type CatalogProductBadge,
   type CatalogProductId,
 } from "@/lib/catalog";
+import { catalogProductImageAlt } from "@/lib/catalog-image-alt";
 import { formatEuroES } from "@/lib/format-euro";
 import { cardHoverLiftClass } from "./home-shared";
 import { useCatalogSearch } from "./catalog-search-context";
@@ -117,7 +118,7 @@ export function ProductGrid() {
       >
         <Image
           src={tresLeches.imageUrl}
-          alt={tresLeches.name}
+          alt={catalogProductImageAlt(tresLeches)}
           fill
           className={catalogPhotoClass}
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 66vw, 800px"
@@ -156,7 +157,7 @@ export function ProductGrid() {
         >
           <Image
             src={cachitos.imageUrl}
-            alt={cachitos.name}
+            alt={catalogProductImageAlt(cachitos)}
             fill
             className={catalogPhotoClass}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 400px"
@@ -193,7 +194,7 @@ export function ProductGrid() {
         >
           <Image
             src={quesillo.imageUrl}
-            alt={quesillo.name}
+            alt={catalogProductImageAlt(quesillo)}
             fill
             className={catalogPhotoClass}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 400px"
@@ -249,7 +250,7 @@ export function ProductGrid() {
           >
             <Image
               src={golfeados.imageUrl}
-              alt={golfeados.name}
+              alt={catalogProductImageAlt(golfeados)}
               fill
               className={catalogPhotoClass}
               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 45vw, 520px"

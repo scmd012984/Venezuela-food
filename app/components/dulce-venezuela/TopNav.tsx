@@ -37,8 +37,8 @@ export function TopNav() {
 
   const linkClass = (active: boolean) =>
     active
-      ? "rounded-lg bg-primary/10 px-2.5 py-1.5 text-xs font-semibold text-primary sm:text-sm"
-      : "rounded-lg px-2.5 py-1.5 text-xs font-normal text-on-surface/80 transition hover:bg-surface-container-high hover:text-primary sm:text-sm";
+      ? "rounded-lg bg-primary/12 px-2.5 py-1.5 text-sm font-semibold text-primary lg:px-3 lg:text-[0.9375rem]"
+      : "rounded-lg px-2.5 py-1.5 text-sm font-medium text-on-surface transition hover:bg-surface-container-high hover:text-primary lg:px-3 lg:text-[0.9375rem] dark:text-slate-100";
 
   return (
     <>
@@ -163,10 +163,10 @@ export function TopNav() {
               <Link
                 key={link.label}
                 href={link.href}
-                className={`rounded-lg px-3 py-2 text-sm transition-colors ${
+                className={`rounded-lg px-3 py-2.5 text-[15px] transition-colors ${
                   link.active
                     ? "bg-primary-container/12 font-semibold text-primary"
-                    : "font-normal text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-slate-800/80"
+                    : "font-medium text-on-surface hover:bg-surface-container-low dark:text-slate-100 dark:hover:bg-slate-800/80"
                 }`}
                 onClick={() => setMenuOpen(false)}
               >
