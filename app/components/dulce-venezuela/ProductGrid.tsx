@@ -91,6 +91,7 @@ export function ProductGrid() {
           fill
           className={catalogPhotoClass}
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 66vw, 800px"
+          priority
         />
         <CatalogImageVeil />
         <div className="absolute inset-0 bg-linear-to-t from-[#040814]/90 via-[#040814]/35 via-45% to-transparent" />
