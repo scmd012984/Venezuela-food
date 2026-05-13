@@ -31,9 +31,6 @@ export function CategoryFilterSection() {
   );
   const [panelOpen, setPanelOpen] = useState(false);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const openCycleRef = useRef(0);
-  /** Evita que el efecto de apertura se dispare mientras `panelOpen` baja a false en un cierre. */
-  const closingRef = useRef(false);
 
   const clearCloseTimer = useCallback(() => {
     if (closeTimerRef.current !== null) {
@@ -44,54 +41,27 @@ export function CategoryFilterSection() {
 
   useEffect(() => () => clearCloseTimer(), [clearCloseTimer]);
 
-  const scheduleUnmount = useCallback(() => {
+  const closePanel = useCallback(() => {
     clearCloseTimer();
+    setPanelOpen(false);
     closeTimerRef.current = setTimeout(() => {
       setPanelCategory(null);
       closeTimerRef.current = null;
     }, CLOSE_MS);
   }, [clearCloseTimer]);
 
-  const closePanel = useCallback(() => {
-    closingRef.current = true;
-    setPanelOpen(false);
-    scheduleUnmount();
-  }, [scheduleUnmount]);
-
-  useEffect(() => {
-    if (panelCategory === null) {
-      closingRef.current = false;
-      return;
-    }
-    if (panelOpen) return;
-    if (closingRef.current) return;
-
-    openCycleRef.current += 1;
-    const cycle = openCycleRef.current;
-    const id = requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (openCycleRef.current !== cycle) return;
-        setPanelOpen(true);
-      });
-    });
-    return () => cancelAnimationFrame(id);
-  }, [panelCategory, panelOpen]);
-
   const openCategory = useCallback(
     (tag: CategoryLabel) => {
       setActiveCategory(tag);
       clearCloseTimer();
-      closingRef.current = false;
 
       if (panelCategory === tag && panelOpen) {
         closePanel();
         return;
       }
-      if (panelCategory !== null && panelCategory !== tag && panelOpen) {
-        setPanelCategory(tag);
-        return;
-      }
+
       setPanelCategory(tag);
+      setPanelOpen(true);
     },
     [panelCategory, panelOpen, clearCloseTimer, closePanel],
   );
