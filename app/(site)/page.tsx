@@ -1,4 +1,4 @@
-import { DulceVenezuelaHome } from "./components/dulce-venezuela/DulceVenezuelaHome";
+import { DulceVenezuelaHome } from "@/app/components/dulce-venezuela/DulceVenezuelaHome";
 import { getInstagramFeedData } from "@/lib/instagram-feed";
 
 export default async function Home() {

@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces, Inter } from "next/font/google";
-import { BottomNav } from "@/app/components/dulce-venezuela/BottomNav";
-import { TopNav } from "@/app/components/dulce-venezuela/TopNav";
 import { Providers } from "./providers";
 import "./globals.css";
 
@@ -42,12 +40,8 @@ export default function RootLayout({
       lang="es"
       className={`light ${inter.variable} ${fraunces.variable} antialiased`}
     >
-      <body className="texture-page-warm flex min-h-screen flex-col bg-background pb-24 font-sans text-base font-normal text-on-surface md:pb-6">
-        <Providers>
-          <TopNav />
-          <main className="flex-1">{children}</main>
-          <BottomNav />
-        </Providers>
+      <body className="min-h-dvh font-sans antialiased">
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
