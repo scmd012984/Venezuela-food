@@ -65,8 +65,7 @@ export function AdminShell({ children }: AdminShellProps) {
           <ul className="space-y-0.5">
             {ADMIN_NAV_ITEMS.map((item) => {
               const Icon = item.icon;
-              const isActive =
-                !item.disabled && pathname === item.href && item.label === "Panel";
+              const isActive = !item.disabled && pathname === item.href;
               const className = item.disabled
                 ? "flex cursor-not-allowed items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-slate-400"
                 : isActive
