@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { CatalogProductImage } from "@/app/components/dulce-venezuela/CatalogProductImage";
 import {
   buildWhatsAppContactHref,
   isWhatsAppWebHref,
@@ -65,18 +65,14 @@ export function LandingHero() {
             ))}
           </div>
         </div>
-        <div className="relative order-1 aspect-[16/11] min-h-[200px] w-full sm:aspect-[16/10] sm:min-h-[240px] lg:aspect-auto lg:min-h-[300px]">
-          <Image
+        <div className="group relative order-1 aspect-[16/11] min-h-[200px] w-full overflow-hidden sm:aspect-[16/10] sm:min-h-[240px] lg:aspect-auto lg:min-h-[300px]">
+          <CatalogProductImage
+            productId="tres-leches"
             src={heroProduct.imageUrl}
-            alt={catalogProductImageAlt(heroProduct)}
-            fill
-            className="object-cover object-center"
+            alt={catalogProductImageAlt(heroProduct, "tres-leches")}
             sizes="(max-width: 1024px) 100vw, 50vw"
             priority
-          />
-          <div
-            className="pointer-events-none absolute inset-0 bg-linear-to-tr from-black/10 via-transparent to-white/10"
-            aria-hidden
+            variant="hero"
           />
         </div>
       </div>

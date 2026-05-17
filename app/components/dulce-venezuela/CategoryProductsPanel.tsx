@@ -1,12 +1,12 @@
 "use client";
 
-import Image from "next/image";
 import { ChevronUp, X } from "lucide-react";
 import { useEffect, useMemo } from "react";
 import { AddToCartButton } from "@/app/components/cart/AddToCartButton";
+import { CatalogProductImage } from "@/app/components/dulce-venezuela/CatalogProductImage";
 import { formatEuroES } from "@/lib/format-euro";
 import { catalogProductImageAlt } from "@/lib/catalog-image-alt";
-import { getCatalogProduct } from "@/lib/catalog";
+import { getCatalogProduct, type CatalogProductId } from "@/lib/catalog";
 import { getMatchingProductIds } from "@/lib/catalog-search";
 import type { CategoryLabel } from "@/lib/catalog-categories";
 import { getProductIdsForCategory } from "@/lib/catalog-categories";
@@ -122,13 +122,13 @@ export function CategoryProductsPanel({
                   key={productId}
                   className="flex min-h-0 min-w-0 items-start gap-3 rounded-xl border border-outline-variant/40 bg-surface-container-low/80 p-3 sm:gap-4 sm:rounded-2xl sm:p-4 md:gap-5 md:p-5 dark:border-slate-600/50 dark:bg-slate-800/50"
                 >
-                  <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-outline-variant/35 bg-slate-200/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] min-[380px]:h-[5.25rem] min-[380px]:w-[5.25rem] min-[380px]:rounded-xl sm:h-24 sm:w-24 md:h-[7.25rem] md:w-[7.25rem] md:rounded-2xl lg:h-32 lg:w-32 dark:border-slate-600/50 dark:bg-slate-800/90">
-                    <Image
+                  <div className="group relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-outline-variant/35 bg-slate-200/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] min-[380px]:h-[5.25rem] min-[380px]:w-[5.25rem] min-[380px]:rounded-xl sm:h-24 sm:w-24 md:h-[7.25rem] md:w-[7.25rem] md:rounded-2xl lg:h-32 lg:w-32 dark:border-slate-600/50 dark:bg-slate-800/90">
+                    <CatalogProductImage
+                      productId={productId as CatalogProductId}
                       src={p.imageUrl}
-                      alt={catalogProductImageAlt(p)}
-                      fill
-                      className="object-cover object-center brightness-[1.03] contrast-[1.02] saturate-[1.04]"
+                      alt={catalogProductImageAlt(p, productId as CatalogProductId)}
                       sizes="(max-width: 379px) 80px, (max-width: 639px) 84px, (max-width: 767px) 96px, (max-width: 1023px) 116px, 128px"
+                      variant="thumb"
                     />
                   </div>
                   <div className="flex min-w-0 flex-1 flex-col gap-2 sm:gap-2.5">

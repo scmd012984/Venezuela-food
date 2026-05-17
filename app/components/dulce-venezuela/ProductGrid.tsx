@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useMemo } from "react";
 import { AddToCartButton } from "@/app/components/cart/AddToCartButton";
+import { CatalogProductImage } from "@/app/components/dulce-venezuela/CatalogProductImage";
 import {
   CATALOG_PRODUCTS,
   type CatalogProductBadge,
@@ -18,12 +18,6 @@ const catalogProductImageSlotBase =
   "catalog-product-image-slot relative isolate w-full shrink-0 overflow-hidden bg-slate-200/80 dark:bg-slate-800/90";
 
 const catalogProductThumbHeight = "h-56 sm:h-64 md:h-64";
-
-/**
- * Misma gradación y encuadre en todas las fotos del catálogo (relleno total + cover).
- */
-const catalogPhotoClass =
-  "h-full w-full min-h-0 min-w-0 max-h-none object-cover object-center brightness-[1.04] contrast-[1.02] saturate-[1.05] transition-transform duration-700 ease-out group-hover:scale-[1.02]";
 
 /** Precio: mismo bloque en todas las tarjetas para lectura rápida */
 const priceDisplayClass =
@@ -52,16 +46,6 @@ function productBadgeClass(kind: CatalogProductBadge): string {
     return `${base} bg-cta-warm text-on-cta-warm ring-white/30 shadow-[0_2px_12px_rgba(229,52,106,0.4)]`;
   }
   return `${base} bg-cta-warm-soft/95 text-cta-warm-hover ring-cta-warm/45 shadow-[0_1px_8px_rgba(229,52,106,0.18)]`;
-}
-
-/** Velo ligero cálido + viñeta para igualar iluminación entre fuentes distintas */
-function CatalogImageVeil() {
-  return (
-    <div
-      className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(24,18,14,0.12)_82%,rgba(12,8,6,0.22)_100%),linear-gradient(to_top,rgba(28,20,16,0.12)_0%,transparent_45%,rgba(255,248,240,0.1)_100%)]"
-      aria-hidden
-    />
-  );
 }
 
 function ProductBadgeStrip({
@@ -116,17 +100,20 @@ export function ProductGrid() {
         id="favoritos"
         className={`catalog-product-image-slot glass-panel shadow-card-soft group relative min-h-[22rem] h-[min(70vh,32rem)] overflow-hidden rounded-3xl sm:min-h-[26rem] md:col-span-8 md:h-[500px] md:min-h-0 ${cardHoverLiftClass} ${matchHighlightClass(active("tres-leches"))}`}
       >
-        <Image
+        <CatalogProductImage
+          productId="tres-leches"
           src={tresLeches.imageUrl}
-          alt={catalogProductImageAlt(tresLeches)}
-          fill
-          className={catalogPhotoClass}
+          alt={catalogProductImageAlt(tresLeches, "tres-leches")}
           sizes="(max-width: 768px) 100vw, (max-width: 1280px) 66vw, 800px"
           priority
+          variant="card"
         />
-        <CatalogImageVeil />
-        <div className="absolute inset-0 bg-linear-to-t from-[#040814]/90 via-[#040814]/35 via-45% to-transparent" />
-        <div className="absolute inset-0 bg-linear-to-br from-black/25 to-transparent opacity-80" />
+        <div
+          className="pointer-events-none absolute inset-x-0 top-0 z-[3] h-[55%] bg-[radial-gradient(ellipse_90%_80%_at_50%_0%,rgba(255,252,245,0.42)_0%,rgba(255,235,200,0.12)_42%,transparent_72%)]"
+          aria-hidden
+        />
+        <div className="absolute inset-0 z-[3] bg-linear-to-t from-[#040814]/88 via-[#040814]/32 via-48% to-transparent" />
+        <div className="absolute inset-0 z-[3] bg-linear-to-br from-black/20 to-transparent opacity-75" />
         <div className="absolute left-4 top-4 z-[12] sm:left-5 sm:top-5">
           <ProductBadgeStrip badges={tresLeches.badges} />
         </div>
@@ -155,14 +142,13 @@ export function ProductGrid() {
         <div
           className={`${catalogProductImageSlotBase} ${catalogProductThumbHeight}`}
         >
-          <Image
+          <CatalogProductImage
+            productId="cachitos"
             src={cachitos.imageUrl}
-            alt={catalogProductImageAlt(cachitos)}
-            fill
-            className={catalogPhotoClass}
+            alt={catalogProductImageAlt(cachitos, "cachitos")}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 400px"
+            variant="card"
           />
-          <CatalogImageVeil />
           <div className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
             <ProductBadgeStrip badges={cachitos.badges} />
           </div>
@@ -192,14 +178,13 @@ export function ProductGrid() {
         <div
           className={`${catalogProductImageSlotBase} ${catalogProductThumbHeight}`}
         >
-          <Image
+          <CatalogProductImage
+            productId="quesillo"
             src={quesillo.imageUrl}
-            alt={catalogProductImageAlt(quesillo)}
-            fill
-            className={catalogPhotoClass}
+            alt={catalogProductImageAlt(quesillo, "quesillo")}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 400px"
+            variant="card"
           />
-          <CatalogImageVeil />
           <div className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
             <ProductBadgeStrip badges={quesillo.badges} />
           </div>
@@ -248,14 +233,13 @@ export function ProductGrid() {
           <div
             className={`${catalogProductImageSlotBase} order-2 h-56 w-full shrink-0 sm:h-64 md:order-none md:h-full md:min-h-0 md:w-1/2 md:flex-1`}
           >
-            <Image
+            <CatalogProductImage
+              productId="golfeados"
               src={golfeados.imageUrl}
-              alt={catalogProductImageAlt(golfeados)}
-              fill
-              className={catalogPhotoClass}
+              alt={catalogProductImageAlt(golfeados, "golfeados")}
               sizes="(max-width: 768px) 100vw, (max-width: 1280px) 45vw, 520px"
+              variant="card"
             />
-            <CatalogImageVeil />
             <div className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
               <ProductBadgeStrip badges={golfeados.badges} />
             </div>

@@ -100,12 +100,107 @@
     -webkit-tap-highlight-color: transparent;
   }
 
-  /* Catálogo: todas las fotos rellenan el slot (Next/Image deja el <img> anidado) */
-  #catalogo .catalog-product-image-slot img {
+  /* Catálogo: macro + luz dramática + brillo apetitoso (catalog-image-presentation.ts) */
+  #catalogo .catalog-product-image-slot img,
+  .catalog-product-photo {
     height: 100%;
     width: 100%;
+    min-height: 0;
+    min-width: 0;
+    max-height: none;
     object-fit: cover;
-    object-position: center;
+    transform: scale(var(--catalog-macro-scale, 1.14));
+    filter: brightness(1.06) contrast(1.16) saturate(1.14);
+    transition: transform 0.75s cubic-bezier(0.33, 1, 0.2, 1), filter 0.5s ease;
+  }
+
+  .group:hover .catalog-product-image-slot img,
+  .group:hover .catalog-product-photo {
+    transform: scale(calc(var(--catalog-macro-scale, 1.14) * 1.05));
+    filter: brightness(1.1) contrast(1.18) saturate(1.16);
+  }
+
+  /* Reflejos tipo merengue horneado / superficie brillante */
+  .catalog-product-shine {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background:
+      radial-gradient(
+        ellipse 95% 75% at 16% 6%,
+        rgba(255, 252, 245, 0.62) 0%,
+        rgba(255, 240, 210, 0.2) 38%,
+        transparent 58%
+      ),
+      radial-gradient(
+        ellipse 55% 40% at 78% 18%,
+        rgba(255, 228, 180, 0.35) 0%,
+        transparent 52%
+      ),
+      linear-gradient(
+        128deg,
+        rgba(255, 255, 255, 0.28) 0%,
+        rgba(255, 255, 255, 0.06) 28%,
+        transparent 48%
+      );
+    mix-blend-mode: soft-light;
+  }
+
+  .catalog-product-shine--thumb {
+    background:
+      radial-gradient(
+        ellipse 90% 70% at 20% 10%,
+        rgba(255, 252, 245, 0.45) 0%,
+        transparent 52%
+      ),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, transparent 42%);
+  }
+
+  .catalog-product-gloss {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    opacity: 0.42;
+    background: linear-gradient(
+      168deg,
+      transparent 0%,
+      rgba(255, 248, 235, 0.08) 35%,
+      rgba(255, 255, 255, 0.14) 48%,
+      transparent 62%
+    );
+    mix-blend-mode: overlay;
+  }
+
+  .group:hover .catalog-product-shine {
+    background:
+      radial-gradient(
+        ellipse 95% 75% at 16% 6%,
+        rgba(255, 253, 248, 0.72) 0%,
+        rgba(255, 242, 215, 0.28) 38%,
+        transparent 58%
+      ),
+      radial-gradient(
+        ellipse 55% 40% at 78% 18%,
+        rgba(255, 232, 190, 0.42) 0%,
+        transparent 52%
+      ),
+      linear-gradient(
+        128deg,
+        rgba(255, 255, 255, 0.34) 0%,
+        rgba(255, 255, 255, 0.08) 28%,
+        transparent 48%
+      );
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #catalogo .catalog-product-image-slot img,
+    .catalog-product-photo,
+    .group:hover .catalog-product-image-slot img,
+    .group:hover .catalog-product-photo {
+      transition: none;
+    }
   }
 
   .pb-safe {
