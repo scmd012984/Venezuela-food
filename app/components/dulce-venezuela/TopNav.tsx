@@ -6,6 +6,13 @@ import { useEffect, useId, useState } from "react";
 import { useCart } from "@/app/contexts/cart-context";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
 import { LogoBrandStars } from "./LogoBrandMark";
+import {
+  PAGE_ENTER_DELAYS,
+  pageEnterDelay,
+  pageEnterNavTopClass,
+  panelCloseBtnClass,
+  siteContentClass,
+} from "./home-shared";
 
 type NavLink = { href: string; label: string; active?: boolean };
 
@@ -37,36 +44,41 @@ export function TopNav() {
   }, [menuOpen]);
 
   const linkClass = (active: boolean) =>
-    `topnav-link btn-text rounded-lg px-2.5 py-1.5 text-sm lg:px-3 lg:text-[0.9375rem] ${
+    `topnav-link btn-text rounded-lg px-2 py-1 text-[0.8125rem] lg:px-2.5 lg:text-sm ${
       active ? "topnav-link--active" : ""
     }`;
 
   return (
     <>
       <nav
-        className="topnav-gold-bar topnav-gold-surface sticky top-0 z-50"
+        className={`${pageEnterNavTopClass} topnav-gold-bar`}
         aria-label="Navegación principal"
+        style={pageEnterDelay(PAGE_ENTER_DELAYS.navTop)}
       >
-        <div className="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:px-8">
+        <div className={`${siteContentClass} topnav-inner`}>
           <div className="flex min-h-0 min-w-0 shrink-0 items-center gap-2 sm:gap-2.5">
             <button
               type="button"
-              className="topnav-link flex size-9 shrink-0 items-center justify-center rounded-lg md:hidden"
+              className={
+                menuOpen
+                  ? `${panelCloseBtnClass} size-8 rounded-lg md:hidden`
+                  : "topnav-link flex size-8 shrink-0 items-center justify-center rounded-lg md:hidden"
+              }
               aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={menuOpen}
               aria-controls={menuId}
               onClick={() => setMenuOpen((o) => !o)}
             >
               {menuOpen ? (
-                <X className="size-6" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
+                <X className="size-5" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
               ) : (
-                <Menu className="size-6" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
+                <Menu className="size-5" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
               )}
             </button>
             <Link
               href="/"
               aria-label="Dulce Venezuela, repostería artesanal"
-              className="logo-brand-frame group relative flex h-9 max-w-[min(100%,17.5rem)] min-h-9 min-w-0 shrink-0 items-center overflow-hidden rounded-xl py-0 pl-2.5 pr-1.5 sm:max-w-[20rem] sm:rounded-2xl sm:pl-3 sm:pr-2"
+              className="logo-brand-frame group relative flex h-8 max-w-[min(100%,17.5rem)] min-h-8 min-w-0 shrink-0 items-center overflow-hidden rounded-lg py-0 pl-2 pr-1.5 sm:max-w-[20rem] sm:rounded-xl sm:pl-2.5 sm:pr-2"
             >
               <div
                 className="absolute inset-0 flex flex-col opacity-[0.72] transition-opacity duration-300 group-hover:opacity-[0.88]"
@@ -85,7 +97,7 @@ export function TopNav() {
                 aria-hidden
               />
               <span className="relative z-[1] flex min-w-0 flex-1 items-center gap-0.5 sm:gap-1">
-                <span className="logo-brand-title min-w-0 truncate font-headline text-base font-black leading-none tracking-[-0.02em] min-[380px]:text-lg sm:text-xl md:text-2xl">
+                <span className="logo-brand-title min-w-0 truncate font-headline text-sm font-black leading-none tracking-[-0.02em] min-[380px]:text-base sm:text-lg md:text-xl">
                   Dulce Venezuela
                 </span>
                 <LogoBrandStars />
@@ -114,7 +126,7 @@ export function TopNav() {
           <div className="ml-auto flex shrink-0 items-center">
             <button
               type="button"
-              className="topnav-link btn-text relative flex h-9 min-h-9 items-center gap-1.5 rounded-xl px-2 sm:rounded-2xl sm:px-2.5"
+              className="topnav-link btn-text relative flex h-8 min-h-8 items-center gap-1 rounded-lg px-2 sm:rounded-xl sm:px-2.5"
               aria-label={
                 itemCount === 0
                   ? "Abrir carrito"
@@ -123,7 +135,7 @@ export function TopNav() {
               onClick={() => openDrawer()}
             >
               <ShoppingCart
-                className="size-6 shrink-0 text-chocolate-ink sm:size-[26px]"
+                className="size-5 shrink-0 text-chocolate-ink sm:size-[22px]"
                 strokeWidth={LUCIDE_ICON_STROKE}
                 aria-hidden
               />
@@ -131,7 +143,7 @@ export function TopNav() {
                 Carrito
               </span>
               {itemCount > 0 ? (
-                <span className="absolute -right-1 -top-1 flex min-w-[1.125rem] items-center justify-center rounded-full bg-cta-warm px-1 py-0.5 text-[9px] font-semibold leading-none text-on-cta-warm ring-2 ring-surface-elevated-strong shadow-[0_2px_10px_rgba(92,6,30,0.38)] dark:ring-slate-900 sm:-right-0.5 sm:top-0 sm:text-[10px]">
+                <span className="absolute -right-1 -top-1 flex min-w-[1.125rem] items-center justify-center rounded-full bg-cta-warm px-1 py-0.5 text-[9px] font-semibold leading-none text-on-cta-warm ring-2 ring-gold-flare/80 shadow-[0_2px_10px_rgba(92,6,30,0.38)] sm:-right-0.5 sm:top-0 sm:text-[10px]">
                   {itemCount > 99 ? "99+" : itemCount}
                 </span>
               ) : null}
@@ -160,7 +172,7 @@ export function TopNav() {
             <p className="logo-brand-title text-sm font-semibold tracking-tight">Menú</p>
             <button
               type="button"
-              className="topnav-link flex size-9 items-center justify-center rounded-lg"
+              className={`${panelCloseBtnClass} size-9 rounded-lg`}
               aria-label="Cerrar"
               onClick={() => setMenuOpen(false)}
             >

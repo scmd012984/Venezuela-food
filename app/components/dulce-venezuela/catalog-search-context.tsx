@@ -6,7 +6,6 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react";
 import { getMatchingProductIds } from "@/lib/catalog-search";
@@ -28,12 +27,14 @@ const SCROLL_DEBOUNCE_MS = 220;
 
 export function CatalogSearchProvider({
   children,
+  initialQuery = "",
 }: {
   children: React.ReactNode;
+  /** Desde `searchParams` en el servidor — evita hidratar la búsqueda en un effect. */
+  initialQuery?: string;
 }) {
-  const [query, setQueryState] = useState("");
-  const [debouncedQuery, setDebouncedQuery] = useState("");
-  const hydratedFromUrl = useRef(false);
+  const [query, setQueryState] = useState(initialQuery);
+  const [debouncedQuery, setDebouncedQuery] = useState(initialQuery);
 
   useEffect(() => {
     const t = window.setTimeout(() => {
@@ -41,13 +42,6 @@ export function CatalogSearchProvider({
     }, SCROLL_DEBOUNCE_MS);
     return () => window.clearTimeout(t);
   }, [query]);
-
-  useEffect(() => {
-    if (hydratedFromUrl.current) return;
-    hydratedFromUrl.current = true;
-    const q = new URLSearchParams(window.location.search).get("q");
-    if (q) setQueryState(q);
-  }, []);
 
   const setQuery = useCallback((next: string) => {
     setQueryState(next);

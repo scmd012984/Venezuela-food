@@ -1,6 +1,6 @@
 import type { CatalogProductId } from "@/lib/catalog";
 
-export type CatalogImageVariant = "hero" | "card" | "thumb";
+export type CatalogImageVariant = "hero" | "card" | "thumb" | "showcase";
 
 export type ProductImagePresentation = {
   /** Encuadre macro: punto de enfoque CSS (object-position). */
@@ -26,7 +26,7 @@ export const PRODUCT_PHOTOGRAPHY_BRIEF: Record<CatalogProductId, string> = {
 
 const BASE_PRESENTATION: Record<CatalogProductId, ProductImagePresentation> = {
   "tres-leches": { objectPosition: "50% 24%", macroScale: 1.22 },
-  cachitos: { objectPosition: "52% 42%", macroScale: 1.24 },
+  cachitos: { objectPosition: "50% 38%", macroScale: 1.14 },
   quesillo: { objectPosition: "50% 36%", macroScale: 1.22 },
   golfeados: { objectPosition: "46% 38%", macroScale: 1.18 },
 };
@@ -35,12 +35,25 @@ const VARIANT_SCALE: Record<CatalogImageVariant, number> = {
   hero: 1.04,
   card: 1,
   thumb: 0.92,
+  showcase: 1,
+};
+
+/** Encuadre del slideshow del hero: producto entero, centrado. */
+const SHOWCASE_PRESENTATION: Record<CatalogProductId, ProductImagePresentation> = {
+  "tres-leches": { objectPosition: "50% 42%", macroScale: 1 },
+  golfeados: { objectPosition: "50% 48%", macroScale: 1 },
+  cachitos: { objectPosition: "50% 46%", macroScale: 1 },
+  quesillo: { objectPosition: "50% 44%", macroScale: 1 },
 };
 
 export function getProductImagePresentation(
   productId: CatalogProductId,
   variant: CatalogImageVariant = "card",
 ): ProductImagePresentation {
+  if (variant === "showcase") {
+    return SHOWCASE_PRESENTATION[productId];
+  }
+
   const base = BASE_PRESENTATION[productId];
   return {
     objectPosition: base.objectPosition,

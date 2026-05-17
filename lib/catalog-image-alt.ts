@@ -34,7 +34,7 @@ export function catalogProductImageAlt(
     core = `${product.name}. Repostería venezolana artesanal.`;
   }
 
-  let text = `${core} ${BRAND}.`.replace(/\s+/g, " ").trim();
+  const text = `${core} ${BRAND}.`.replace(/\s+/g, " ").trim();
   if (text.length <= MAX_ALT) return text;
 
   const withTexture = textureHint

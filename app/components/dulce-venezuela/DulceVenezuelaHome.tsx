@@ -7,28 +7,71 @@ import { LandingHero } from "./LandingHero";
 import { OccasionsCallout } from "./OccasionsCallout";
 import { ProductGrid } from "./ProductGrid";
 import { VenezuelaFlagBackground } from "./VenezuelaFlagBackground";
+import {
+  PAGE_ENTER_DELAYS,
+  pageEnterDelay,
+  pageEnterSectionClass,
+  siteContentClass,
+  siteSectionStackClass,
+} from "./home-shared";
 import { CatalogSearchProvider } from "./catalog-search-context";
 import { CategoryPanelBridgeProvider } from "./category-panel-bridge";
 
 type DulceVenezuelaHomeProps = {
   instagramFeed: InstagramFeedData;
+  initialSearchQuery?: string;
 };
 
-export function DulceVenezuelaHome({ instagramFeed }: DulceVenezuelaHomeProps) {
+export function DulceVenezuelaHome({
+  instagramFeed,
+  initialSearchQuery = "",
+}: DulceVenezuelaHomeProps) {
   return (
     <div className="relative isolate min-h-screen">
       <VenezuelaFlagBackground />
-      <CatalogSearchProvider>
+      <CatalogSearchProvider initialQuery={initialSearchQuery}>
         <CategoryPanelBridgeProvider>
-          <main className="mx-auto max-w-7xl space-y-10 px-4 pt-8 sm:space-y-12 sm:px-6 sm:pt-10 md:space-y-14 md:pt-12 lg:space-y-16 lg:px-8">
-            <LandingHero />
-            <HeroHeader />
-            <OccasionsCallout />
-            <ClientTestimonials />
-            <CatalogQuickStrip />
+          <div
+            className={`${siteContentClass} ${siteSectionStackClass} pt-6 sm:pt-7 md:pt-8`}
+          >
+            <div
+              className={pageEnterSectionClass}
+              style={pageEnterDelay(PAGE_ENTER_DELAYS.hero)}
+            >
+              <LandingHero />
+            </div>
+            <div
+              className={pageEnterSectionClass}
+              style={pageEnterDelay(PAGE_ENTER_DELAYS.header)}
+            >
+              <HeroHeader />
+            </div>
+            <div
+              className={pageEnterSectionClass}
+              style={pageEnterDelay(PAGE_ENTER_DELAYS.occasions)}
+            >
+              <OccasionsCallout />
+            </div>
+            <div
+              className={pageEnterSectionClass}
+              style={pageEnterDelay(PAGE_ENTER_DELAYS.testimonials)}
+            >
+              <ClientTestimonials />
+            </div>
+            <div
+              className={pageEnterSectionClass}
+              style={pageEnterDelay(PAGE_ENTER_DELAYS.quickStrip)}
+            >
+              <CatalogQuickStrip />
+            </div>
             <ProductGrid />
-            <InstagramFeedSection data={instagramFeed} />
-          </main>
+            <div
+              className={pageEnterSectionClass}
+              style={pageEnterDelay(PAGE_ENTER_DELAYS.instagram)}
+            >
+              <InstagramFeedSection data={instagramFeed} />
+            </div>
+          </div>
         </CategoryPanelBridgeProvider>
       </CatalogSearchProvider>
     </div>

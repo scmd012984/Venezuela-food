@@ -1,27 +1,29 @@
 "use client";
 
-import { useMemo } from "react";
-import { AddToCartButton } from "@/app/components/cart/AddToCartButton";
+import { useCallback, useMemo } from "react";
 import { CatalogProductImage } from "@/app/components/dulce-venezuela/CatalogProductImage";
+import { CatalogProductPurchaseRow } from "@/app/components/dulce-venezuela/CatalogProductPurchaseRow";
+import { ProductBadgeStrip } from "@/app/components/dulce-venezuela/ProductBadgeStrip";
 import {
   CATALOG_PRODUCTS,
-  type CatalogProductBadge,
   type CatalogProductId,
 } from "@/lib/catalog";
 import { catalogProductImageAlt } from "@/lib/catalog-image-alt";
-import { formatEuroES } from "@/lib/format-euro";
 import {
   cardHoverLiftClass,
+  catalogPhotoSlotClass,
   giftPanelClass,
+  heroOnImageSecondaryCtaClass,
+  premiumDisplayClass,
   premiumProductDescClass,
   premiumProductTitleClass,
-  pricePremiumClass,
+  pageEnterProductClass,
+  pageEnterProductDelay,
+  productBadgeAnchorClass,
+  productPhotoInnerClass,
 } from "./home-shared";
 import { useCatalogSearch } from "./catalog-search-context";
-
-/** Contenedor de foto: misma altura en tarjetas lista + recorte limpio */
-const catalogProductImageSlotBase =
-  "catalog-product-image-slot relative isolate w-full shrink-0 overflow-hidden bg-slate-200/80 dark:bg-slate-800/90";
+import { useCategoryPanelBridge } from "./category-panel-bridge";
 
 const catalogProductThumbHeight = "h-56 sm:h-64 md:h-64";
 
@@ -31,50 +33,19 @@ function matchHighlightClass(active: boolean): string {
     : "";
 }
 
-/** Etiquetas de confianza / novedad para orientar la compra */
-const BADGE_LABEL: Record<CatalogProductBadge, string> = {
-  nuevo: "Nuevo",
-  masVendido: "Más vendido",
-  favorito: "Favorito",
-};
-
-function productBadgeClass(kind: CatalogProductBadge): string {
-  const base =
-    "inline-flex items-center rounded-full px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest shadow-md ring-1 backdrop-blur-sm sm:px-3 sm:py-1 sm:text-[11px]";
-  if (kind === "nuevo") {
-    return `${base} bg-emerald-600/95 text-white ring-white/25`;
-  }
-  if (kind === "masVendido") {
-    return `${base} bg-chocolate text-gold-soft ring-2 ring-gold-bright/70 shadow-[0_2px_12px_rgba(61,40,23,0.35),0_0_14px_-4px_rgba(224,184,64,0.35)]`;
-  }
-  return `${base} bg-gold-soft/95 text-chocolate ring-2 ring-gold-bright/80 shadow-[0_1px_8px_rgba(120,90,30,0.2),0_0_14px_-4px_rgba(224,184,64,0.4)]`;
-}
-
-function ProductBadgeStrip({
-  badges,
-}: {
-  badges: readonly CatalogProductBadge[];
-}) {
-  if (badges.length === 0) return null;
-  return (
-    <ul
-      className="flex max-w-[min(100%,22rem)] flex-wrap gap-2"
-      aria-label="Destacados del producto"
-    >
-      {badges.map((kind) => (
-        <li key={kind}>
-          <span className={productBadgeClass(kind)}>{BADGE_LABEL[kind]}</span>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 export function ProductGrid() {
   const { query, matchingIds } = useCatalogSearch();
+  const { openCatalogCategory } = useCategoryPanelBridge();
   const q = query.trim();
   const matchSet = useMemo(() => new Set(matchingIds), [matchingIds]);
   const active = (id: CatalogProductId) => q.length > 0 && matchSet.has(id);
+
+  const openGolfeadosBandejas = useCallback(() => {
+    openCatalogCategory("Golfeados");
+    document
+      .getElementById("explorar-dulces")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, [openCatalogCategory]);
 
   const tresLeches = CATALOG_PRODUCTS["tres-leches"];
   const cachitos = CATALOG_PRODUCTS.cachitos;
@@ -84,7 +55,7 @@ export function ProductGrid() {
   return (
     <section
       id="catalogo"
-      className="scroll-mt-24 grid grid-cols-1 gap-8 pb-14 sm:gap-10 sm:scroll-mt-28 md:grid-cols-12 md:gap-12 md:pb-16"
+      className="scroll-mt-24 grid grid-cols-1 gap-5 pb-8 sm:gap-6 sm:scroll-mt-28 md:grid-cols-12 md:gap-7 md:pb-10"
       aria-label="Catálogo de productos"
     >
       {q.length > 0 && matchingIds.length === 0 ? (
@@ -98,54 +69,69 @@ export function ProductGrid() {
           Prueba otras palabras o navega por las tarjetas.
         </p>
       ) : null}
+
+      {/* Tres leches — hero editorial */}
       <div
         id="favoritos"
-        className={`catalog-product-image-slot catalog-featured-tres-leches ${giftPanelClass} group relative min-h-[22rem] h-[min(70vh,32rem)] overflow-hidden rounded-3xl sm:min-h-[26rem] md:col-span-8 md:h-[500px] md:min-h-0 ${cardHoverLiftClass} ${matchHighlightClass(active("tres-leches"))}`}
+        className={`${pageEnterProductClass} catalog-product-image-slot catalog-featured-tres-leches photo-hover-group ${giftPanelClass} group relative min-h-[22rem] h-[min(70vh,32rem)] overflow-hidden rounded-3xl sm:min-h-[26rem] md:col-span-8 md:h-[500px] md:min-h-0 ${cardHoverLiftClass} ${matchHighlightClass(active("tres-leches"))}`}
+        style={pageEnterProductDelay(0)}
       >
-        <CatalogProductImage
-          productId="tres-leches"
-          src={tresLeches.imageUrl}
-          alt={catalogProductImageAlt(tresLeches, "tres-leches")}
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 66vw, 800px"
-          priority
-          variant="card"
-        />
+        <div className={`${productPhotoInnerClass} absolute inset-0 z-0`}>
+          <CatalogProductImage
+            productId="tres-leches"
+            src={tresLeches.imageUrl}
+            alt={catalogProductImageAlt(tresLeches, "tres-leches")}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 66vw, 800px"
+            priority
+            variant="card"
+          />
+        </div>
         <div
-          className="pointer-events-none absolute inset-x-0 top-0 z-[3] h-[52%] bg-[radial-gradient(ellipse_95%_85%_at_50%_0%,rgba(255,253,248,0.65)_0%,rgba(255,240,210,0.2)_45%,transparent_72%)]"
+          className="photo-overlay-shine-top pointer-events-none absolute inset-x-0 top-0 z-[3] h-[52%]"
           aria-hidden
         />
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-[42%] bg-linear-to-t from-[#1a120e]/62 via-[#1a120e]/18 via-55% to-transparent" />
-        <div className="pointer-events-none absolute inset-0 z-[3] bg-linear-to-br from-black/8 to-transparent opacity-50" />
-        <div className="absolute left-4 top-4 z-[12] sm:left-5 sm:top-5">
+        <div
+          className="photo-overlay-bottom pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-[42%]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 z-[3] bg-linear-to-br from-chocolate-deep/8 to-transparent opacity-50"
+          aria-hidden
+        />
+        <div className={productBadgeAnchorClass}>
           <ProductBadgeStrip badges={tresLeches.badges} />
         </div>
         <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col gap-4 p-4 sm:flex-row sm:items-end sm:justify-between sm:gap-5 sm:p-6 md:p-7">
-          <div className="gift-caption-box gift-caption-box--featured max-w-[min(100%,24rem)] space-y-1.5 rounded-2xl px-3.5 py-2.5 backdrop-blur-md backdrop-saturate-150 sm:max-w-md sm:space-y-2 sm:px-4 sm:py-3">
-            <p className="type-eyebrow-gold text-[0.625rem] drop-shadow-[0_1px_6px_rgba(224,184,64,0.7)] sm:text-[0.6875rem]">
+          <div className="catalog-hero-card-copy gift-caption-box gift-caption-box--featured max-w-[min(100%,24rem)] space-y-1.5 rounded-2xl px-3.5 py-2.5 backdrop-blur-md backdrop-saturate-150 sm:max-w-md sm:space-y-2 sm:px-4 sm:py-3">
+            <p className="type-eyebrow-gold text-[0.625rem] sm:text-[0.6875rem]">
               Capricho artesanal
             </p>
-            <h3 className="font-headline text-xl font-semibold leading-tight tracking-[-0.02em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] sm:text-2xl">
+            <h3
+              className={`${premiumDisplayClass} text-xl leading-tight drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] sm:text-2xl`}
+            >
               {tresLeches.name}
             </h3>
-            <p className="leading-body text-pretty text-sm font-normal text-white/95 drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)] sm:text-[0.9375rem]">
+            <p className="leading-body text-pretty text-sm font-normal drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)] sm:text-[0.9375rem]">
               {tresLeches.description}
             </p>
           </div>
-          <div className="relative z-20 flex shrink-0 flex-row flex-wrap items-center justify-end gap-2.5 sm:gap-3">
-            <span className={pricePremiumClass}>
-              {formatEuroES(tresLeches.unitPriceEuro)}
-            </span>
-            <AddToCartButton productId="tres-leches" />
+          <div className="relative z-20 w-full shrink-0 sm:max-w-[min(100%,20rem)]">
+            <CatalogProductPurchaseRow
+              productId="tres-leches"
+              unitPriceEuro={tresLeches.unitPriceEuro}
+            />
           </div>
         </div>
       </div>
 
+      {/* Cachitos — ficha estándar */}
       <div
         id="catalog-product-cachitos"
-        className={`${giftPanelClass} group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass} ${matchHighlightClass(active("cachitos"))}`}
+        className={`${pageEnterProductClass} ${giftPanelClass} group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass} ${matchHighlightClass(active("cachitos"))}`}
+        style={pageEnterProductDelay(1)}
       >
         <div
-          className={`${catalogProductImageSlotBase} ${catalogProductThumbHeight}`}
+          className={`${catalogPhotoSlotClass} ${catalogProductThumbHeight}`}
         >
           <CatalogProductImage
             productId="cachitos"
@@ -154,7 +140,7 @@ export function ProductGrid() {
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 400px"
             variant="card"
           />
-          <div className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
+          <div className={productBadgeAnchorClass}>
             <ProductBadgeStrip badges={cachitos.badges} />
           </div>
         </div>
@@ -168,21 +154,21 @@ export function ProductGrid() {
               {cachitos.description}
             </p>
           </div>
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-            <span className={pricePremiumClass}>
-              {formatEuroES(cachitos.unitPriceEuro)}
-            </span>
-            <AddToCartButton productId="cachitos" />
-          </div>
+          <CatalogProductPurchaseRow
+            productId="cachitos"
+            unitPriceEuro={cachitos.unitPriceEuro}
+          />
         </div>
       </div>
 
+      {/* Quesillo — ficha estándar */}
       <div
         id="catalog-product-quesillo"
-        className={`${giftPanelClass} group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass} ${matchHighlightClass(active("quesillo"))}`}
+        className={`${pageEnterProductClass} ${giftPanelClass} group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass} ${matchHighlightClass(active("quesillo"))}`}
+        style={pageEnterProductDelay(2)}
       >
         <div
-          className={`${catalogProductImageSlotBase} ${catalogProductThumbHeight}`}
+          className={`${catalogPhotoSlotClass} ${catalogProductThumbHeight}`}
         >
           <CatalogProductImage
             productId="quesillo"
@@ -191,7 +177,7 @@ export function ProductGrid() {
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 400px"
             variant="card"
           />
-          <div className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
+          <div className={productBadgeAnchorClass}>
             <ProductBadgeStrip badges={quesillo.badges} />
           </div>
         </div>
@@ -207,51 +193,66 @@ export function ProductGrid() {
               </p>
             ) : null}
           </div>
-          <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-            <span className={pricePremiumClass}>
-              {formatEuroES(quesillo.unitPriceEuro)}
-            </span>
-            <AddToCartButton productId="quesillo" />
-          </div>
+          <CatalogProductPurchaseRow
+            productId="quesillo"
+            unitPriceEuro={quesillo.unitPriceEuro}
+          />
         </div>
       </div>
 
+      {/* Golfeados — hero ancho + CTA bandejas */}
       <div
         id="catalog-product-golfeados"
-        className={`${giftPanelClass} group relative overflow-hidden rounded-3xl md:col-span-8 md:min-h-[24rem] lg:min-h-[26rem] ${cardHoverLiftClass} ${matchHighlightClass(active("golfeados"))}`}
+        className={`${pageEnterProductClass} catalog-product-image-slot catalog-golfeados-hero photo-hover-group ${giftPanelClass} group relative min-h-[24rem] overflow-hidden rounded-3xl sm:min-h-[26rem] md:col-span-8 md:min-h-[28rem] lg:min-h-[30rem] ${cardHoverLiftClass} ${matchHighlightClass(active("golfeados"))}`}
+        style={pageEnterProductDelay(3)}
       >
-        <div className="flex flex-col md:absolute md:inset-0 md:min-h-[24rem] md:flex-row md:items-stretch lg:min-h-[26rem]">
-          <div className="z-10 order-1 flex w-full flex-col justify-center gap-4 p-6 sm:gap-5 sm:p-8 md:order-none md:min-h-0 md:w-1/2 md:justify-between md:gap-6 md:p-10 lg:p-12">
-            <div className="space-y-4 sm:space-y-5">
-              <div className="premium-divider-gold" aria-hidden />
-              <h3 className={`${premiumProductTitleClass} text-2xl sm:text-3xl`}>
-                {golfeados.name}
-              </h3>
-              <p className={`${premiumProductDescClass} sm:text-base`}>
-                {golfeados.description}
-              </p>
-            </div>
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 md:mt-0">
-              <span className={pricePremiumClass}>
-                {formatEuroES(golfeados.unitPriceEuro)}
-              </span>
-              <AddToCartButton productId="golfeados" />
-            </div>
+        <div className={`${productPhotoInnerClass} absolute inset-0 z-0`}>
+          <CatalogProductImage
+            productId="golfeados"
+            src={golfeados.imageUrl}
+            alt={catalogProductImageAlt(golfeados, "golfeados")}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 66vw, 900px"
+            variant="card"
+          />
+        </div>
+        <div
+          className="photo-overlay-shine-top pointer-events-none absolute inset-x-0 top-0 z-[2] h-[40%]"
+          aria-hidden
+        />
+        <div
+          className="catalog-hero-scrim pointer-events-none absolute inset-0 z-[2]"
+          aria-hidden
+        />
+        <div
+          className="photo-overlay-bottom pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-[58%]"
+          aria-hidden
+        />
+        <div className={productBadgeAnchorClass}>
+          <ProductBadgeStrip badges={golfeados.badges} />
+        </div>
+        <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col gap-5 p-5 sm:gap-6 sm:p-7 md:p-8 lg:p-9">
+          <div className="catalog-hero-card-copy max-w-2xl space-y-2 sm:space-y-2.5 md:space-y-3">
+            <p className="type-eyebrow-gold text-[0.6875rem] sm:text-xs">
+              Bandejas y porciones
+            </p>
+            <h3
+              className={`${premiumDisplayClass} text-[1.75rem] leading-[1.08] drop-shadow-[0_2px_14px_rgba(0,0,0,0.55)] sm:text-3xl md:text-4xl lg:text-[2.5rem]`}
+            >
+              {golfeados.name}
+            </h3>
+            <p className="leading-body max-w-xl text-pretty text-sm font-normal drop-shadow-[0_1px_8px_rgba(0,0,0,0.5)] sm:text-base md:text-lg">
+              {golfeados.description}
+            </p>
           </div>
-          <div
-            className={`${catalogProductImageSlotBase} order-2 h-56 w-full shrink-0 sm:h-64 md:order-none md:h-full md:min-h-0 md:w-1/2 md:flex-1`}
-          >
-            <CatalogProductImage
-              productId="golfeados"
-              src={golfeados.imageUrl}
-              alt={catalogProductImageAlt(golfeados, "golfeados")}
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 45vw, 520px"
-              variant="card"
-            />
-            <div className="absolute left-3 top-3 z-[2] sm:left-4 sm:top-4">
-              <ProductBadgeStrip badges={golfeados.badges} />
-            </div>
-          </div>
+          <CatalogProductPurchaseRow
+            productId="golfeados"
+            unitPriceEuro={golfeados.unitPriceEuro}
+            secondaryAction={{
+              label: "Ver bandejas",
+              className: heroOnImageSecondaryCtaClass,
+              onClick: openGolfeadosBandejas,
+            }}
+          />
         </div>
       </div>
     </section>

@@ -6,14 +6,38 @@
 
 @theme inline {
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-headline: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-display: var(--font-playfair), "Playfair Display", ui-serif, Georgia,
+    serif;
 }
 
 @layer base {
   body {
     min-height: max(884px, 100dvh);
+    background-color: var(--color-background);
     font-family: var(--font-body);
     font-weight: var(--font-weight-body);
     letter-spacing: 0.01em;
+  }
+
+  /** Titulares serif elegantes; cuerpo y UI quedan en Inter vía body / .font-sans */
+  :is(h1, h2, h3) {
+    font-family: var(--font-display);
+    font-weight: var(--font-weight-display);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--color-chocolate-ink);
+    text-wrap: balance;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-headline);
+    font-weight: var(--font-weight-headline);
+    letter-spacing: -0.015em;
+    line-height: 1.25;
+    color: var(--color-chocolate);
   }
 
   /**
@@ -30,8 +54,10 @@
         .font-bold,
         .font-extrabold,
         .font-headline,
+        .font-display,
         .type-premium-display,
         .type-premium-product-title,
+        .type-premium-quote,
         .type-eyebrow-gold,
         .type-eyebrow-gold-lg
       )
@@ -61,6 +87,71 @@
   }
 }
 
+@keyframes product-cascade-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(10px);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes product-cascade-fade {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/** Entrada de página — fade + slide-up premium */
+@keyframes page-enter-fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 1.125rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes page-enter-fade-down {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -0.625rem, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes page-enter-shell {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes page-enter-backdrop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 @layer utilities {
   .animate-category-panel-content {
     animation: category-panel-content-in 0.38s cubic-bezier(0.33, 1, 0.68, 1) both;
@@ -82,31 +173,201 @@
     }
   }
 
+  /** Apertura: secciones en cascada */
+  .page-enter-section {
+    opacity: 0;
+    animation: page-enter-fade-up 0.75s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--page-enter-delay, 0ms);
+  }
+
+  /** Catálogo: stagger por tarjeta de producto */
+  .page-enter-product {
+    opacity: 0;
+    animation: page-enter-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(
+      var(--page-enter-base-delay, 470ms) + var(--page-enter-stagger, 0ms)
+    );
+  }
+
+  .page-enter-nav-top {
+    opacity: 0;
+    animation: page-enter-fade-down 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--page-enter-delay, 0ms);
+  }
+
+  .page-enter-nav-bottom {
+    opacity: 0;
+    animation: page-enter-fade-up 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--page-enter-delay, 580ms);
+  }
+
+  .page-enter-shell {
+    animation: page-enter-shell 0.42s ease-out both;
+  }
+
+  .page-enter-backdrop {
+    opacity: 0;
+    animation: page-enter-backdrop 0.85s ease-out both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-enter-section,
+    .page-enter-product,
+    .page-enter-nav-top,
+    .page-enter-nav-bottom,
+    .page-enter-shell,
+    .page-enter-backdrop {
+      opacity: 1;
+      animation: none;
+      transform: none;
+    }
+  }
+
+  .product-cascade-item {
+    opacity: 0;
+    will-change: opacity, transform, filter;
+  }
+
+  .product-cascade-item--play {
+    animation: product-cascade-reveal 1.15s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
   /**
-   * Superficies elevadas: blanco semitransparente sobre crema (profundidad sin blanco puro).
+   * Slideshow del hero: producto completo (contain), sin zoom macro.
+   */
+  .product-cascade-slide {
+    background: linear-gradient(
+      168deg,
+      var(--color-ivory-soft) 0%,
+      var(--color-ivory-bright) 42%,
+      color-mix(in srgb, var(--color-background) 88%, var(--color-ivory-bright)) 100%
+    );
+  }
+
+  .product-cascade-slide .catalog-product-photo {
+    object-fit: contain !important;
+    transform: none !important;
+    filter: brightness(1.06) contrast(1.08) saturate(1.12);
+  }
+
+  .product-cascade--hero .ring-gold-frame {
+    opacity: 0.95;
+  }
+
+  /**
+   * Zoom muy suave en fotos; la elevación de tarjetas va en .card-hover-lift.
+   */
+  @media (hover: hover) {
+    .photo-hover-group {
+      transition:
+        transform 0.45s cubic-bezier(0.33, 1, 0.2, 1),
+        box-shadow 0.45s ease;
+    }
+
+    /* Marcos sueltos (Instagram, etc.) — misma elevación que tarjetas */
+    .photo-hover-group:not(.card-hover-lift):hover {
+      transform: translateY(-3px);
+    }
+
+    /* Dentro de una tarjeta que ya sube: solo zoom en la imagen */
+    .card-hover-lift .photo-hover-group:hover {
+      transform: none;
+    }
+
+    .photo-hover-inner .catalog-product-photo,
+    .photo-hover-group .catalog-product-photo,
+    .photo-hover-img {
+      transition:
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        filter 0.5s ease;
+    }
+
+    .photo-hover-group:hover .catalog-product-photo {
+      transform: scale(calc(var(--catalog-macro-scale, 1) * 1.04)) !important;
+      filter: brightness(1.06) contrast(1.08) saturate(1.1) !important;
+    }
+
+    .photo-hover-group:hover .photo-hover-img {
+      transform: scale(1.04);
+    }
+
+    .product-cascade-slide:hover .catalog-product-photo {
+      transform: scale(1.03) !important;
+      filter: brightness(1.06) contrast(1.08) saturate(1.1) !important;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .photo-hover-group,
+    .photo-hover-group:hover,
+    .card-hover-lift,
+    .card-hover-lift:hover,
+    .btn-hover-lift,
+    .btn-hover-lift:hover,
+    .photo-hover-inner .catalog-product-photo,
+    .photo-hover-group:hover .photo-hover-inner .catalog-product-photo,
+    .photo-hover-img,
+    .photo-hover-group:hover .photo-hover-img,
+    .product-cascade-slide:hover .catalog-product-photo,
+    .catalog-featured-tres-leches.group:hover .catalog-product-photo {
+      transition: none;
+      transform: none !important;
+    }
+  }
+
+  .product-cascade-viewport {
+    isolation: isolate;
+  }
+
+  .product-cascade-slide__frame {
+    padding: 0.65rem 0.75rem 2.5rem;
+    box-sizing: border-box;
+  }
+
+  .product-cascade-slide__frame .catalog-product-photo {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+  }
+
+  @media (min-width: 640px) {
+    .product-cascade-slide__frame {
+      padding: 0.85rem 1rem 2.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .product-cascade-item--play {
+      animation: product-cascade-fade 0.5s ease both;
+    }
+  }
+
+  /**
+   * Superficies elevadas: crema clara sobre fondo (sin blanco puro).
    */
   .bg-surface-elevated {
-    background-color: color-mix(in srgb, #ffffff 80%, var(--color-background));
+    background-color: color-mix(in srgb, var(--color-ivory-bright) 82%, var(--color-background));
   }
 
   .bg-surface-elevated-soft {
-    background-color: color-mix(in srgb, #ffffff 65%, var(--color-background));
+    background-color: color-mix(in srgb, var(--color-ivory-bright) 68%, var(--color-background));
   }
 
   .bg-surface-elevated-strong {
-    background-color: color-mix(in srgb, #ffffff 88%, var(--color-background));
+    background-color: color-mix(in srgb, var(--color-ivory-bright) 90%, var(--color-background));
   }
 
   /**
    * Tarjetas: velo crema + ligero blur (menos “vidrio tech”, más papel artesanal).
    */
   .glass-panel {
-    background: color-mix(in srgb, #ffffff 80%, var(--color-background));
+    background: color-mix(in srgb, var(--color-ivory-bright) 80%, var(--color-background));
     backdrop-filter: blur(9px) saturate(1.02);
     -webkit-backdrop-filter: blur(9px) saturate(1.02);
     border: 1.5px solid color-mix(in srgb, #ddd6cb 72%, #6b5344 8%);
     box-shadow:
-      inset 0 1px 0 color-mix(in srgb, #ffffff 55%, var(--color-background)),
+      inset 0 1px 0 color-mix(in srgb, var(--color-ivory-bright) 55%, var(--color-background)),
       var(--shadow-card);
   }
 
@@ -142,14 +403,14 @@
   }
 
   /**
-   * Textura de página: marfil muy suave (sin amarillo chillón ni blanco puro).
+   * Textura de página: crema suave #fffaf3 (sin blanco puro).
    */
   .texture-page-warm {
-    background-color: var(--color-background);
+    background-color: #fffaf3;
     background-repeat: no-repeat;
     background-image:
-      radial-gradient(ellipse 130% 65% at 14% -10%, rgba(253, 252, 248, 0.75), transparent 58%),
-      radial-gradient(ellipse 105% 55% at 99% 20%, rgba(245, 242, 235, 0.22), transparent 54%),
+      radial-gradient(ellipse 130% 65% at 14% -10%, rgba(255, 252, 249, 0.75), transparent 58%),
+      radial-gradient(ellipse 105% 55% at 99% 20%, rgba(246, 241, 232, 0.22), transparent 54%),
       radial-gradient(ellipse 92% 50% at 1% 99%, rgba(255, 223, 183, 0.08), transparent 56%),
       radial-gradient(ellipse 150% 75% at 50% 112%, rgba(240, 235, 227, 0.18), transparent 52%);
   }
@@ -261,13 +522,15 @@
       );
   }
 
-  /* Tarta tres leches — foto más luminosa y merengue más brillante */
+  /* Tarta tres leches — foto más luminosa + mismo zoom al hover que el resto */
   .catalog-featured-tres-leches .catalog-product-photo {
     filter: brightness(1.22) contrast(1.1) saturate(1.24);
   }
 
-  .catalog-featured-tres-leches.group:hover .catalog-product-photo {
-    filter: brightness(1.26) contrast(1.12) saturate(1.26);
+  .catalog-featured-tres-leches.group:hover .catalog-product-photo,
+  .catalog-featured-tres-leches.photo-hover-group:hover .catalog-product-photo {
+    transform: scale(calc(var(--catalog-macro-scale, 1.22) * 1.04)) !important;
+    filter: brightness(1.24) contrast(1.12) saturate(1.22) !important;
   }
 
   .catalog-product-shine--featured {

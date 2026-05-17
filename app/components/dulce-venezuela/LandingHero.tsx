@@ -1,31 +1,33 @@
 import Link from "next/link";
-import { CatalogProductImage } from "@/app/components/dulce-venezuela/CatalogProductImage";
+import { ProductCascade } from "@/app/components/dulce-venezuela/ProductCascade";
+import {
+  BRAND_HERO_LEAD,
+  BRAND_HERO_TITLE,
+  BRAND_TAGLINE,
+} from "@/lib/brand";
 import {
   buildWhatsAppContactHref,
   isWhatsAppWebHref,
 } from "@/lib/contact-public";
-import { CATALOG_PRODUCTS } from "@/lib/catalog";
-import { catalogProductImageAlt } from "@/lib/catalog-image-alt";
 import type { CtaLink } from "./home-shared";
 import {
-  giftPanelClass,
+  goldCtaHeroClass,
+  heroPanelClass,
   premiumDisplayClass,
   premiumEyebrowClass,
-  primaryCtaClass,
   whatsappCtaClass,
 } from "./home-shared";
 import { WhatsAppBrandIcon } from "./WhatsAppBrandIcon";
 
-/** Hero de entrada: bloque claro con foto, copy breve y acciones */
+/** Hero de entrada: marca, copy breve y acciones */
 export function LandingHero() {
-  const heroProduct = CATALOG_PRODUCTS["tres-leches"];
   const waContactHref = buildWhatsAppContactHref();
   const openWhatsAppInNewTab = isWhatsAppWebHref(waContactHref);
   const heroCtas: CtaLink[] = [
     {
       href: "#catalogo",
       label: "Ver catálogo",
-      className: `${primaryCtaClass} px-8`,
+      className: goldCtaHeroClass,
     },
     {
       href: waContactHref,
@@ -38,25 +40,21 @@ export function LandingHero() {
   ];
 
   return (
-    <section
-      className={`${giftPanelClass} overflow-hidden rounded-3xl`}
-      aria-labelledby="hero-heading"
-    >
+    <section className={heroPanelClass} aria-labelledby="hero-heading">
       <div className="grid lg:grid-cols-2 lg:items-stretch">
-        <div className="order-2 flex flex-col justify-center gap-5 px-6 py-8 sm:gap-6 sm:px-10 sm:py-10 lg:order-1 lg:px-12 lg:py-14">
-          <p className={premiumEyebrowClass}>Regalos & caprichos</p>
-          <div className="premium-divider-gold" aria-hidden />
+        <div className="hero-copy-stack order-2 flex flex-col justify-center px-5 py-6 sm:px-8 sm:py-8 lg:order-1 lg:px-10 lg:py-10">
+          <p className={premiumEyebrowClass}>{BRAND_TAGLINE}</p>
+          <div className="premium-divider-gold hero-panel-divider" aria-hidden />
           <h1
             id="hero-heading"
-            className={`${premiumDisplayClass} text-balance text-3xl leading-[1.12] sm:text-4xl sm:leading-[1.1] lg:text-[2.45rem] lg:leading-[1.08]`}
+            className={`${premiumDisplayClass} hero-panel-title text-balance text-3xl leading-[1.12] sm:text-4xl sm:leading-[1.1] lg:text-[2.45rem] lg:leading-[1.08]`}
           >
-            Repostería venezolana, hecha hoy.
+            {BRAND_HERO_TITLE}
           </h1>
-          <p className="type-premium-body leading-body max-w-md text-base sm:text-lg">
-            Cada pieza es un detalle para consentir — para regalar o para un
-            capricho solo tuyo.
+          <p className="hero-panel-body hero-panel-lead text-pretty text-base sm:text-lg">
+            {BRAND_HERO_LEAD}
           </p>
-          <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+          <div className="hero-panel-actions flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             {heroCtas.map((cta) => (
               <Link
                 key={cta.label}
@@ -73,15 +71,8 @@ export function LandingHero() {
             ))}
           </div>
         </div>
-        <div className="group relative order-1 aspect-[16/11] min-h-[200px] w-full overflow-hidden sm:aspect-[16/10] sm:min-h-[240px] lg:aspect-auto lg:min-h-[300px]">
-          <CatalogProductImage
-            productId="tres-leches"
-            src={heroProduct.imageUrl}
-            alt={catalogProductImageAlt(heroProduct, "tres-leches")}
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            priority
-            variant="hero"
-          />
+        <div className="photo-hover-group group relative order-1 aspect-[16/11] min-h-[200px] w-full overflow-hidden sm:aspect-[16/10] sm:min-h-[240px] lg:aspect-auto lg:min-h-[300px]">
+          <ProductCascade />
         </div>
       </div>
     </section>

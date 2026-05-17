@@ -9,9 +9,14 @@ import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
 import {
   cardHoverLiftClass,
   giftPanelClass,
-  premiumDisplayClass,
-  testimonialsEyebrowClass,
+  productPhotoFrameClass,
+  productPhotoInnerClass,
+  premiumQuoteClass,
   premiumProductDescClass,
+  siteSectionHeaderCenterClass,
+  siteSectionLeadClass,
+  siteSectionTitleClass,
+  testimonialsEyebrowClass,
 } from "./home-shared";
 
 function StarRating({ size = "md" }: { size?: "md" | "lg" }) {
@@ -38,18 +43,20 @@ function TestimonialCard({ testimonial }: { testimonial: ClientTestimonial }) {
     <article
       className={`${giftPanelClass} flex h-full flex-col overflow-hidden rounded-2xl sm:rounded-3xl ${cardHoverLiftClass}`}
     >
-      <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-vanilla-muted">
-        <Image
-          src={testimonial.imageUrl}
-          alt={testimonial.imageDescription}
-          fill
-          className="object-cover object-center"
-          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
-        />
-        <div
-          className="pointer-events-none absolute inset-0 bg-linear-to-t from-chocolate-deep/25 via-transparent to-transparent"
-          aria-hidden
-        />
+      <div className={`${productPhotoFrameClass} group relative aspect-[4/3] w-full shrink-0 p-1`}>
+        <div className={productPhotoInnerClass}>
+          <Image
+            src={testimonial.imageUrl}
+            alt={testimonial.imageDescription}
+            fill
+            className="photo-hover-img object-cover object-center"
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 400px"
+          />
+          <div
+            className="pointer-events-none absolute inset-0 bg-linear-to-t from-chocolate-deep/25 via-transparent to-transparent"
+            aria-hidden
+          />
+        </div>
       </div>
       <div className="flex flex-1 flex-col gap-3 p-5 sm:gap-4 sm:p-6">
         <StarRating />
@@ -59,7 +66,7 @@ function TestimonialCard({ testimonial }: { testimonial: ClientTestimonial }) {
           </p>
         </blockquote>
         <footer className="border-gold-separator border-gold-separator-t pt-3">
-          <p className="font-headline text-base font-semibold text-chocolate">
+          <p className="font-sans text-base font-semibold text-chocolate">
             {testimonial.name}
           </p>
           <p className={`${premiumProductDescClass} mt-0.5 not-italic text-sm`}>
@@ -81,44 +88,41 @@ export function ClientTestimonials() {
       className="scroll-mt-24 sm:scroll-mt-28"
       aria-labelledby="testimonios-heading"
     >
-      <div className="mb-8 text-center sm:mb-10">
+      <header className={`${siteSectionHeaderCenterClass} mb-6 sm:mb-7`}>
         <p className={testimonialsEyebrowClass}>Momentos reales</p>
-        <div className="premium-divider-gold mx-auto mt-2 mb-4" aria-hidden />
-        <h2
-          id="testimonios-heading"
-          className={`${premiumDisplayClass} text-2xl sm:text-3xl md:text-[2.125rem]`}
-        >
+        <div className="premium-divider-gold" aria-hidden />
+        <h2 id="testimonios-heading" className={siteSectionTitleClass}>
           Felicidad que se comparte
         </h2>
-        <p className="type-premium-body leading-body mx-auto mt-3 max-w-2xl text-base sm:text-lg">
-          Nuestros dulces acompañan bodas, cumpleaños y encuentros que se quedan
-          en la memoria.
+        <p className={`${siteSectionLeadClass} max-w-2xl text-base sm:text-lg`}>
+          En Málaga, nuestros dulces acompañan bodas, cumpleaños y encuentros que
+          se quedan en la memoria.
         </p>
-      </div>
+      </header>
 
-      <div className="space-y-6 sm:space-y-8">
+      <div className="space-y-5 sm:space-y-6">
         <article
           className={`${giftPanelClass} overflow-hidden rounded-2xl sm:rounded-3xl`}
           aria-labelledby="featured-testimonial-quote"
         >
           <div className="border-gold-separator border-gold-separator-b grid lg:grid-cols-2 lg:items-stretch">
-            <div className="relative min-h-[14rem] w-full sm:min-h-[18rem] lg:min-h-[20rem]">
-              <Image
-                src={featured.imageUrl}
-                alt={featured.imageDescription}
-                fill
-                className="object-cover object-[center_38%]"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              <div
-                className="pointer-events-none absolute inset-0 bg-linear-to-t from-chocolate-deep/40 via-chocolate-deep/5 to-transparent lg:bg-linear-to-r lg:from-transparent lg:via-transparent lg:to-chocolate-deep/10"
-                aria-hidden
-              />
-              <div
-                className="ring-gold-frame pointer-events-none absolute inset-3 rounded-xl sm:inset-4"
-                aria-hidden
-              />
-              <p className="absolute bottom-3 left-3 z-[1] rounded-full bg-chocolate-deep/75 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-gold-soft backdrop-blur-sm sm:bottom-4 sm:left-4">
+            <div
+              className={`${productPhotoFrameClass} group relative min-h-[14rem] w-full p-2 sm:min-h-[18rem] lg:min-h-[20rem]`}
+            >
+              <div className={`${productPhotoInnerClass} min-h-[inherit]`}>
+                <Image
+                  src={featured.imageUrl}
+                  alt={featured.imageDescription}
+                  fill
+                  className="photo-hover-img object-cover object-[center_38%]"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div
+                  className="pointer-events-none absolute inset-0 bg-linear-to-t from-chocolate-deep/40 via-chocolate-deep/5 to-transparent lg:bg-linear-to-r lg:from-transparent lg:via-transparent lg:to-chocolate-deep/10"
+                  aria-hidden
+                />
+              </div>
+              <p className="absolute bottom-5 left-5 z-[1] rounded-full bg-chocolate-deep/75 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-gold-soft backdrop-blur-sm sm:bottom-6 sm:left-6">
                 Celebrando con los tuyos
               </p>
             </div>
@@ -128,13 +132,13 @@ export function ClientTestimonials() {
               <blockquote>
                 <p
                   id="featured-testimonial-quote"
-                  className="font-headline text-lg font-medium italic leading-relaxed tracking-wide text-chocolate sm:text-xl"
+                  className={`${premiumQuoteClass} text-lg sm:text-xl`}
                 >
                   “{featured.quote}”
                 </p>
               </blockquote>
               <footer className="border-gold-separator border-gold-separator-t pt-3">
-                <p className="font-headline text-base font-semibold text-chocolate-deep sm:text-lg">
+                <p className="font-sans text-base font-semibold text-chocolate-deep sm:text-lg">
                   {featured.name}
                 </p>
                 <p className={`${premiumProductDescClass} mt-0.5 not-italic text-sm`}>
@@ -149,7 +153,7 @@ export function ClientTestimonials() {
           <p className={`${testimonialsEyebrowClass} mb-4 text-center sm:mb-5`}>
             Más historias
           </p>
-          <ul className="m-0 grid list-none grid-cols-1 gap-5 p-0 sm:gap-6 md:grid-cols-3 md:gap-6">
+          <ul className="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:gap-5 md:grid-cols-3 md:gap-5">
             {CLIENT_TESTIMONIALS.map((t) => (
               <li key={t.id} className="min-w-0">
                 <TestimonialCard testimonial={t} />

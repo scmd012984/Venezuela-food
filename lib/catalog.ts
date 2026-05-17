@@ -41,7 +41,8 @@ export const CATALOG_PRODUCTS = {
     unitPriceEuro: 5,
     imageUrl:
       "https://lh3.googleusercontent.com/aida-public/AB6AXuBozKqZoogbgijyV8-KJUFC5-7LZRILIGALzyZ3H8Rb8GPNANMlpSNOWDvmDKdLPkDHmU7WuWmX3lT21vdBM_6_QdJsOXnVSPIHPk76JdyHh7paE-NAcVoXLNcZImV7IZY81wSPiOYSNfwMNdIFB53UvYN1grgxgAuas_rrsfAzSOwFvfTkgEk9IhJZ8luaXDh1jqEgAT5Ey_ShNMt62MpeiVx_O5bbzlqinGoU0372LZlH6LNs6zZI2DTdGWMEs-k6hlVyPMaKz1Yv",
-    description: "",
+    description:
+      "Flan casero de huevo y leche condensada, bañado en caramelo dorado y suave.",
     badges: ["nuevo"],
     categories: ["Quesillos"],
   },

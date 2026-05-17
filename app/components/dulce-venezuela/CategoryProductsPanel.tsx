@@ -2,9 +2,9 @@
 
 import { ChevronUp, X } from "lucide-react";
 import { useEffect, useMemo } from "react";
-import { AddToCartButton } from "@/app/components/cart/AddToCartButton";
 import { CatalogProductImage } from "@/app/components/dulce-venezuela/CatalogProductImage";
-import { formatEuroES } from "@/lib/format-euro";
+import { CatalogProductPurchaseRow } from "@/app/components/dulce-venezuela/CatalogProductPurchaseRow";
+import { ProductBadgeStrip } from "@/app/components/dulce-venezuela/ProductBadgeStrip";
 import { catalogProductImageAlt } from "@/lib/catalog-image-alt";
 import { getCatalogProduct, type CatalogProductId } from "@/lib/catalog";
 import { getMatchingProductIds } from "@/lib/catalog-search";
@@ -12,10 +12,12 @@ import type { CategoryLabel } from "@/lib/catalog-categories";
 import { getProductIdsForCategory } from "@/lib/catalog-categories";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
 import {
+  productPhotoFrameClass,
+  productPhotoInnerClass,
   giftPanelClass,
+  panelCloseBtnClass,
   premiumProductDescClass,
   premiumProductTitleClass,
-  pricePremiumClass,
 } from "./home-shared";
 
 type CategoryProductsPanelProps = {
@@ -55,7 +57,7 @@ export function CategoryProductsPanel({
       role="region"
       aria-labelledby="category-panel-title"
     >
-      <div className="border-gold-separator border-gold-separator-b flex items-center justify-between gap-2 bg-gold-soft/30 px-3 py-2.5 sm:px-4 sm:py-3 md:px-5 md:py-3.5">
+      <div className="category-panel-header border-gold-separator border-gold-separator-b flex items-center justify-between gap-2 px-3 py-2.5 sm:px-4 sm:py-3 md:px-5 md:py-3.5">
         <h2
           id="category-panel-title"
           className="type-premium-product-title min-w-0 truncate text-base sm:text-lg md:text-xl"
@@ -64,7 +66,7 @@ export function CategoryProductsPanel({
         </h2>
         <button
           type="button"
-          className="tap-highlight-none inline-flex size-9 shrink-0 items-center justify-center rounded-xl text-on-surface-variant transition hover:bg-surface-container-low sm:size-10 sm:rounded-2xl dark:hover:bg-slate-800"
+          className={`${panelCloseBtnClass} size-9 sm:size-10 sm:rounded-2xl`}
           aria-label="Cerrar lista de categoría"
           onClick={onClose}
         >
@@ -126,16 +128,25 @@ export function CategoryProductsPanel({
               return (
                 <li
                   key={productId}
-                  className="flex min-h-0 min-w-0 items-start gap-3 rounded-xl border-2 border-gold-bright/75 bg-surface-container-low/90 p-3 shadow-[inset_0_1px_0_rgba(255,248,220,0.9),0_0_16px_-5px_rgba(224,184,64,0.32)] sm:gap-4 sm:rounded-2xl sm:p-4 md:gap-5 md:p-5"
+                  className="shadow-card-subtle flex min-h-0 min-w-0 items-start gap-3 rounded-xl border-2 border-gold-bright/70 bg-surface-container-low/95 p-3 sm:gap-4 sm:rounded-2xl sm:p-4 md:gap-5 md:p-5"
                 >
-                  <div className="group relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border-2 border-gold-bright/80 bg-slate-200/80 shadow-[inset_0_1px_0_rgba(255,248,220,0.85),0_0_14px_-4px_rgba(224,184,64,0.38)] min-[380px]:h-[5.25rem] min-[380px]:w-[5.25rem] min-[380px]:rounded-xl sm:h-24 sm:w-24 md:h-[7.25rem] md:w-[7.25rem] md:rounded-2xl lg:h-32 lg:w-32 dark:border-slate-600/50 dark:bg-slate-800/90">
-                    <CatalogProductImage
-                      productId={productId as CatalogProductId}
-                      src={p.imageUrl}
-                      alt={catalogProductImageAlt(p, productId as CatalogProductId)}
-                      sizes="(max-width: 379px) 80px, (max-width: 639px) 84px, (max-width: 767px) 96px, (max-width: 1023px) 116px, 128px"
-                      variant="thumb"
-                    />
+                  <div
+                    className={`${productPhotoFrameClass} catalog-product-image-slot group relative h-20 w-20 shrink-0 p-1 min-[380px]:h-[5.25rem] min-[380px]:w-[5.25rem] sm:h-24 sm:w-24 md:h-[7.25rem] md:w-[7.25rem] lg:h-32 lg:w-32`}
+                  >
+                    <div className={productPhotoInnerClass}>
+                      <CatalogProductImage
+                        productId={productId as CatalogProductId}
+                        src={p.imageUrl}
+                        alt={catalogProductImageAlt(p, productId as CatalogProductId)}
+                        sizes="(max-width: 379px) 80px, (max-width: 639px) 84px, (max-width: 767px) 96px, (max-width: 1023px) 116px, 128px"
+                        variant="thumb"
+                      />
+                    </div>
+                    {p.badges.length > 0 ? (
+                      <div className="absolute left-1 top-1 z-[2] max-w-[calc(100%-0.5rem)] sm:left-1.5 sm:top-1.5">
+                        <ProductBadgeStrip badges={p.badges} />
+                      </div>
+                    ) : null}
                   </div>
                   <div className="flex min-w-0 flex-1 flex-col gap-2 sm:gap-2.5">
                     <div className="min-w-0">
@@ -148,14 +159,11 @@ export function CategoryProductsPanel({
                         </p>
                       ) : null}
                     </div>
-                    <div className="mt-auto flex flex-col gap-2 pt-0.5 min-[400px]:flex-row min-[400px]:flex-wrap min-[400px]:items-center min-[400px]:justify-between min-[400px]:gap-3 md:pt-1">
-                      <span className={`${pricePremiumClass} !min-h-0 !min-w-0 px-3 py-1.5 text-sm sm:text-base`}>
-                        {formatEuroES(p.unitPriceEuro)}
-                      </span>
-                      <div className="shrink-0 self-start min-[400px]:self-center">
-                        <AddToCartButton productId={productId} />
-                      </div>
-                    </div>
+                    <CatalogProductPurchaseRow
+                      productId={productId as CatalogProductId}
+                      unitPriceEuro={p.unitPriceEuro}
+                      compact
+                    />
                   </div>
                 </li>
               );

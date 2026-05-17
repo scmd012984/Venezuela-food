@@ -10,6 +10,7 @@ import { useCatalogSearch } from "./catalog-search-context";
 import { useCategoryPanelBridge } from "./category-panel-bridge";
 import {
   categoryFilterTrackClass,
+  categoryFilterChipRowClass,
   goldFilterChipClass,
 } from "./home-shared";
 
@@ -19,7 +20,7 @@ const panelGridClass =
   "grid min-h-0 transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none motion-reduce:duration-0";
 
 export function CategoryFilterSection() {
-  const { debouncedSearchQuery } = useCatalogSearch();
+  const { debouncedSearchQuery, query, setQuery } = useCatalogSearch();
   const {
     setOpenCatalogCategory,
     activeCategory,
@@ -48,6 +49,13 @@ export function CategoryFilterSection() {
       closeTimerRef.current = null;
     }, CLOSE_MS);
   }, [clearCloseTimer]);
+
+  const handlePanelClose = useCallback(() => {
+    if (query.trim().length > 0) {
+      setQuery("");
+    }
+    closePanel();
+  }, [query, setQuery, closePanel]);
 
   const openCategory = useCallback(
     (tag: CategoryLabel) => {
@@ -81,14 +89,20 @@ export function CategoryFilterSection() {
     return () => setOpenCatalogCategory(null);
   }, [setOpenCatalogCategory, openCatalogCategoryForced]);
 
+  const searchQuery = debouncedSearchQuery.trim();
+  const searchDrivesPanel = searchQuery.length > 0;
+  const displayedCategory: CategoryLabel | null = searchDrivesPanel
+    ? "Todos"
+    : panelCategory;
+  const displayedOpen = searchDrivesPanel || panelOpen;
+  const chipActiveCategory: CategoryLabel = searchDrivesPanel
+    ? "Todos"
+    : activeCategory;
+
   useEffect(() => {
-    const q = debouncedSearchQuery.trim();
-    if (!q) return;
+    if (!searchDrivesPanel) return;
     clearCloseTimer();
-    setActiveCategory("Todos");
-    setPanelCategory("Todos");
-    setPanelOpen(true);
-  }, [debouncedSearchQuery, clearCloseTimer, setActiveCategory]);
+  }, [searchDrivesPanel, clearCloseTimer]);
 
   return (
     <div className="flex min-w-0 flex-1 flex-col gap-1.5">
@@ -103,13 +117,13 @@ export function CategoryFilterSection() {
         aria-labelledby="filter-cat-label"
       >
         <legend className="sr-only">Filtrar por categoría</legend>
-        <div className="no-scrollbar flex flex-wrap gap-1">
+        <div className={`${categoryFilterChipRowClass} no-scrollbar`}>
           {CATEGORY_LABELS.map((tag) => (
             <button
               key={tag}
               type="button"
-              className={goldFilterChipClass(tag === activeCategory)}
-              aria-pressed={tag === activeCategory}
+              className={goldFilterChipClass(tag === chipActiveCategory)}
+              aria-pressed={tag === chipActiveCategory}
               onClick={() => openCategory(tag)}
             >
               {tag}
@@ -120,19 +134,19 @@ export function CategoryFilterSection() {
 
       <div
         className={`${panelGridClass} ${
-          panelOpen && panelCategory !== null
+          displayedOpen && displayedCategory !== null
             ? "grid-rows-[1fr]"
             : "grid-rows-[0fr]"
         }`}
       >
         <div className="min-h-0 overflow-hidden">
-          {panelCategory !== null ? (
+          {displayedCategory !== null ? (
             <div className="mt-3 min-h-0">
               <CategoryProductsPanel
-                key={panelCategory}
-                category={panelCategory}
+                key={displayedCategory}
+                category={displayedCategory}
                 searchFilterQuery={debouncedSearchQuery}
-                onClose={closePanel}
+                onClose={handlePanelClose}
               />
             </div>
           ) : null}

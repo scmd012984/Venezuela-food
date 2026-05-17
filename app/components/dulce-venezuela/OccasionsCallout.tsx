@@ -18,9 +18,11 @@ import {
 import {
   cardHoverLiftClass,
   giftPanelClass,
-  premiumDisplayClass,
-  testimonialsEyebrowClass,
-  primaryCtaClass,
+  productPhotoFrameClass,
+  productPhotoInnerClass,
+  premiumEyebrowClass,
+  siteSectionTitleClass,
+  goldCtaClass,
   type CtaLink,
   whatsappCtaClass,
 } from "./home-shared";
@@ -35,7 +37,7 @@ export function OccasionsCallout() {
       href: mailtoHref,
       label: "Pedir presupuesto",
       icon: "mail",
-      className: `${primaryCtaClass} px-6`,
+      className: `${goldCtaClass} px-6`,
     },
     {
       href: waContactHref,
@@ -53,7 +55,7 @@ export function OccasionsCallout() {
       aria-labelledby="occasions-heading"
     >
       <div className="grid lg:grid-cols-2 lg:items-stretch">
-        <div className="relative order-2 flex flex-col justify-center px-6 py-7 sm:px-8 sm:py-8 lg:order-1 lg:px-10 lg:py-10 xl:px-12">
+        <div className="relative order-2 flex flex-col justify-center px-5 py-6 sm:px-7 sm:py-7 lg:order-1 lg:px-9 lg:py-9">
           <div
             className="pointer-events-none absolute inset-0 overflow-hidden lg:block"
             aria-hidden
@@ -68,30 +70,23 @@ export function OccasionsCallout() {
             <div className="absolute inset-0 bg-linear-to-br from-ivory-bright/92 via-surface-elevated/88 to-ivory-soft/90 backdrop-blur-[2px] lg:from-ivory-bright/94 lg:via-surface-elevated/90 lg:to-ivory/85" />
           </div>
 
-          <div className="relative z-[1] min-w-0">
-            <p className={testimonialsEyebrowClass}>Para celebrar</p>
-            <div className="premium-divider-gold mt-2 mb-3" aria-hidden />
-            <h2
-              id="occasions-heading"
-              className={`${premiumDisplayClass} text-2xl leading-[1.15] sm:text-3xl md:text-[2.125rem] md:leading-[1.12]`}
-            >
+          <div className="hero-copy-stack relative z-[1] min-w-0">
+            <p className={premiumEyebrowClass}>Para celebrar</p>
+            <div className="premium-divider-gold" aria-hidden />
+            <h2 id="occasions-heading" className={siteSectionTitleClass}>
               Preparamos tu mesa dulce
             </h2>
-            <p className="type-premium-body leading-body mt-3 text-base sm:mt-4 sm:text-lg">
-              Diseñamos bandejas y{" "}
-              <strong className="font-semibold text-on-surface">mesas de postres</strong>{" "}
-              para{" "}
+            <p className="type-premium-body text-base sm:text-lg">
+              Bandejas y mesas de postres en Málaga para{" "}
               <strong className="font-semibold text-on-surface">bodas</strong>,{" "}
-              <strong className="font-semibold text-on-surface">cumpleaños</strong>,
-              reuniones con amigos, celebraciones en familia, eventos más formales y
-              cualquier otra ocasión. Cuéntanos{" "}
+              <strong className="font-semibold text-on-surface">cumpleaños</strong> y
+              reuniones. Cuéntanos{" "}
               <strong className="font-semibold text-on-surface">
-                fecha, número de comensales y estilo
+                fecha, comensales y estilo
               </strong>
-              , y te proponemos una selección equilibrada de nuestros{" "}
-              <strong className="font-semibold text-on-surface">dulces</strong>.
+              , y armamos la selección contigo.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:flex-wrap">
+            <div className="hero-panel-actions flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               {occasionCtas.map((cta) => (
                 <Link
                   key={cta.label}
@@ -117,7 +112,10 @@ export function OccasionsCallout() {
           </div>
         </div>
 
-        <div className="relative order-1 min-h-[min(52vw,17.5rem)] w-full overflow-hidden sm:min-h-[20rem] lg:order-2 lg:min-h-[22rem] xl:min-h-[24rem]">
+        <div
+          className={`${productPhotoFrameClass} group relative order-1 min-h-[min(52vw,17.5rem)] w-full p-2 sm:min-h-[20rem] lg:order-2 lg:min-h-[22rem] xl:min-h-[24rem]`}
+        >
+          <div className={`${productPhotoInnerClass} relative min-h-[inherit] size-full`}>
           <CatalogProductImage
             productId={MESA_DULCE_HERO_PRODUCT_ID}
             src={MESA_DULCE_HERO_PRODUCT.imageUrl}
@@ -132,11 +130,11 @@ export function OccasionsCallout() {
             className="pointer-events-none absolute inset-0 bg-linear-to-t from-chocolate-deep/35 via-transparent to-transparent lg:bg-linear-to-l lg:from-chocolate-deep/20 lg:via-transparent lg:to-transparent"
             aria-hidden
           />
+          </div>
           <div
             className="ring-gold-frame pointer-events-none absolute inset-3 rounded-2xl sm:inset-4"
             aria-hidden
           />
-
           <div className="mesa-dulce-caption absolute bottom-3 left-3 z-[2] max-w-[min(100%,15rem)] rounded-full px-3.5 py-2 backdrop-blur-md sm:bottom-4 sm:left-4 sm:max-w-none sm:px-4 sm:py-2.5">
             <p className="mesa-dulce-caption-text text-center text-[10px] font-semibold uppercase tracking-[0.14em] sm:text-[11px] sm:tracking-[0.12em]">
               {MESA_DULCE_IMAGE_CAPTION}

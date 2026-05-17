@@ -20,9 +20,19 @@ function CatalogImageVeil({
   variant: CatalogImageVariant;
   productId: CatalogProductId;
 }) {
+  const showcase = variant === "showcase";
   const intense = variant === "hero" || variant === "card";
   const featuredTresLeches =
     productId === "tres-leches" && (variant === "card" || variant === "hero");
+
+  if (showcase) {
+    return (
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_50%_18%,rgba(255,252,248,0.35)_0%,transparent_55%),linear-gradient(180deg,transparent_58%,rgba(28,16,10,0.12)_100%)]"
+        aria-hidden
+      />
+    );
+  }
 
   return (
     <div
@@ -47,8 +57,13 @@ function CatalogImageShine({
   productId: CatalogProductId;
 }) {
   const isThumb = variant === "thumb";
+  const isShowcase = variant === "showcase";
   const featuredShine =
     productId === "tres-leches" && (variant === "card" || variant === "hero");
+
+  if (isShowcase) {
+    return null;
+  }
 
   return (
     <>

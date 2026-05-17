@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { BRAND_META_DESCRIPTION } from "@/lib/brand";
 import { Fraunces, Inter, Playfair_Display } from "next/font/google";
 import { Providers } from "./providers";
 import "./globals.css";
@@ -19,18 +20,18 @@ const fraunces = Fraunces({
   display: "swap",
 });
 
-/** Serif elegante con curvas — titulares principales (crema / chocolate). */
+/** Serif elegante — titulares de sección y nombres de producto (identidad gastronómica). */
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: "Dulce Venezuela",
-  description:
-    "Repostería venezolana: sabores que cuentan historias entre tradición y refinamiento.",
+  description: BRAND_META_DESCRIPTION,
 };
 
 export const viewport: Viewport = {

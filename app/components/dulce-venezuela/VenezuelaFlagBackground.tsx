@@ -1,3 +1,5 @@
+import { pageEnterBackdropClass } from "./home-shared";
+
 export function VenezuelaFlagBackground() {
   const stars = [
     { x: 160, y: 170 },
@@ -10,7 +12,9 @@ export function VenezuelaFlagBackground() {
   ] as const;
 
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+    <div
+      className={`${pageEnterBackdropClass} pointer-events-none fixed inset-0 -z-10 overflow-hidden`}
+    >
       <div className="absolute inset-0 opacity-[0.38]">
         <div className="h-1/3 bg-linear-to-b from-[#ffdd33] via-[#f7cb18] to-[#e5b700]" />
         <div className="h-1/3 bg-linear-to-b from-[#0a3db4] via-[#0033a0] to-[#00297f]" />

@@ -1,14 +1,14 @@
 /* Admin — paleta horneado: crema/hueso, chocolate, dorado */
 
 .admin-canvas {
-  --admin-cream: #faf6ee;
-  --admin-cream-deep: #f3ebe0;
-  --admin-bone: #ede4d3;
-  --admin-bone-dark: #e2d6c4;
-  --admin-panel: #f9f4eb;
-  --admin-panel-elevated: #fff9f0;
-  --admin-chocolate: #4a3228;
-  --admin-chocolate-deep: #3d2817;
+  --admin-cream: #fffaf3;
+  --admin-cream-deep: #f6f1e8;
+  --admin-bone: #ede8df;
+  --admin-bone-dark: #e8e2d8;
+  --admin-panel: #f8f4ec;
+  --admin-panel-elevated: #fffcf9;
+  --admin-chocolate: #3c2f2f;
+  --admin-chocolate-deep: #2b1b17;
   --admin-chocolate-soft: #6b5344;
   --admin-gold: #c9a227;
   --admin-gold-bright: #d4af37;

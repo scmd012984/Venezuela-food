@@ -1,5 +1,12 @@
 import { instagramFeedImageAlt, type InstagramFeedData } from "@/lib/instagram-feed";
-import { uiChipClass } from "./home-shared";
+import {
+  goldFilterChipClass,
+  productPhotoFrameClass,
+  siteSectionHeaderClass,
+  siteSectionLeadClass,
+  siteSectionTitleClass,
+  productPhotoInnerClass,
+} from "./home-shared";
 
 const PLACEHOLDER_SLOTS = 6;
 
@@ -38,35 +45,32 @@ export function InstagramFeedSection({ data }: InstagramFeedSectionProps) {
   return (
     <section
       id="instagram"
-      className="scroll-mt-24 border-t border-outline-variant/40 pb-16 pt-10 sm:scroll-mt-28 sm:pb-20 sm:pt-12 md:pt-14 dark:border-slate-600/40"
+      className="scroll-mt-24 border-t border-gold-bright/28 pb-10 pt-1 sm:scroll-mt-28 sm:pb-12"
       aria-labelledby="instagram-heading"
     >
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
-        <div>
-          <h2
-            id="instagram-heading"
-            className="font-headline text-2xl font-semibold tracking-tight text-chocolate-deep sm:text-3xl"
-          >
-            Recién salido del horno (Instagram)
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-5">
+        <header className={`${siteSectionHeaderClass} min-w-0 flex-1`}>
+          <h2 id="instagram-heading" className={siteSectionTitleClass}>
+            Recién salido del horno
           </h2>
-          <p className="leading-body mt-2 max-w-xl text-sm text-on-surface-variant sm:text-base">
+          <p className={`${siteSectionLeadClass} max-w-xl`}>
             {hasPhotos
-              ? "Las últimas fotos de nuestros dulces y celebraciones. Toca una imagen para verla en Instagram."
-              : "Conecta tu cuenta profesional para mostrar aquí las fotos más recientes. Mientras tanto, síguenos en Instagram para ver el día a día."}
+              ? "Lo último de nuestro horno en Málaga — toca una foto para verla en Instagram."
+              : "Síguenos en Instagram para ver el día a día mientras conectamos el feed aquí."}
           </p>
-        </div>
+        </header>
         <a
           href={profileUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className={`${uiChipClass} inline-flex shrink-0 items-center gap-2 self-start rounded-full px-4 py-2.5 sm:self-auto`}
+          className={`${goldFilterChipClass(false)} shrink-0 gap-1.5 self-start sm:self-auto`}
         >
-          <InstagramGlyph className="size-5 shrink-0" />
+          <InstagramGlyph className="size-5 shrink-0 text-chocolate-ink" />
           @{handle}
         </a>
       </div>
 
-      <div className="mt-6 grid grid-cols-2 gap-2 sm:mt-8 sm:grid-cols-3 sm:gap-3 md:grid-cols-6">
+      <div className="mt-5 grid grid-cols-2 gap-2.5 sm:mt-6 sm:grid-cols-3 sm:gap-3 md:grid-cols-6">
         {hasPhotos
           ? items.map((item, index) => (
               <a
@@ -74,26 +78,29 @@ export function InstagramFeedSection({ data }: InstagramFeedSectionProps) {
                 href={item.permalink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shadow-card-soft group relative aspect-square overflow-hidden rounded-2xl border border-outline-variant/45 bg-surface-container transition duration-200 hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,252,245,0.65),var(--shadow-card-hover)] dark:border-slate-600/50"
+                className={`${productPhotoFrameClass} group relative aspect-square p-1 hover:bg-cta-warm-hover`}
               >
-                {/* CDN de Instagram: <img> evita lista fija de hostnames en next/image */}
-                <img
-                  src={item.imageSrc}
-                  alt={instagramFeedImageAlt({
-                    handle,
-                    caption: item.caption,
-                    position: index + 1,
-                    total: items.length,
-                  })}
-                  className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.04]"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <span className="sr-only">Ver publicación en Instagram</span>
-                <div
-                  className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/35 via-transparent to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                  aria-hidden
-                />
+                <div className={`${productPhotoInnerClass} aspect-square`}>
+                  {/* CDN de Instagram: <img> evita lista fija de hostnames en next/image */}
+                  {/* eslint-disable-next-line @next/next/no-img-element -- URLs dinámicas del CDN de Instagram */}
+                  <img
+                    src={item.imageSrc}
+                    alt={instagramFeedImageAlt({
+                      handle,
+                      caption: item.caption,
+                      position: index + 1,
+                      total: items.length,
+                    })}
+                    className="photo-hover-img size-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <span className="sr-only">Ver publicación en Instagram</span>
+                  <div
+                    className="pointer-events-none absolute inset-0 bg-linear-to-t from-chocolate-deep/40 via-transparent to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                    aria-hidden
+                  />
+                </div>
               </a>
             ))
           : Array.from({ length: PLACEHOLDER_SLOTS }, (_, i) => (
@@ -102,9 +109,9 @@ export function InstagramFeedSection({ data }: InstagramFeedSectionProps) {
                 href={profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="shadow-card-soft relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl border border-dashed border-outline-variant/55 bg-linear-to-br from-cta-warm-soft/80 via-surface-container-low to-surface-container transition hover:border-cta-warm/40 dark:border-slate-600/55 dark:from-slate-800/80 dark:via-slate-900 dark:to-slate-900"
+                className={`${productPhotoFrameClass} photo-hover-group relative flex aspect-square items-center justify-center p-2 hover:bg-cta-warm-hover`}
               >
-                <InstagramGlyph className="size-8 text-cta-warm/50 sm:size-9" />
+                <InstagramGlyph className="size-8 text-on-cta-warm/70 sm:size-9" />
                 <span className="sr-only">Abrir perfil de Instagram @{handle}</span>
               </a>
             ))}

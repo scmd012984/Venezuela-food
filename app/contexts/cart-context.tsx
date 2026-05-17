@@ -4,18 +4,20 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
+  useRef,
   useState,
   type ReactNode,
 } from "react";
 import { getCatalogProduct } from "@/lib/catalog";
+import {
+  loadStoredCartLines,
+  saveStoredCartLines,
+} from "@/lib/cart-storage";
+import type { CartLine } from "@/lib/cart-types";
 
-export type CartLine = {
-  productId: string;
-  name: string;
-  unitPriceEuro: number;
-  quantity: number;
-};
+export type { CartLine } from "@/lib/cart-types";
 
 type CartContextValue = {
   lines: CartLine[];
@@ -35,6 +37,20 @@ const CartContext = createContext<CartContextValue | null>(null);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [lines, setLines] = useState<CartLine[]>([]);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const persistReadyRef = useRef(false);
+
+  useEffect(() => {
+    const stored = loadStoredCartLines();
+    persistReadyRef.current = true;
+    if (stored.length > 0) {
+      queueMicrotask(() => setLines(stored));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!persistReadyRef.current) return;
+    saveStoredCartLines(lines);
+  }, [lines]);
 
   const addToCart = useCallback((productId: string) => {
     const p = getCatalogProduct(productId);
