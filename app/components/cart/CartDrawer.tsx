@@ -7,7 +7,7 @@ import { formatEuroES } from "@/lib/format-euro";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
 
 const rowBtnClass =
-  "tap-highlight-none inline-flex size-9 items-center justify-center rounded-xl border border-outline-variant/55 bg-white text-primary transition hover:border-primary/40 hover:bg-surface-container-low active:scale-95 dark:border-slate-600/60 dark:bg-slate-900/80 dark:text-blue-300";
+  "tap-highlight-none inline-flex size-9 items-center justify-center rounded-xl border border-outline-variant/55 bg-white text-chocolate-deep transition hover:border-chocolate/35 hover:bg-surface-container-low active:scale-95 dark:border-slate-600/60 dark:bg-slate-900/80 dark:text-gold-soft";
 
 export function CartDrawer() {
   const {
@@ -53,7 +53,7 @@ export function CartDrawer() {
         <div className="flex items-center justify-between border-b border-outline-variant/45 px-4 py-3 dark:border-slate-700/60">
           <h2
             id="cart-drawer-title"
-            className="font-headline text-lg font-semibold tracking-tight text-primary"
+            className="font-headline text-lg font-semibold tracking-tight text-chocolate-deep"
           >
             Carrito
           </h2>
@@ -119,7 +119,7 @@ export function CartDrawer() {
                         <Plus className="size-4" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
                       </button>
                     </div>
-                    <span className="text-sm font-bold tabular-nums text-primary">
+                    <span className="text-sm font-bold tabular-nums text-chocolate-deep">
                       {formatEuroES(line.unitPriceEuro * line.quantity)}
                     </span>
                   </div>
@@ -132,13 +132,13 @@ export function CartDrawer() {
         <div className="border-t border-outline-variant/45 p-4 dark:border-slate-700/60">
           <div className="mb-3 flex items-center justify-between text-base">
             <span className="font-medium text-on-surface-variant">Total</span>
-            <span className="text-xl font-extrabold tabular-nums text-primary">
+            <span className="text-xl font-extrabold tabular-nums text-chocolate-deep">
               {formatEuroES(totalEuro)}
             </span>
           </div>
           <button
             type="button"
-            className="w-full rounded-full border-2 border-primary/25 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 dark:hover:bg-primary/15"
+            className="w-full rounded-full border-2 border-chocolate/20 py-3 text-sm font-semibold text-chocolate-deep transition hover:bg-chocolate-deep/8 dark:hover:bg-chocolate-deep/15"
             onClick={closeDrawer}
           >
             Seguir comprando

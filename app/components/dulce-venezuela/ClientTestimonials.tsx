@@ -10,7 +10,7 @@ import {
   cardHoverLiftClass,
   giftPanelClass,
   premiumDisplayClass,
-  premiumEyebrowClass,
+  testimonialsEyebrowClass,
   premiumProductDescClass,
 } from "./home-shared";
 
@@ -82,7 +82,7 @@ export function ClientTestimonials() {
       aria-labelledby="testimonios-heading"
     >
       <div className="mb-8 text-center sm:mb-10">
-        <p className={premiumEyebrowClass}>Momentos reales</p>
+        <p className={testimonialsEyebrowClass}>Momentos reales</p>
         <div className="premium-divider-gold mx-auto mt-2 mb-4" aria-hidden />
         <h2
           id="testimonios-heading"
@@ -146,7 +146,7 @@ export function ClientTestimonials() {
         </article>
 
         <div>
-          <p className={`${premiumEyebrowClass} mb-4 text-center sm:mb-5`}>
+          <p className={`${testimonialsEyebrowClass} mb-4 text-center sm:mb-5`}>
             Más historias
           </p>
           <ul className="m-0 grid list-none grid-cols-1 gap-5 p-0 sm:gap-6 md:grid-cols-3 md:gap-6">

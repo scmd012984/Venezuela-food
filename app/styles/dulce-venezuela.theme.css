@@ -12,47 +12,47 @@
   --color-on-error: #ffffff;
   --color-surface-container-lowest: #faf4eb;
   --color-surface-container-high: #e2d6c4;
-  --color-on-primary-container: #9eb2ff;
+  --color-on-primary-container: #2a1810;
   --color-surface-container-highest: #dbd1c2;
   --color-on-secondary-container: #5a4d00;
-  --color-primary-fixed: #dce1ff;
+  --color-primary-fixed: #f0e6d6;
   --color-on-tertiary-fixed-variant: #8f0012;
   --color-outline-variant: #cec5b8;
-  --color-on-background: #1c1a17;
-  --color-on-primary: #ffffff;
+  --color-on-background: #1a120e;
+  --color-on-primary: #fcf7ee;
   --color-tertiary-fixed: #ffdad7;
   --color-surface-variant: #e8dece;
   --color-on-secondary-fixed: #221b00;
   --color-inverse-on-surface: #faf7f0;
-  --color-on-primary-fixed: #001550;
+  --color-on-primary-fixed: #1a120e;
   --color-tertiary: #5a0009;
-  --color-inverse-primary: #b6c4ff;
+  --color-inverse-primary: #e2d6c4;
   --color-surface-container-low: #f0e6d6;
   --color-outline: #887f72;
-  --color-on-primary-fixed-variant: #133ca8;
-  --color-primary-fixed-dim: #b6c4ff;
+  --color-on-primary-fixed-variant: #4a3228;
+  --color-primary-fixed-dim: #e2d6c4;
   --color-error-container: #ffdad6;
   --color-background: #f5ebe0;
   --color-surface: #f7f0e4;
   --color-on-error-container: #93000a;
-  --color-primary: #0c2463;
+  --color-primary: #221610;
   --color-secondary: #6b5a00;
   --color-on-tertiary: #ffffff;
   --color-error: #b3261e;
   --color-secondary-fixed-dim: #e0bc00;
   --color-surface-container: #ebe1d2;
   --color-surface-bright: #fcf7ee;
-  --color-inverse-surface: #2c2925;
-  --color-on-surface: #1c1a17;
+  --color-inverse-surface: #1a120e;
+  --color-on-surface: #1a120e;
   --color-on-secondary-fixed-variant: #544600;
   --color-on-tertiary-fixed: #410004;
   --color-tertiary-container: #7a0010;
   --color-tertiary-fixed-dim: #ffb3ae;
   --color-secondary-container: #f2d84a;
-  --color-on-surface-variant: #585046;
+  --color-on-surface-variant: #5c4f42;
   --color-on-secondary: #ffffff;
   --color-secondary-fixed: #ffe789;
-  --color-primary-container: #1a3a8f;
+  --color-primary-container: #e6d9c8;
   --color-surface-tint: #6b5d4c;
   --color-on-tertiary-container: #ff9a94;
 
@@ -62,7 +62,13 @@
   --color-cta-warm-soft: #fff0f5;
   --color-on-cta-warm: #ffffff;
 
-  /* Regalo / premium — oro metálico + chocolate */
+  /* Chocolate — marca, textos y logo (casi negro, calor horneado) */
+  --color-chocolate-ink: #1a120e;
+  --color-chocolate-deep: #221610;
+  --color-chocolate: #3d2817;
+  --color-chocolate-mid: #524030;
+
+  /* Regalo / premium — oro metálico */
   --color-gold-deep: #5c4308;
   --color-gold: #a67c0a;
   --color-gold-bright: #e0b840;
@@ -70,8 +76,6 @@
   --color-gold-flare: #fff8e0;
   --color-gold-soft: #faf0d4;
   --color-gold-muted: #edd06a;
-  --color-chocolate: #4a3228;
-  --color-chocolate-deep: #3d2817;
 
   --radius-DEFAULT: 0.25rem;
   --radius-lg: 0.5rem;

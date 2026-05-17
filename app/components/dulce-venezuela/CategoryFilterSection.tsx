@@ -20,7 +20,7 @@ const filterActiveClass =
 
 /** Resto: borde fino, fondo casi neutro */
 const filterInactiveClass =
-  "cursor-pointer rounded-xl border border-outline-variant/55 bg-white/90 px-3 py-2 text-xs font-medium text-on-surface-variant shadow-none transition duration-200 hover:border-primary/30 hover:bg-surface-container-low hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/35 focus-visible:ring-offset-2 active:scale-[0.98] sm:px-4 sm:py-2.5 sm:text-sm dark:border-slate-600/45 dark:bg-slate-900/55 dark:text-slate-300 dark:hover:border-primary/45 dark:hover:bg-slate-800/90 dark:hover:text-slate-50";
+  "cursor-pointer rounded-xl border border-outline-variant/55 bg-white/90 px-3 py-2 text-xs font-medium text-on-surface-variant shadow-none transition duration-200 hover:border-chocolate/25 hover:bg-surface-container-low hover:text-chocolate-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-chocolate/25 focus-visible:ring-offset-2 active:scale-[0.98] sm:px-4 sm:py-2.5 sm:text-sm dark:border-slate-600/45 dark:bg-slate-900/55 dark:text-slate-300 dark:hover:border-chocolate/35 dark:hover:bg-slate-800/90 dark:hover:text-slate-50";
 
 const panelGridClass =
   "grid min-h-0 transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none motion-reduce:duration-0";

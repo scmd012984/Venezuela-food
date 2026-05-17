@@ -17,6 +17,9 @@ export const cardHoverLiftClass =
 
 export const premiumEyebrowClass = "type-eyebrow-gold";
 
+/** Rótulos dorados de la sección testimonios (más grandes y legibles) */
+export const testimonialsEyebrowClass = "type-eyebrow-gold-lg";
+
 export const premiumDisplayClass = "type-premium-display";
 
 export const premiumProductTitleClass = "type-premium-product-title";

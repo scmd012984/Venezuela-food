@@ -7,7 +7,7 @@ export default function SiteLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="texture-page-warm flex min-h-dvh flex-col bg-background font-sans text-base font-normal text-on-surface">
+    <div className="texture-page-warm flex min-h-dvh flex-col bg-background font-sans text-base font-normal text-chocolate-ink">
       <TopNav />
       <main className="flex-1 pb-24 md:pb-6">{children}</main>
       <BottomNav />

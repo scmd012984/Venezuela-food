@@ -10,7 +10,7 @@ import {
   cardHoverLiftClass,
   giftPanelClass,
   premiumDisplayClass,
-  premiumEyebrowClass,
+  testimonialsEyebrowClass,
   type CtaLink,
 } from "./home-shared";
 import { WhatsAppBrandIcon } from "./WhatsAppBrandIcon";
@@ -50,7 +50,7 @@ export function OccasionsCallout() {
           aria-hidden
         />
         <div className="min-w-0 flex-1">
-          <p className={premiumEyebrowClass}>Para celebrar</p>
+          <p className={testimonialsEyebrowClass}>Para celebrar</p>
           <div className="premium-divider-gold mt-2 mb-3" aria-hidden />
           <h2
             id="occasions-heading"

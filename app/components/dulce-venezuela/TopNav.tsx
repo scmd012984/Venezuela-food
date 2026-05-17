@@ -37,8 +37,8 @@ export function TopNav() {
 
   const linkClass = (active: boolean) =>
     active
-      ? "rounded-lg bg-primary/12 px-2.5 py-1.5 text-sm font-semibold text-primary lg:px-3 lg:text-[0.9375rem]"
-      : "rounded-lg px-2.5 py-1.5 text-sm font-medium text-on-surface transition hover:bg-surface-container-high hover:text-primary lg:px-3 lg:text-[0.9375rem] dark:text-slate-100";
+      ? "rounded-lg bg-chocolate-deep/10 px-2.5 py-1.5 text-sm font-semibold text-chocolate-deep lg:px-3 lg:text-[0.9375rem]"
+      : "rounded-lg px-2.5 py-1.5 text-sm font-medium text-on-surface transition hover:bg-surface-container-high hover:text-chocolate-deep lg:px-3 lg:text-[0.9375rem] dark:text-slate-100";
 
   return (
     <>
@@ -50,7 +50,7 @@ export function TopNav() {
           <div className="flex min-h-0 min-w-0 shrink-0 items-center gap-2 sm:gap-2.5">
             <button
               type="button"
-              className="flex size-9 shrink-0 items-center justify-center rounded-lg text-primary transition hover:bg-surface-container-low active:scale-95 md:hidden dark:text-blue-400 dark:hover:bg-slate-800/60"
+              className="flex size-9 shrink-0 items-center justify-center rounded-lg text-chocolate-deep transition hover:bg-surface-container-low active:scale-95 md:hidden dark:text-vanilla-bright dark:hover:bg-slate-800/60"
               aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
               aria-expanded={menuOpen}
               aria-controls={menuId}
@@ -75,7 +75,7 @@ export function TopNav() {
               <div className="absolute inset-0 bg-white/62 backdrop-blur-[1px] dark:bg-slate-900/35" />
               <div className="pointer-events-none absolute inset-0 bg-linear-to-r from-white/35 via-transparent to-white/20" />
               <div className="pointer-events-none absolute -left-[40%] top-[-60%] h-[230%] w-[34%] rotate-12 bg-linear-to-r from-transparent via-white/85 to-transparent opacity-0 transition-all duration-700 group-hover:left-[125%] group-hover:opacity-100" />
-              <span className="relative z-[1] max-w-full truncate bg-linear-to-r from-[#001550] via-[#0033a0] to-[#3456c1] bg-clip-text font-headline text-base font-black leading-none tracking-[-0.02em] text-transparent drop-shadow-[0_1px_6px_rgba(0,0,0,0.12)] min-[380px]:text-lg sm:text-xl md:text-2xl dark:from-blue-100 dark:via-blue-300 dark:to-blue-500">
+              <span className="relative z-[1] max-w-full truncate bg-linear-to-r from-chocolate-ink via-chocolate-deep to-chocolate bg-clip-text font-headline text-base font-black leading-none tracking-[-0.02em] text-transparent drop-shadow-[0_1px_4px_rgba(34,22,16,0.18)] min-[380px]:text-lg sm:text-xl md:text-2xl dark:from-vanilla-bright dark:via-gold-soft dark:to-gold-shine">
                 Dulce Venezuela
               </span>
             </Link>
@@ -102,7 +102,7 @@ export function TopNav() {
           <div className="ml-auto flex shrink-0 items-center">
             <button
               type="button"
-              className="shadow-card-soft relative flex h-9 min-h-9 items-center gap-1.5 rounded-xl border-2 border-outline-variant/55 bg-white px-2 text-primary transition duration-200 hover:-translate-y-0.5 hover:border-primary/40 hover:bg-surface-container-low hover:shadow-md active:translate-y-0 active:scale-[0.97] sm:rounded-2xl sm:px-2.5 dark:border-slate-600/50 dark:bg-slate-900/90 dark:text-blue-300 dark:hover:border-primary/35 dark:hover:bg-slate-800"
+              className="shadow-card-soft relative flex h-9 min-h-9 items-center gap-1.5 rounded-xl border-2 border-outline-variant/55 bg-white px-2 text-chocolate-deep transition duration-200 hover:-translate-y-0.5 hover:border-chocolate/25 hover:bg-surface-container-low hover:shadow-md active:translate-y-0 active:scale-[0.97] sm:rounded-2xl sm:px-2.5 dark:border-slate-600/50 dark:bg-slate-900/90 dark:text-vanilla-bright dark:hover:border-gold-bright/35 dark:hover:bg-slate-800"
               aria-label={
                 itemCount === 0
                   ? "Abrir carrito"
@@ -145,7 +145,7 @@ export function TopNav() {
           className={`absolute left-0 top-0 flex h-full w-[min(100vw-3rem,20rem)] max-w-[320px] flex-col border-r border-outline-variant/40 bg-white/96 shadow-[8px_0_40px_-16px_rgba(28,29,38,0.15)] backdrop-blur-xl transition-transform duration-300 ease-out dark:border-slate-600/40 dark:bg-slate-900/96 ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}
         >
           <div className="flex items-center justify-between border-b border-outline-variant/50 px-3 py-3 dark:border-slate-700/60">
-            <p className="text-sm font-semibold tracking-tight text-primary">Menú</p>
+            <p className="text-sm font-semibold tracking-tight text-chocolate-deep">Menú</p>
             <button
               type="button"
               className="flex size-9 items-center justify-center rounded-lg text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-slate-800"
@@ -165,7 +165,7 @@ export function TopNav() {
                 href={link.href}
                 className={`rounded-lg px-3 py-2.5 text-[15px] transition-colors ${
                   link.active
-                    ? "bg-primary-container/12 font-semibold text-primary"
+                    ? "bg-chocolate-deep/10 font-semibold text-chocolate-deep"
                     : "font-medium text-on-surface hover:bg-surface-container-low dark:text-slate-100 dark:hover:bg-slate-800/80"
                 }`}
                 onClick={() => setMenuOpen(false)}
@@ -187,7 +187,7 @@ export function TopNav() {
               }}
             >
               <ShoppingCart
-                className="size-6 shrink-0 text-primary"
+                className="size-6 shrink-0 text-chocolate-deep"
                 strokeWidth={LUCIDE_ICON_STROKE}
                 aria-hidden
               />

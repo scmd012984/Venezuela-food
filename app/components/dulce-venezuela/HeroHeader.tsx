@@ -13,7 +13,7 @@ export function HeroHeader() {
       className="scroll-mt-24 space-y-6 sm:scroll-mt-28 sm:space-y-7"
     >
       <div className="max-w-2xl space-y-1.5">
-        <h2 className="font-headline text-lg font-semibold tracking-tight text-primary sm:text-xl">
+        <h2 className="font-headline text-lg font-semibold tracking-tight text-chocolate-deep sm:text-xl">
           Explorar dulces
         </h2>
         <p className="text-sm leading-relaxed text-on-surface-variant sm:text-base sm:leading-relaxed">
@@ -34,7 +34,7 @@ export function HeroHeader() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Buscar delicias…"
             autoComplete="off"
-            className="shadow-card-soft w-full rounded-3xl border border-outline-variant/60 bg-white py-3.5 pl-5 pr-5 text-base font-normal text-on-surface placeholder:text-on-surface-variant/70 transition duration-200 placeholder:font-normal hover:border-primary/40 hover:shadow-[0_8px_28px_-12px_rgba(12,36,99,0.14)] focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/18 dark:border-slate-600/50 dark:bg-slate-950 dark:text-white dark:hover:border-primary/45 dark:placeholder:text-slate-500"
+            className="shadow-card-soft w-full rounded-3xl border border-outline-variant/60 bg-white py-3.5 pl-5 pr-5 text-base font-normal text-chocolate-ink placeholder:text-on-surface-variant/70 transition duration-200 placeholder:font-normal hover:border-chocolate/30 hover:shadow-[0_8px_28px_-12px_rgba(34,22,16,0.12)] focus:border-chocolate-deep focus:outline-none focus:ring-4 focus:ring-chocolate/15 dark:border-slate-600/50 dark:bg-slate-950 dark:text-vanilla-bright dark:hover:border-gold-bright/35 dark:placeholder:text-slate-500"
           />
         </div>
         <CategoryFilterSection />
