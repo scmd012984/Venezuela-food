@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useId, useState } from "react";
 import { useCart } from "@/app/contexts/cart-context";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
+import { LogoBrandStars } from "./LogoBrandMark";
 
 type NavLink = { href: string; label: string; active?: boolean };
 
@@ -65,18 +66,29 @@ export function TopNav() {
             <Link
               href="/"
               aria-label="Dulce Venezuela, repostería artesanal"
-              className="shadow-card-soft group relative flex h-9 max-w-[min(100%,15.5rem)] min-h-9 min-w-0 shrink-0 items-center overflow-hidden rounded-xl border border-outline-variant/45 px-2.5 ring-1 ring-white/45 sm:max-w-[18rem] sm:rounded-2xl sm:px-3 dark:border-slate-600/50 dark:ring-slate-800/60"
+              className="shadow-card-soft group relative flex h-9 max-w-[min(100%,17.5rem)] min-h-9 min-w-0 shrink-0 items-center overflow-hidden rounded-xl border border-outline-variant/45 py-0 pl-2.5 pr-1.5 ring-1 ring-white/45 sm:max-w-[20rem] sm:rounded-2xl sm:pl-3 sm:pr-2 dark:border-slate-600/50 dark:ring-slate-800/60"
             >
-              <div className="absolute inset-0 flex flex-col opacity-50 transition-opacity duration-300 group-hover:opacity-70">
-                <div className="h-1/3 bg-[#fed721]" />
-                <div className="h-1/3 bg-[#0033a0]" />
-                <div className="h-1/3 bg-[#ba1a1a]" />
+              <div
+                className="absolute inset-0 flex flex-col opacity-[0.72] transition-opacity duration-300 group-hover:opacity-[0.88]"
+                aria-hidden
+              >
+                <div className="h-1/3 bg-linear-to-b from-[#ffdd33] via-[#fed721] to-[#f7cb18]" />
+                <div className="h-1/3 bg-linear-to-b from-[#0a3db4] via-[#0033a0] to-[#00297f]" />
+                <div className="h-1/3 bg-linear-to-b from-[#d22a2a] via-[#ba1a1a] to-[#971010]" />
               </div>
-              <div className="bg-surface-elevated-soft absolute inset-0 backdrop-blur-[1px] dark:bg-slate-900/35" />
-              <div className="pointer-events-none absolute inset-0 bg-linear-to-r from-surface-elevated/40 via-transparent to-surface-elevated-soft/25" />
-              <div className="pointer-events-none absolute -left-[40%] top-[-60%] h-[230%] w-[34%] rotate-12 bg-linear-to-r from-transparent via-surface-elevated-strong/80 to-transparent opacity-0 transition-all duration-700 group-hover:left-[125%] group-hover:opacity-100" />
-              <span className="relative z-[1] max-w-full truncate bg-linear-to-r from-chocolate-ink via-chocolate-deep to-chocolate bg-clip-text font-headline text-base font-black leading-none tracking-[-0.02em] text-transparent drop-shadow-[0_1px_4px_rgba(34,22,16,0.18)] min-[380px]:text-lg sm:text-xl md:text-2xl dark:from-vanilla-bright dark:via-gold-soft dark:to-gold-shine">
-                Dulce Venezuela
+              <div
+                className="pointer-events-none absolute inset-0 bg-white/18 backdrop-blur-[0.5px] dark:bg-slate-900/25"
+                aria-hidden
+              />
+              <div
+                className="pointer-events-none absolute -left-[40%] top-[-60%] h-[230%] w-[34%] rotate-12 bg-linear-to-r from-transparent via-white/70 to-transparent opacity-0 transition-all duration-700 group-hover:left-[125%] group-hover:opacity-100"
+                aria-hidden
+              />
+              <span className="relative z-[1] flex min-w-0 flex-1 items-center gap-0.5 sm:gap-1">
+                <span className="min-w-0 truncate bg-linear-to-r from-chocolate-ink via-chocolate-deep to-chocolate bg-clip-text font-headline text-base font-black leading-none tracking-[-0.02em] text-transparent drop-shadow-[0_1px_2px_rgba(255,252,245,0.85),0_1px_4px_rgba(34,22,16,0.2)] min-[380px]:text-lg sm:text-xl md:text-2xl dark:from-vanilla-bright dark:via-gold-soft dark:to-gold-shine">
+                  Dulce Venezuela
+                </span>
+                <LogoBrandStars />
               </span>
             </Link>
           </div>

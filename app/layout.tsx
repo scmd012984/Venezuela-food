@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Fraunces, Inter, Playfair_Display } from "next/font/google";
 import { Providers } from "./providers";
 import "./globals.css";
 
@@ -10,11 +10,19 @@ const inter = Inter({
   display: "swap",
 });
 
-/** Serif con carácter (repostería artesanal) — titulares; cuerpo sigue en Inter. */
+/** Serif con carácter — titulares secundarios y logo. */
 const fraunces = Fraunces({
   variable: "--font-fraunces",
   subsets: ["latin"],
   weight: ["500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+/** Serif elegante con curvas — titulares principales (crema / chocolate). */
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -38,7 +46,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`light ${inter.variable} ${fraunces.variable} antialiased`}
+      className={`light ${inter.variable} ${fraunces.variable} ${playfair.variable} antialiased`}
     >
       <body className="min-h-dvh font-sans antialiased">
         <Providers>{children}</Providers>

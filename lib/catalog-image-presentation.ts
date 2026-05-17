@@ -25,7 +25,7 @@ export const PRODUCT_PHOTOGRAPHY_BRIEF: Record<CatalogProductId, string> = {
 };
 
 const BASE_PRESENTATION: Record<CatalogProductId, ProductImagePresentation> = {
-  "tres-leches": { objectPosition: "48% 30%", macroScale: 1.2 },
+  "tres-leches": { objectPosition: "50% 24%", macroScale: 1.22 },
   cachitos: { objectPosition: "52% 42%", macroScale: 1.24 },
   quesillo: { objectPosition: "50% 36%", macroScale: 1.22 },
   golfeados: { objectPosition: "46% 38%", macroScale: 1.18 },

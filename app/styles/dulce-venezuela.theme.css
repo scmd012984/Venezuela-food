@@ -109,7 +109,7 @@
 
   --font-headline: var(--font-fraunces), ui-serif, Georgia, "Times New Roman",
     serif;
-  --font-display: var(--font-fraunces), ui-serif, Georgia, "Times New Roman",
+  --font-display: var(--font-playfair), "Playfair Display", ui-serif, Georgia,
     serif;
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-label: var(--font-inter), ui-sans-serif, system-ui, sans-serif;

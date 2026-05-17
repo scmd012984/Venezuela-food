@@ -15,7 +15,7 @@ export function AddToCartButton({ productId }: { productId: CatalogProductId }) 
   return (
     <button
       type="button"
-      className={addToCartBtnClass}
+      className={`${addToCartBtnClass} relative z-30`}
       aria-label={`Añadir al carrito: ${product?.name ?? productId}`}
       onClick={() => addToCart(productId)}
     >

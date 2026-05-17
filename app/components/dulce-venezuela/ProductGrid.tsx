@@ -100,7 +100,7 @@ export function ProductGrid() {
       ) : null}
       <div
         id="favoritos"
-        className={`catalog-product-image-slot ${giftPanelClass} group relative min-h-[22rem] h-[min(70vh,32rem)] overflow-hidden rounded-3xl sm:min-h-[26rem] md:col-span-8 md:h-[500px] md:min-h-0 ${cardHoverLiftClass} ${matchHighlightClass(active("tres-leches"))}`}
+        className={`catalog-product-image-slot catalog-featured-tres-leches ${giftPanelClass} group relative min-h-[22rem] h-[min(70vh,32rem)] overflow-hidden rounded-3xl sm:min-h-[26rem] md:col-span-8 md:h-[500px] md:min-h-0 ${cardHoverLiftClass} ${matchHighlightClass(active("tres-leches"))}`}
       >
         <CatalogProductImage
           productId="tres-leches"
@@ -111,27 +111,27 @@ export function ProductGrid() {
           variant="card"
         />
         <div
-          className="pointer-events-none absolute inset-x-0 top-0 z-[3] h-[55%] bg-[radial-gradient(ellipse_90%_80%_at_50%_0%,rgba(255,252,245,0.42)_0%,rgba(255,235,200,0.12)_42%,transparent_72%)]"
+          className="pointer-events-none absolute inset-x-0 top-0 z-[3] h-[52%] bg-[radial-gradient(ellipse_95%_85%_at_50%_0%,rgba(255,253,248,0.65)_0%,rgba(255,240,210,0.2)_45%,transparent_72%)]"
           aria-hidden
         />
-        <div className="absolute inset-0 z-[3] bg-linear-to-t from-[#040814]/88 via-[#040814]/32 via-48% to-transparent" />
-        <div className="absolute inset-0 z-[3] bg-linear-to-br from-black/20 to-transparent opacity-75" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[3] h-[42%] bg-linear-to-t from-[#1a120e]/62 via-[#1a120e]/18 via-55% to-transparent" />
+        <div className="pointer-events-none absolute inset-0 z-[3] bg-linear-to-br from-black/8 to-transparent opacity-50" />
         <div className="absolute left-4 top-4 z-[12] sm:left-5 sm:top-5">
           <ProductBadgeStrip badges={tresLeches.badges} />
         </div>
-        <div className="absolute inset-x-0 bottom-0 flex flex-col gap-6 p-6 sm:flex-row sm:items-end sm:justify-between sm:p-10">
-          <div className="gift-caption-box max-w-xl space-y-3 rounded-3xl bg-black/50 px-5 py-4 backdrop-blur-md backdrop-saturate-125 sm:space-y-3 sm:px-6 sm:py-5">
-            <p className="type-eyebrow-gold drop-shadow-[0_1px_6px_rgba(224,184,64,0.65)]">
+        <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col gap-4 p-4 sm:flex-row sm:items-end sm:justify-between sm:gap-5 sm:p-6 md:p-7">
+          <div className="gift-caption-box gift-caption-box--featured gift-caption-box--compact max-w-[min(100%,20rem)] space-y-1.5 rounded-2xl px-3.5 py-2.5 backdrop-blur-md backdrop-saturate-150 sm:max-w-xs sm:space-y-2 sm:px-4 sm:py-3">
+            <p className="type-eyebrow-gold text-[0.625rem] drop-shadow-[0_1px_6px_rgba(224,184,64,0.7)] sm:text-[0.6875rem]">
               Capricho artesanal
             </p>
-            <h3 className="font-headline text-3xl font-semibold leading-tight tracking-[-0.02em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] sm:text-4xl">
+            <h3 className="font-headline text-xl font-semibold leading-tight tracking-[-0.02em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] sm:text-2xl">
               {tresLeches.name}
             </h3>
-            <p className="max-w-md font-headline text-base font-medium italic leading-relaxed tracking-wide text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.55)] sm:text-lg">
+            <p className="line-clamp-2 max-w-[18rem] font-headline text-sm font-medium italic leading-snug tracking-wide text-white/95 drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)] sm:text-[0.9375rem] sm:leading-relaxed">
               {tresLeches.description}
             </p>
           </div>
-          <div className="flex shrink-0 flex-row flex-wrap items-center justify-end gap-3 sm:gap-4">
+          <div className="relative z-20 flex shrink-0 flex-row flex-wrap items-center justify-end gap-2.5 sm:gap-3">
             <span className={pricePremiumClass}>
               {formatEuroES(tresLeches.unitPriceEuro)}
             </span>

@@ -26,6 +26,15 @@
   }
 }
 
+@keyframes brand-stars-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @layer utilities {
   .animate-category-panel-content {
     animation: category-panel-content-in 0.38s cubic-bezier(0.33, 1, 0.68, 1) both;
@@ -33,6 +42,16 @@
 
   @media (prefers-reduced-motion: reduce) {
     .animate-category-panel-content {
+      animation: none;
+    }
+  }
+
+  .animate-brand-stars-spin {
+    animation: brand-stars-spin 22s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-brand-stars-spin {
       animation: none;
     }
   }
@@ -220,6 +239,61 @@
         rgba(255, 255, 255, 0.34) 0%,
         rgba(255, 255, 255, 0.08) 28%,
         transparent 48%
+      );
+  }
+
+  /* Tarta tres leches — foto más luminosa y merengue más brillante */
+  .catalog-featured-tres-leches .catalog-product-photo {
+    filter: brightness(1.22) contrast(1.1) saturate(1.24);
+  }
+
+  .catalog-featured-tres-leches.group:hover .catalog-product-photo {
+    filter: brightness(1.26) contrast(1.12) saturate(1.26);
+  }
+
+  .catalog-product-shine--featured {
+    background:
+      radial-gradient(
+        ellipse 100% 80% at 18% 4%,
+        rgba(255, 253, 250, 0.82) 0%,
+        rgba(255, 242, 215, 0.35) 36%,
+        transparent 58%
+      ),
+      radial-gradient(
+        ellipse 60% 45% at 76% 16%,
+        rgba(255, 232, 195, 0.48) 0%,
+        transparent 54%
+      ),
+      linear-gradient(
+        125deg,
+        rgba(255, 255, 255, 0.42) 0%,
+        rgba(255, 255, 255, 0.1) 26%,
+        transparent 50%
+      );
+  }
+
+  .catalog-featured-tres-leches .catalog-product-gloss {
+    opacity: 0.58;
+  }
+
+  .catalog-featured-tres-leches.group:hover .catalog-product-shine--featured {
+    background:
+      radial-gradient(
+        ellipse 100% 80% at 18% 4%,
+        rgba(255, 254, 252, 0.9) 0%,
+        rgba(255, 246, 220, 0.42) 36%,
+        transparent 58%
+      ),
+      radial-gradient(
+        ellipse 60% 45% at 76% 16%,
+        rgba(255, 238, 205, 0.55) 0%,
+        transparent 54%
+      ),
+      linear-gradient(
+        125deg,
+        rgba(255, 255, 255, 0.48) 0%,
+        rgba(255, 255, 255, 0.12) 26%,
+        transparent 50%
       );
   }
 
