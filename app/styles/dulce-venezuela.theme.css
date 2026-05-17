@@ -1,72 +1,97 @@
-/* Tema Dulce Venezuela — vainilla suave + acentos cálidos */
+/* Tema Dulce Venezuela — marfil / vainilla suave + acentos dorados (sin amarillo chillón) */
 
 @theme {
-  /* Vainilla (más cálida que crema casi blanco #FFFDF5) */
-  --color-vanilla: #f5ebe0;
-  --color-vanilla-deep: #ede0cf;
-  --color-vanilla-muted: #e6d9c8;
-  --color-vanilla-bright: #faf4eb;
+  /* Marfil — fondo general (referencia #FAF6EE, #FFFDF7) */
+  --color-ivory: #faf6ee;
+  --color-ivory-bright: #fdfcf8;
+  --color-ivory-soft: #f5f2eb;
+  --color-ivory-muted: #f0ebe3;
+  --color-ivory-deep: #e8e2d8;
+  /* Elevación sobre #FAF6EE — sin blanco puro (≈ rgba(255,255,255,0.8) sobre crema) */
+  --color-surface-elevated: #fefdfc;
+  --color-surface-elevated-soft: #f9f7f3;
+  --color-surface-elevated-strong: #fefefd;
+  /* Toque cálido muy sutil (referencia #FFDFB7, solo acentos) */
+  --color-cream-warm: #ffdfb7;
 
-  /* Neutros cálidos (papel / vainilla, sin gris azulado) */
-  --color-surface-dim: #cfc5b6;
+  /* Alias marfil (overlays y utilidades existentes) */
+  --color-butter-cream: #faf6ee;
+  --color-butter-soft: #f5f2eb;
+  --color-butter: #f0ede6;
+  --color-butter-deep: #e8e2d8;
+
+  /* Vainilla — crema neutra, sin amarillo fuerte */
+  --color-vanilla: #f3efe6;
+  --color-vanilla-deep: #ebe6dd;
+  --color-vanilla-muted: #e4dfd6;
+  --color-vanilla-bright: #fdfcf8;
+
+  /* Neutros cálidos (papel marfil, sin gris azulado) */
+  --color-surface-dim: #d4cdc2;
   --color-on-error: #ffffff;
-  --color-surface-container-lowest: #faf4eb;
-  --color-surface-container-high: #e2d6c4;
-  --color-on-primary-container: #2a1810;
-  --color-surface-container-highest: #dbd1c2;
+  --color-surface-container-lowest: #fdfcf8;
+  --color-surface-container-high: #e4ddd2;
+  --color-on-primary-container: #2b1b17;
+  --color-surface-container-highest: #dad4c8;
   --color-on-secondary-container: #5a4d00;
-  --color-primary-fixed: #f0e6d6;
+  --color-primary-fixed: #f3efe6;
   --color-on-tertiary-fixed-variant: #8f0012;
-  --color-outline-variant: #cec5b8;
-  --color-on-background: #1a120e;
+  --color-outline-variant: #ddd6cb;
+  --color-on-background: #2b1b17;
   --color-on-primary: #fcf7ee;
   --color-tertiary-fixed: #ffdad7;
-  --color-surface-variant: #e8dece;
+  --color-surface-variant: #ebe6dd;
   --color-on-secondary-fixed: #221b00;
   --color-inverse-on-surface: #faf7f0;
-  --color-on-primary-fixed: #1a120e;
+  --color-on-primary-fixed: #2b1b17;
   --color-tertiary: #5a0009;
   --color-inverse-primary: #e2d6c4;
-  --color-surface-container-low: #f0e6d6;
-  --color-outline: #887f72;
-  --color-on-primary-fixed-variant: #4a3228;
-  --color-primary-fixed-dim: #e2d6c4;
+  --color-surface-container-low: #f3efe6;
+  --color-outline: #8a7d6e;
+  --color-on-primary-fixed-variant: #3c2f2f;
+  --color-primary-fixed-dim: #e4dfd6;
   --color-error-container: #ffdad6;
-  --color-background: #f5ebe0;
-  --color-surface: #f7f0e4;
+  --color-background: #faf6ee;
+  --color-surface: #f8f5ef;
   --color-on-error-container: #93000a;
-  --color-primary: #221610;
+  --color-primary: #2b1b17;
   --color-secondary: #6b5a00;
   --color-on-tertiary: #ffffff;
   --color-error: #b3261e;
   --color-secondary-fixed-dim: #e0bc00;
-  --color-surface-container: #ebe1d2;
-  --color-surface-bright: #fcf7ee;
-  --color-inverse-surface: #1a120e;
-  --color-on-surface: #1a120e;
+  --color-surface-container: #ede8df;
+  --color-surface-bright: #fdfcf8;
+  --color-inverse-surface: #2b1b17;
+  --color-on-surface: #2b1b17;
   --color-on-secondary-fixed-variant: #544600;
   --color-on-tertiary-fixed: #410004;
   --color-tertiary-container: #7a0010;
   --color-tertiary-fixed-dim: #ffb3ae;
   --color-secondary-container: #f2d84a;
-  --color-on-surface-variant: #5c4f42;
+  --color-on-surface-variant: #3c2f2f;
   --color-on-secondary: #ffffff;
   --color-secondary-fixed: #ffe789;
-  --color-primary-container: #e6d9c8;
-  --color-surface-tint: #6b5d4c;
+  --color-primary-container: #e8e2d8;
+  --color-surface-tint: #5a4f4d;
   --color-on-tertiary-container: #ff9a94;
 
-  /* CTA repostería: coral-frambuesa (dulzor + urgencia suave, alto contraste con blanco) */
-  --color-cta-warm: #e5346a;
-  --color-cta-warm-hover: #c41d52;
-  --color-cta-warm-soft: #fff0f5;
-  --color-on-cta-warm: #ffffff;
+  /* CTA — borgoña / guinda elegante (no rosa fucsia ni rojo saturado) */
+  --color-cta-warm: #721c24;
+  --color-cta-warm-hover: #5c061e;
+  --color-cta-warm-soft: #f8ece9;
+  --color-on-cta-warm: #fdfcf8;
 
-  /* Chocolate — marca, textos y logo (casi negro, calor horneado) */
-  --color-chocolate-ink: #1a120e;
-  --color-chocolate-deep: #221610;
-  --color-chocolate: #3d2817;
-  --color-chocolate-mid: #524030;
+  /* WhatsApp — verde oliva / pino apagado (identidad sin romper armonía dulce) */
+  --color-whatsapp: #4e5a44;
+  --color-whatsapp-hover: #3f4a38;
+  --color-whatsapp-soft: #eef1eb;
+  --color-on-whatsapp: #fdfcf8;
+
+  /* Chocolate — textos principales (legible, integrado con crema / dulce) */
+  --color-chocolate-ink: #2b1b17;
+  --color-chocolate-deep: #2b1b17;
+  --color-chocolate: #3c2f2f;
+  --color-chocolate-mid: #554948;
 
   /* Regalo / premium — oro metálico */
   --color-gold-deep: #5c4308;

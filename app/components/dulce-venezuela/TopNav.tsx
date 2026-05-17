@@ -43,7 +43,7 @@ export function TopNav() {
   return (
     <>
       <nav
-        className="sticky top-0 z-50 border-b border-outline-variant/50 bg-white/96 shadow-[0_1px_0_rgba(255,255,255,0.85)_inset,0_1px_3px_rgba(28,29,38,0.06)] backdrop-blur-md backdrop-saturate-125 dark:border-slate-600/45 dark:bg-slate-950/96 dark:shadow-[0_1px_0_rgba(255,255,255,0.04)_inset,0_1px_3px_rgba(0,0,0,0.35)]"
+        className="bg-surface-elevated-strong sticky top-0 z-50 border-b border-outline-variant/50 shadow-[0_1px_0_rgba(254,253,250,0.75)_inset,0_1px_3px_rgba(34,22,16,0.05)] backdrop-blur-md backdrop-saturate-125 dark:border-slate-600/45 dark:bg-slate-950/96 dark:shadow-[0_1px_0_rgba(255,255,255,0.04)_inset,0_1px_3px_rgba(0,0,0,0.35)]"
         aria-label="Navegación principal"
       >
         <div className="mx-auto flex h-14 max-w-7xl items-center gap-2 px-4 sm:gap-3 sm:px-6 lg:px-8">
@@ -72,9 +72,9 @@ export function TopNav() {
                 <div className="h-1/3 bg-[#0033a0]" />
                 <div className="h-1/3 bg-[#ba1a1a]" />
               </div>
-              <div className="absolute inset-0 bg-white/62 backdrop-blur-[1px] dark:bg-slate-900/35" />
-              <div className="pointer-events-none absolute inset-0 bg-linear-to-r from-white/35 via-transparent to-white/20" />
-              <div className="pointer-events-none absolute -left-[40%] top-[-60%] h-[230%] w-[34%] rotate-12 bg-linear-to-r from-transparent via-white/85 to-transparent opacity-0 transition-all duration-700 group-hover:left-[125%] group-hover:opacity-100" />
+              <div className="bg-surface-elevated-soft absolute inset-0 backdrop-blur-[1px] dark:bg-slate-900/35" />
+              <div className="pointer-events-none absolute inset-0 bg-linear-to-r from-surface-elevated/40 via-transparent to-surface-elevated-soft/25" />
+              <div className="pointer-events-none absolute -left-[40%] top-[-60%] h-[230%] w-[34%] rotate-12 bg-linear-to-r from-transparent via-surface-elevated-strong/80 to-transparent opacity-0 transition-all duration-700 group-hover:left-[125%] group-hover:opacity-100" />
               <span className="relative z-[1] max-w-full truncate bg-linear-to-r from-chocolate-ink via-chocolate-deep to-chocolate bg-clip-text font-headline text-base font-black leading-none tracking-[-0.02em] text-transparent drop-shadow-[0_1px_4px_rgba(34,22,16,0.18)] min-[380px]:text-lg sm:text-xl md:text-2xl dark:from-vanilla-bright dark:via-gold-soft dark:to-gold-shine">
                 Dulce Venezuela
               </span>
@@ -102,7 +102,7 @@ export function TopNav() {
           <div className="ml-auto flex shrink-0 items-center">
             <button
               type="button"
-              className="shadow-card-soft relative flex h-9 min-h-9 items-center gap-1.5 rounded-xl border-2 border-outline-variant/55 bg-white px-2 text-chocolate-deep transition duration-200 hover:-translate-y-0.5 hover:border-chocolate/25 hover:bg-surface-container-low hover:shadow-md active:translate-y-0 active:scale-[0.97] sm:rounded-2xl sm:px-2.5 dark:border-slate-600/50 dark:bg-slate-900/90 dark:text-vanilla-bright dark:hover:border-gold-bright/35 dark:hover:bg-slate-800"
+              className="bg-surface-elevated shadow-card-soft relative flex h-9 min-h-9 items-center gap-1.5 rounded-xl border-2 border-outline-variant/55 px-2 text-chocolate-deep transition duration-200 hover:-translate-y-0.5 hover:border-chocolate/25 hover:bg-surface-container-low hover:shadow-md active:translate-y-0 active:scale-[0.97] sm:rounded-2xl sm:px-2.5 dark:border-slate-600/50 dark:bg-slate-900/90 dark:text-vanilla-bright dark:hover:border-gold-bright/35 dark:hover:bg-slate-800"
               aria-label={
                 itemCount === 0
                   ? "Abrir carrito"
@@ -119,7 +119,7 @@ export function TopNav() {
                 Carrito
               </span>
               {itemCount > 0 ? (
-                <span className="absolute -right-1 -top-1 flex min-w-[1.125rem] items-center justify-center rounded-full bg-cta-warm px-1 py-0.5 text-[9px] font-semibold leading-none text-on-cta-warm ring-2 ring-white shadow-[0_2px_10px_rgba(229,52,106,0.45)] dark:ring-slate-900 sm:-right-0.5 sm:top-0 sm:text-[10px]">
+                <span className="absolute -right-1 -top-1 flex min-w-[1.125rem] items-center justify-center rounded-full bg-cta-warm px-1 py-0.5 text-[9px] font-semibold leading-none text-on-cta-warm ring-2 ring-surface-elevated-strong shadow-[0_2px_10px_rgba(92,6,30,0.38)] dark:ring-slate-900 sm:-right-0.5 sm:top-0 sm:text-[10px]">
                   {itemCount > 99 ? "99+" : itemCount}
                 </span>
               ) : null}
@@ -142,7 +142,7 @@ export function TopNav() {
           onClick={() => setMenuOpen(false)}
         />
         <div
-          className={`absolute left-0 top-0 flex h-full w-[min(100vw-3rem,20rem)] max-w-[320px] flex-col border-r border-outline-variant/40 bg-white/96 shadow-[8px_0_40px_-16px_rgba(28,29,38,0.15)] backdrop-blur-xl transition-transform duration-300 ease-out dark:border-slate-600/40 dark:bg-slate-900/96 ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}
+          className={`bg-surface-elevated-strong absolute left-0 top-0 flex h-full w-[min(100vw-3rem,20rem)] max-w-[320px] flex-col border-r border-outline-variant/40 shadow-[8px_0_40px_-16px_rgba(34,22,16,0.12)] backdrop-blur-xl transition-transform duration-300 ease-out dark:border-slate-600/40 dark:bg-slate-900/96 ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}
         >
           <div className="flex items-center justify-between border-b border-outline-variant/50 px-3 py-3 dark:border-slate-700/60">
             <p className="text-sm font-semibold tracking-tight text-chocolate-deep">Menú</p>
@@ -193,7 +193,7 @@ export function TopNav() {
               />
               <span>Carrito</span>
               {itemCount > 0 ? (
-                <span className="ml-auto flex min-w-[1.5rem] items-center justify-center rounded-full bg-cta-warm px-2 py-0.5 text-xs font-semibold text-on-cta-warm ring-1 ring-white/30 shadow-[0_2px_10px_rgba(229,52,106,0.4)]">
+                <span className="ml-auto flex min-w-[1.5rem] items-center justify-center rounded-full bg-cta-warm px-2 py-0.5 text-xs font-semibold text-on-cta-warm ring-1 ring-surface-elevated-strong/80 shadow-[0_2px_10px_rgba(92,6,30,0.35)]">
                   {itemCount > 99 ? "99+" : itemCount}
                 </span>
               ) : null}

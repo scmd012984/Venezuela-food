@@ -58,7 +58,7 @@ export function InstagramFeedSection({ data }: InstagramFeedSectionProps) {
           href={profileUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border-2 border-chocolate/20 bg-white px-4 py-2.5 text-sm font-semibold text-chocolate-deep shadow-sm transition hover:border-chocolate/35 hover:bg-surface-container-low sm:self-auto dark:border-slate-600/50 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
+          className="bg-surface-elevated inline-flex shrink-0 items-center gap-2 self-start rounded-full border-2 border-chocolate/20 px-4 py-2.5 text-sm font-semibold text-chocolate-deep shadow-sm transition hover:border-chocolate/35 hover:bg-surface-container-low sm:self-auto dark:border-slate-600/50 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
         >
           <InstagramGlyph className="size-5 shrink-0" />
           @{handle}

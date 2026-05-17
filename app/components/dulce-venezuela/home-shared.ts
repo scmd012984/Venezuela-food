@@ -27,3 +27,12 @@ export const premiumProductTitleClass = "type-premium-product-title";
 export const premiumProductDescClass = "type-premium-product-desc";
 
 export const pricePremiumClass = "price-premium";
+
+const ctaButtonBase =
+  "btn-ring-gold inline-flex h-12 min-h-12 items-center justify-center gap-2 rounded-full text-sm font-semibold transition duration-200 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98]";
+
+/** CTA principal (borgoña) — anillo dorado metálico */
+export const primaryCtaClass = `${ctaButtonBase} bg-cta-warm text-on-cta-warm hover:bg-cta-warm-hover`;
+
+/** CTA WhatsApp — verde oliva + anillo dorado */
+export const whatsappCtaClass = `${ctaButtonBase} bg-whatsapp px-6 text-on-whatsapp hover:bg-whatsapp-hover`;

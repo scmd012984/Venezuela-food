@@ -7,7 +7,7 @@ import { formatEuroES } from "@/lib/format-euro";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
 
 const rowBtnClass =
-  "tap-highlight-none inline-flex size-9 items-center justify-center rounded-xl border border-outline-variant/55 bg-white text-chocolate-deep transition hover:border-chocolate/35 hover:bg-surface-container-low active:scale-95 dark:border-slate-600/60 dark:bg-slate-900/80 dark:text-gold-soft";
+  "tap-highlight-none bg-surface-elevated inline-flex size-9 items-center justify-center rounded-xl border border-outline-variant/55 text-chocolate-deep transition hover:border-chocolate/35 hover:bg-surface-container-low active:scale-95 dark:border-slate-600/60 dark:bg-slate-900/80 dark:text-gold-soft";
 
 export function CartDrawer() {
   const {
@@ -45,7 +45,7 @@ export function CartDrawer() {
         onClick={closeDrawer}
       />
       <div
-        className="absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-outline-variant/40 bg-white shadow-[-8px_0_40px_-16px_rgba(28,29,38,0.2)] dark:border-slate-600/50 dark:bg-slate-900"
+        className="bg-surface-elevated-strong absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-outline-variant/40 shadow-[-8px_0_40px_-16px_rgba(34,22,16,0.14)] backdrop-blur-md dark:border-slate-600/50 dark:bg-slate-900"
         role="dialog"
         aria-modal="true"
         aria-labelledby="cart-drawer-title"

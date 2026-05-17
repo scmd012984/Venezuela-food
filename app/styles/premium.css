@@ -78,7 +78,7 @@
   font-style: italic;
   letter-spacing: 0.015em;
   line-height: 1.6;
-  color: color-mix(in srgb, var(--color-chocolate) 72%, var(--color-on-surface-variant));
+  color: color-mix(in srgb, var(--color-chocolate-mid) 55%, var(--color-on-surface-variant));
 }
 
 /* Separadores y marcos dorados */
@@ -104,6 +104,31 @@
     inset 0 0 0 2px color-mix(in srgb, var(--color-gold-flare) 70%, transparent),
     inset 0 0 0 3.5px color-mix(in srgb, var(--color-gold-bright) 82%, var(--color-gold-deep)),
     0 0 16px -3px color-mix(in srgb, var(--color-gold-bright) 58%, transparent);
+}
+
+/** Anillo dorado grueso y brillante en botones CTA */
+.btn-ring-gold {
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 75%, white),
+    0 0 0 2px color-mix(in srgb, var(--color-gold-shine) 92%, transparent),
+    0 0 0 4px color-mix(in srgb, var(--color-gold-bright) 98%, var(--color-gold)),
+    0 1px 2px rgba(48, 40, 28, 0.04),
+    0 0 24px -2px color-mix(in srgb, var(--color-gold-bright) 78%, transparent),
+    0 0 44px -8px color-mix(in srgb, var(--color-gold-flare) 58%, transparent);
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.btn-ring-gold:hover {
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 100%, white),
+    0 0 0 2px color-mix(in srgb, var(--color-gold-flare) 90%, transparent),
+    0 0 0 5px color-mix(in srgb, var(--color-gold-shine) 100%, var(--color-gold-bright)),
+    0 1px 2px rgba(48, 40, 28, 0.05),
+    0 0 32px -2px color-mix(in srgb, var(--color-gold-bright) 92%, transparent),
+    0 0 52px -6px color-mix(in srgb, var(--color-gold-flare) 68%, transparent);
 }
 
 .glass-panel-gold {

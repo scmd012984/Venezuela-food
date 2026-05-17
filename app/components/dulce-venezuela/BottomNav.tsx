@@ -9,7 +9,7 @@ export function BottomNav() {
   const { itemCount, openDrawer } = useCart();
 
   return (
-    <nav className="pb-safe fixed bottom-0 left-0 z-50 flex w-full justify-around rounded-t-3xl border-t border-outline-variant/50 bg-white/96 px-2 pt-2 shadow-[0_1px_0_rgba(255,255,255,0.9)_inset,0_-10px_36px_-14px_rgba(34,22,16,0.1),0_-4px_16px_-8px_rgba(28,22,16,0.08)] backdrop-blur-xl backdrop-saturate-125 dark:border-slate-600/50 dark:bg-slate-950/96 dark:shadow-[0_1px_0_rgba(255,255,255,0.05)_inset,0_-12px_32px_-8px_rgba(0,0,0,0.4)] md:hidden">
+    <nav className="bg-surface-elevated-strong pb-safe fixed bottom-0 left-0 z-50 flex w-full justify-around rounded-t-3xl border-t border-outline-variant/50 px-2 pt-2 shadow-[0_1px_0_rgba(254,253,250,0.8)_inset,0_-10px_36px_-14px_rgba(34,22,16,0.1),0_-4px_16px_-8px_rgba(28,22,16,0.08)] backdrop-blur-xl backdrop-saturate-125 dark:border-slate-600/50 dark:bg-slate-950/96 dark:shadow-[0_1px_0_rgba(255,255,255,0.05)_inset,0_-12px_32px_-8px_rgba(0,0,0,0.4)] md:hidden">
       <Link
         href="/"
         className="tap-highlight-none flex min-w-[3.5rem] flex-col items-center justify-center rounded-2xl px-2 py-1.5 text-chocolate-deep transition duration-200 hover:bg-chocolate-deep/10 active:scale-95 dark:text-vanilla-bright dark:hover:bg-chocolate-deep/15"
@@ -64,7 +64,7 @@ export function BottomNav() {
             aria-hidden
           />
           {itemCount > 0 ? (
-            <span className="absolute -right-1.5 -top-1 flex min-w-[1rem] items-center justify-center rounded-full bg-cta-warm px-1 text-[9px] font-semibold leading-none text-on-cta-warm ring-2 ring-white shadow-[0_2px_10px_rgba(229,52,106,0.45)] dark:ring-slate-900">
+            <span className="absolute -right-1.5 -top-1 flex min-w-[1rem] items-center justify-center rounded-full bg-cta-warm px-1 text-[9px] font-semibold leading-none text-on-cta-warm ring-2 ring-surface-elevated-strong shadow-[0_2px_10px_rgba(92,6,30,0.38)] dark:ring-slate-900">
               {itemCount > 99 ? "99+" : itemCount}
             </span>
           ) : null}

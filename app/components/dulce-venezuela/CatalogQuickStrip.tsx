@@ -31,7 +31,7 @@ export function CatalogQuickStrip() {
           <button
             key={item.id}
             type="button"
-            className="tap-highlight-none rounded-full border border-outline-variant/55 bg-white/95 px-3.5 py-2 text-xs font-semibold text-chocolate-deep shadow-sm transition duration-200 hover:border-cta-warm/45 hover:bg-cta-warm-soft hover:text-cta-warm-hover active:scale-[0.98] sm:px-4 sm:text-sm dark:border-slate-600/55 dark:bg-slate-900/85 dark:text-slate-100 dark:hover:border-cta-warm/40 dark:hover:bg-slate-800/90"
+            className="tap-highlight-none bg-surface-elevated rounded-full border border-outline-variant/55 px-3.5 py-2 text-xs font-semibold text-chocolate-deep shadow-sm transition duration-200 hover:border-chocolate/20 hover:bg-surface-container-low hover:text-chocolate active:scale-[0.98] sm:px-4 sm:text-sm dark:border-slate-600/55 dark:bg-slate-900/85 dark:text-slate-100 dark:hover:border-chocolate/30 dark:hover:bg-slate-800/90"
             onClick={() => {
               openCatalogCategory(item.category);
               scrollToExplorer();
