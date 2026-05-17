@@ -11,6 +11,12 @@ import { getMatchingProductIds } from "@/lib/catalog-search";
 import type { CategoryLabel } from "@/lib/catalog-categories";
 import { getProductIdsForCategory } from "@/lib/catalog-categories";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
+import {
+  giftPanelClass,
+  premiumProductDescClass,
+  premiumProductTitleClass,
+  pricePremiumClass,
+} from "./home-shared";
 
 type CategoryProductsPanelProps = {
   category: CategoryLabel;
@@ -45,14 +51,14 @@ export function CategoryProductsPanel({
 
   return (
     <div
-      className="glass-panel shadow-card-soft animate-category-panel-content motion-reduce:animate-none w-full max-w-full overflow-hidden rounded-2xl md:rounded-3xl dark:ring-0"
+      className={`${giftPanelClass} animate-category-panel-content motion-reduce:animate-none w-full max-w-full overflow-hidden rounded-2xl md:rounded-3xl`}
       role="region"
       aria-labelledby="category-panel-title"
     >
-      <div className="flex items-center justify-between gap-2 border-b border-outline-variant/40 px-3 py-2.5 sm:px-4 sm:py-3 md:px-5 md:py-3.5 dark:border-slate-700/60">
+      <div className="flex items-center justify-between gap-2 border-b border-gold-bright/25 bg-gold-soft/25 px-3 py-2.5 sm:px-4 sm:py-3 md:px-5 md:py-3.5">
         <h2
           id="category-panel-title"
-          className="min-w-0 truncate font-headline text-base font-semibold tracking-tight text-primary sm:text-lg md:text-xl"
+          className="type-premium-product-title min-w-0 truncate text-base sm:text-lg md:text-xl"
         >
           {category}
         </h2>
@@ -120,9 +126,9 @@ export function CategoryProductsPanel({
               return (
                 <li
                   key={productId}
-                  className="flex min-h-0 min-w-0 items-start gap-3 rounded-xl border border-outline-variant/40 bg-surface-container-low/80 p-3 sm:gap-4 sm:rounded-2xl sm:p-4 md:gap-5 md:p-5 dark:border-slate-600/50 dark:bg-slate-800/50"
+                  className="flex min-h-0 min-w-0 items-start gap-3 rounded-xl border border-gold-bright/28 bg-surface-container-low/90 p-3 shadow-[inset_0_1px_0_rgba(255,252,245,0.9)] sm:gap-4 sm:rounded-2xl sm:p-4 md:gap-5 md:p-5"
                 >
-                  <div className="group relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-outline-variant/35 bg-slate-200/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] min-[380px]:h-[5.25rem] min-[380px]:w-[5.25rem] min-[380px]:rounded-xl sm:h-24 sm:w-24 md:h-[7.25rem] md:w-[7.25rem] md:rounded-2xl lg:h-32 lg:w-32 dark:border-slate-600/50 dark:bg-slate-800/90">
+                  <div className="group relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-gold-bright/35 bg-slate-200/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] min-[380px]:h-[5.25rem] min-[380px]:w-[5.25rem] min-[380px]:rounded-xl sm:h-24 sm:w-24 md:h-[7.25rem] md:w-[7.25rem] md:rounded-2xl lg:h-32 lg:w-32 dark:border-slate-600/50 dark:bg-slate-800/90">
                     <CatalogProductImage
                       productId={productId as CatalogProductId}
                       src={p.imageUrl}
@@ -133,19 +139,19 @@ export function CategoryProductsPanel({
                   </div>
                   <div className="flex min-w-0 flex-1 flex-col gap-2 sm:gap-2.5">
                     <div className="min-w-0">
-                      <p className="font-headline text-[0.9375rem] font-semibold leading-snug text-on-surface sm:text-base md:text-lg md:leading-tight">
+                      <p className={`${premiumProductTitleClass} text-[0.9375rem] sm:text-base md:text-lg`}>
                         {p.name}
                       </p>
                       {desc ? (
-                        <p className="mt-1.5 text-sm leading-relaxed text-on-surface-variant sm:mt-2 md:text-base md:leading-relaxed">
+                        <p className={`${premiumProductDescClass} mt-1.5 text-sm sm:mt-2 md:text-base`}>
                           {desc}
                         </p>
                       ) : null}
                     </div>
                     <div className="mt-auto flex flex-col gap-2 pt-0.5 min-[400px]:flex-row min-[400px]:flex-wrap min-[400px]:items-center min-[400px]:justify-between min-[400px]:gap-3 md:pt-1">
-                      <p className="text-sm font-semibold tabular-nums text-primary sm:text-base md:text-lg">
+                      <span className={`${pricePremiumClass} !min-h-0 !min-w-0 px-3 py-1.5 text-sm sm:text-base`}>
                         {formatEuroES(p.unitPriceEuro)}
-                      </p>
+                      </span>
                       <div className="shrink-0 self-start min-[400px]:self-center">
                         <AddToCartButton productId={productId} />
                       </div>

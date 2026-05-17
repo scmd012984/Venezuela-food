@@ -10,7 +10,13 @@ import {
 } from "@/lib/catalog";
 import { catalogProductImageAlt } from "@/lib/catalog-image-alt";
 import { formatEuroES } from "@/lib/format-euro";
-import { cardHoverLiftClass } from "./home-shared";
+import {
+  cardHoverLiftClass,
+  giftPanelClass,
+  premiumProductDescClass,
+  premiumProductTitleClass,
+  pricePremiumClass,
+} from "./home-shared";
 import { useCatalogSearch } from "./catalog-search-context";
 
 /** Contenedor de foto: misma altura en tarjetas lista + recorte limpio */
@@ -19,13 +25,9 @@ const catalogProductImageSlotBase =
 
 const catalogProductThumbHeight = "h-56 sm:h-64 md:h-64";
 
-/** Precio: mismo bloque en todas las tarjetas para lectura rápida */
-const priceDisplayClass =
-  "inline-flex min-h-[3.25rem] min-w-[6.5rem] items-center justify-center rounded-2xl border border-primary/25 bg-white px-4 text-xl font-extrabold tabular-nums tracking-tight text-primary shadow-[0_1px_0_rgba(255,255,255,0.9)_inset,0_2px_8px_-2px_rgba(12,36,99,0.12)] sm:min-w-[7rem] sm:text-2xl dark:border-primary/35 dark:bg-slate-900 dark:text-slate-50 dark:shadow-[0_1px_0_rgba(255,255,255,0.06)_inset]";
-
 function matchHighlightClass(active: boolean): string {
   return active
-    ? "z-[2] ring-2 ring-cta-warm/75 ring-offset-2 ring-offset-background shadow-[0_0_0_1px_rgba(229,52,106,0.18)] transition-shadow duration-300"
+    ? "z-[2] ring-2 ring-gold-bright/70 ring-offset-2 ring-offset-background shadow-[0_0_0_1px_rgba(201,162,39,0.25)] transition-shadow duration-300"
     : "";
 }
 
@@ -43,9 +45,9 @@ function productBadgeClass(kind: CatalogProductBadge): string {
     return `${base} bg-emerald-600/95 text-white ring-white/25`;
   }
   if (kind === "masVendido") {
-    return `${base} bg-cta-warm text-on-cta-warm ring-white/30 shadow-[0_2px_12px_rgba(229,52,106,0.4)]`;
+    return `${base} bg-chocolate text-gold-soft ring-gold-bright/40 shadow-[0_2px_12px_rgba(61,40,23,0.35)]`;
   }
-  return `${base} bg-cta-warm-soft/95 text-cta-warm-hover ring-cta-warm/45 shadow-[0_1px_8px_rgba(229,52,106,0.18)]`;
+  return `${base} bg-gold-soft/95 text-chocolate ring-gold-bright/50 shadow-[0_1px_8px_rgba(120,90,30,0.2)]`;
 }
 
 function ProductBadgeStrip({
@@ -98,7 +100,7 @@ export function ProductGrid() {
       ) : null}
       <div
         id="favoritos"
-        className={`catalog-product-image-slot glass-panel shadow-card-soft group relative min-h-[22rem] h-[min(70vh,32rem)] overflow-hidden rounded-3xl sm:min-h-[26rem] md:col-span-8 md:h-[500px] md:min-h-0 ${cardHoverLiftClass} ${matchHighlightClass(active("tres-leches"))}`}
+        className={`catalog-product-image-slot ${giftPanelClass} group relative min-h-[22rem] h-[min(70vh,32rem)] overflow-hidden rounded-3xl sm:min-h-[26rem] md:col-span-8 md:h-[500px] md:min-h-0 ${cardHoverLiftClass} ${matchHighlightClass(active("tres-leches"))}`}
       >
         <CatalogProductImage
           productId="tres-leches"
@@ -118,16 +120,19 @@ export function ProductGrid() {
           <ProductBadgeStrip badges={tresLeches.badges} />
         </div>
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-6 p-6 sm:flex-row sm:items-end sm:justify-between sm:p-10">
-          <div className="max-w-xl space-y-3 rounded-3xl border border-white/25 bg-black/50 px-5 py-4 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.5)] backdrop-blur-md backdrop-saturate-125 sm:space-y-3 sm:px-6 sm:py-5">
-            <h3 className="font-headline text-3xl font-semibold leading-tight tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] sm:text-4xl">
+          <div className="gift-caption-box max-w-xl space-y-3 rounded-3xl bg-black/50 px-5 py-4 backdrop-blur-md backdrop-saturate-125 sm:space-y-3 sm:px-6 sm:py-5">
+            <p className="type-eyebrow-gold text-gold-bright drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
+              Capricho artesanal
+            </p>
+            <h3 className="font-headline text-3xl font-semibold leading-tight tracking-[-0.02em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] sm:text-4xl">
               {tresLeches.name}
             </h3>
-            <p className="max-w-md text-base font-normal leading-relaxed text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.55)] sm:text-lg sm:leading-relaxed">
+            <p className="max-w-md font-headline text-base font-medium italic leading-relaxed tracking-wide text-white/95 drop-shadow-[0_1px_8px_rgba(0,0,0,0.55)] sm:text-lg">
               {tresLeches.description}
             </p>
           </div>
           <div className="flex shrink-0 flex-row flex-wrap items-center justify-end gap-3 sm:gap-4">
-            <span className={priceDisplayClass}>
+            <span className={pricePremiumClass}>
               {formatEuroES(tresLeches.unitPriceEuro)}
             </span>
             <AddToCartButton productId="tres-leches" />
@@ -137,7 +142,7 @@ export function ProductGrid() {
 
       <div
         id="catalog-product-cachitos"
-        className={`glass-panel shadow-card-soft group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass} ${matchHighlightClass(active("cachitos"))}`}
+        className={`${giftPanelClass} group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass} ${matchHighlightClass(active("cachitos"))}`}
       >
         <div
           className={`${catalogProductImageSlotBase} ${catalogProductThumbHeight}`}
@@ -155,15 +160,16 @@ export function ProductGrid() {
         </div>
         <div className="flex flex-grow flex-col justify-between space-y-4 p-5 sm:p-8">
           <div>
-            <h3 className="font-headline text-xl font-semibold tracking-tight text-primary sm:text-2xl">
+            <div className="premium-divider-gold mb-3" aria-hidden />
+            <h3 className={`${premiumProductTitleClass} text-xl sm:text-2xl`}>
               {cachitos.name}
             </h3>
-            <p className="mt-2 text-[15px] font-normal leading-relaxed text-on-surface-variant sm:text-base">
+            <p className={`${premiumProductDescClass} mt-2 sm:text-base`}>
               {cachitos.description}
             </p>
           </div>
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-            <span className={priceDisplayClass}>
+            <span className={pricePremiumClass}>
               {formatEuroES(cachitos.unitPriceEuro)}
             </span>
             <AddToCartButton productId="cachitos" />
@@ -173,7 +179,7 @@ export function ProductGrid() {
 
       <div
         id="catalog-product-quesillo"
-        className={`glass-panel shadow-card-soft group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass} ${matchHighlightClass(active("quesillo"))}`}
+        className={`${giftPanelClass} group relative flex flex-col overflow-hidden rounded-3xl md:col-span-4 ${cardHoverLiftClass} ${matchHighlightClass(active("quesillo"))}`}
       >
         <div
           className={`${catalogProductImageSlotBase} ${catalogProductThumbHeight}`}
@@ -191,17 +197,18 @@ export function ProductGrid() {
         </div>
         <div className="flex flex-grow flex-col justify-between space-y-4 p-5 sm:p-8">
           <div>
-            <h3 className="font-headline text-xl font-semibold tracking-tight text-primary sm:text-2xl">
+            <div className="premium-divider-gold mb-3" aria-hidden />
+            <h3 className={`${premiumProductTitleClass} text-xl sm:text-2xl`}>
               {quesillo.name}
             </h3>
             {quesillo.description ? (
-              <p className="mt-2 text-[15px] font-normal leading-relaxed text-on-surface-variant sm:text-base">
+              <p className={`${premiumProductDescClass} mt-2 sm:text-base`}>
                 {quesillo.description}
               </p>
             ) : null}
           </div>
           <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
-            <span className={priceDisplayClass}>
+            <span className={pricePremiumClass}>
               {formatEuroES(quesillo.unitPriceEuro)}
             </span>
             <AddToCartButton productId="quesillo" />
@@ -211,20 +218,21 @@ export function ProductGrid() {
 
       <div
         id="catalog-product-golfeados"
-        className={`glass-panel shadow-card-soft group relative overflow-hidden rounded-3xl md:col-span-8 md:min-h-[24rem] lg:min-h-[26rem] ${cardHoverLiftClass} ${matchHighlightClass(active("golfeados"))}`}
+        className={`${giftPanelClass} group relative overflow-hidden rounded-3xl md:col-span-8 md:min-h-[24rem] lg:min-h-[26rem] ${cardHoverLiftClass} ${matchHighlightClass(active("golfeados"))}`}
       >
         <div className="flex flex-col md:absolute md:inset-0 md:min-h-[24rem] md:flex-row md:items-stretch lg:min-h-[26rem]">
           <div className="z-10 order-1 flex w-full flex-col justify-center gap-4 p-6 sm:gap-5 sm:p-8 md:order-none md:min-h-0 md:w-1/2 md:justify-between md:gap-6 md:p-10 lg:p-12">
             <div className="space-y-4 sm:space-y-5">
-              <h3 className="font-headline text-2xl font-semibold leading-tight tracking-tight text-primary sm:text-3xl">
+              <div className="premium-divider-gold" aria-hidden />
+              <h3 className={`${premiumProductTitleClass} text-2xl sm:text-3xl`}>
                 {golfeados.name}
               </h3>
-              <p className="text-[15px] font-normal leading-relaxed text-on-surface-variant sm:text-base">
+              <p className={`${premiumProductDescClass} sm:text-base`}>
                 {golfeados.description}
               </p>
             </div>
             <div className="mt-6 flex flex-wrap items-center justify-between gap-3 md:mt-0">
-              <span className={priceDisplayClass}>
+              <span className={pricePremiumClass}>
                 {formatEuroES(golfeados.unitPriceEuro)}
               </span>
               <AddToCartButton productId="golfeados" />

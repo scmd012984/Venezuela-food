@@ -6,7 +6,13 @@ import {
   isWhatsAppWebHref,
 } from "@/lib/contact-public";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
-import { cardHoverLiftClass, type CtaLink } from "./home-shared";
+import {
+  cardHoverLiftClass,
+  giftPanelClass,
+  premiumDisplayClass,
+  premiumEyebrowClass,
+  type CtaLink,
+} from "./home-shared";
 import { WhatsAppBrandIcon } from "./WhatsAppBrandIcon";
 
 export function OccasionsCallout() {
@@ -34,23 +40,25 @@ export function OccasionsCallout() {
 
   return (
     <section
-      className={`glass-panel shadow-card-soft rounded-3xl px-6 py-7 sm:px-8 sm:py-8 ${cardHoverLiftClass}`}
+      className={`${giftPanelClass} rounded-3xl px-6 py-7 sm:px-8 sm:py-8 ${cardHoverLiftClass}`}
       aria-labelledby="occasions-heading"
     >
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
         <PartyPopper
-          className="size-10 shrink-0 text-primary sm:size-12"
+          className="size-10 shrink-0 text-gold-bright sm:size-12"
           strokeWidth={LUCIDE_ICON_STROKE}
           aria-hidden
         />
         <div className="min-w-0 flex-1">
+          <p className={premiumEyebrowClass}>Para celebrar</p>
+          <div className="premium-divider-gold mt-2 mb-3" aria-hidden />
           <h2
             id="occasions-heading"
-            className="font-headline text-2xl font-semibold leading-[1.15] tracking-tight text-primary sm:text-3xl md:text-[2.125rem] md:leading-[1.12]"
+            className={`${premiumDisplayClass} text-2xl leading-[1.15] sm:text-3xl md:text-[2.125rem] md:leading-[1.12]`}
           >
             Preparamos tu mesa dulce
           </h2>
-          <p className="mt-3 text-base font-normal leading-relaxed text-on-surface sm:mt-4 sm:text-lg sm:leading-relaxed">
+          <p className="type-premium-body mt-3 text-base sm:mt-4 sm:text-lg">
             Diseñamos bandejas y{" "}
             <strong className="font-semibold text-on-surface">mesas de postres</strong>{" "}
             para{" "}

@@ -7,6 +7,11 @@ import {
 import { CATALOG_PRODUCTS } from "@/lib/catalog";
 import { catalogProductImageAlt } from "@/lib/catalog-image-alt";
 import type { CtaLink } from "./home-shared";
+import {
+  giftPanelClass,
+  premiumDisplayClass,
+  premiumEyebrowClass,
+} from "./home-shared";
 import { WhatsAppBrandIcon } from "./WhatsAppBrandIcon";
 
 /** Hero de entrada: bloque claro con foto, copy breve y acciones */
@@ -19,7 +24,7 @@ export function LandingHero() {
       href: "#catalogo",
       label: "Ver catálogo",
       className:
-        "shadow-card-soft inline-flex h-12 min-h-12 items-center justify-center rounded-full bg-cta-warm px-8 text-sm font-semibold text-on-cta-warm ring-1 ring-white/25 transition duration-200 hover:-translate-y-0.5 hover:bg-cta-warm-hover hover:shadow-[0_12px_32px_-10px_rgba(196,29,82,0.48)] active:scale-[0.98]",
+        "shadow-card-soft inline-flex h-12 min-h-12 items-center justify-center rounded-full bg-cta-warm px-8 text-sm font-semibold text-on-cta-warm ring-1 ring-gold-bright/30 transition duration-200 hover:-translate-y-0.5 hover:bg-cta-warm-hover hover:shadow-[0_12px_32px_-10px_rgba(196,29,82,0.48)] active:scale-[0.98]",
     },
     {
       href: waContactHref,
@@ -28,25 +33,28 @@ export function LandingHero() {
       target: openWhatsAppInNewTab ? "_blank" : undefined,
       rel: openWhatsAppInNewTab ? "noopener noreferrer" : undefined,
       className:
-        "inline-flex h-12 min-h-12 items-center justify-center rounded-full border-2 border-cta-warm/32 bg-white px-6 text-sm font-semibold text-cta-warm shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-cta-warm/50 hover:bg-cta-warm-soft active:scale-[0.98] dark:bg-slate-900/70 dark:hover:bg-slate-800/90",
+        "inline-flex h-12 min-h-12 items-center justify-center rounded-full border-2 border-gold-bright/45 bg-white px-6 text-sm font-semibold text-chocolate shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-gold-bright/65 hover:bg-gold-soft active:scale-[0.98]",
     },
   ];
 
   return (
     <section
-      className="overflow-hidden rounded-3xl border border-outline-variant/55 bg-white shadow-card-soft ring-1 ring-black/[0.03] dark:border-slate-600/50 dark:bg-slate-950 dark:ring-white/[0.06]"
+      className={`${giftPanelClass} overflow-hidden rounded-3xl`}
       aria-labelledby="hero-heading"
     >
       <div className="grid lg:grid-cols-2 lg:items-stretch">
         <div className="order-2 flex flex-col justify-center gap-5 px-6 py-8 sm:gap-6 sm:px-10 sm:py-10 lg:order-1 lg:px-12 lg:py-14">
+          <p className={premiumEyebrowClass}>Regalos & caprichos</p>
+          <div className="premium-divider-gold" aria-hidden />
           <h1
             id="hero-heading"
-            className="font-headline text-balance text-3xl font-semibold leading-[1.12] tracking-tight text-primary sm:text-4xl sm:leading-[1.1] lg:text-[2.45rem] lg:leading-[1.08]"
+            className={`${premiumDisplayClass} text-balance text-3xl leading-[1.12] sm:text-4xl sm:leading-[1.1] lg:text-[2.45rem] lg:leading-[1.08]`}
           >
             Repostería venezolana, hecha hoy.
           </h1>
-          <p className="max-w-md text-base leading-relaxed text-on-surface-variant sm:text-lg">
-            Para llevar y mesas dulces bajo encargo.
+          <p className="type-premium-body max-w-md text-base sm:text-lg">
+            Cada pieza es un detalle para consentir — para regalar o para un
+            capricho solo tuyo.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             {heroCtas.map((cta) => (

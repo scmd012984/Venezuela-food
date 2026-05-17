@@ -56,6 +56,14 @@
   --color-cta-warm-soft: #fff0f5;
   --color-on-cta-warm: #ffffff;
 
+  /* Regalo / premium — dorado horneado + chocolate */
+  --color-gold: #a67c00;
+  --color-gold-bright: #c9a227;
+  --color-gold-soft: #f8ecd4;
+  --color-gold-muted: #e5d4a8;
+  --color-chocolate: #4a3228;
+  --color-chocolate-deep: #3d2817;
+
   --radius-DEFAULT: 0.25rem;
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;

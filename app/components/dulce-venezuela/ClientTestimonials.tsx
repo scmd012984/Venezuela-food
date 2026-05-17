@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Star } from "lucide-react";
 import { CLIENT_TESTIMONIALS } from "@/lib/client-testimonials";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
-import { cardHoverLiftClass } from "./home-shared";
+import { cardHoverLiftClass, giftPanelClass, premiumDisplayClass, premiumEyebrowClass } from "./home-shared";
 
 function FiveStars() {
   return (
@@ -28,13 +28,15 @@ export function ClientTestimonials() {
       aria-labelledby="testimonios-heading"
     >
       <div className="mb-8 text-center sm:mb-10">
+        <p className={premiumEyebrowClass}>Confianza</p>
+        <div className="premium-divider-gold mx-auto mt-2 mb-4" aria-hidden />
         <h2
           id="testimonios-heading"
-          className="font-headline text-2xl font-semibold tracking-tight text-primary sm:text-3xl md:text-[2.125rem]"
+          className={`${premiumDisplayClass} text-2xl sm:text-3xl md:text-[2.125rem]`}
         >
           Lo que dicen nuestros clientes
         </h2>
-        <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-on-surface-variant sm:text-lg">
+        <p className="type-premium-body mx-auto mt-3 max-w-2xl text-base sm:text-lg">
           Experiencias reales con nuestros dulces: celebraciones, encargos y mesas
           dulces que dejan huella.
         </p>
@@ -44,7 +46,7 @@ export function ClientTestimonials() {
         {CLIENT_TESTIMONIALS.map((t) => (
           <li key={t.id} className="min-w-0">
             <article
-              className={`glass-panel shadow-card-soft flex h-full flex-col overflow-hidden rounded-3xl ${cardHoverLiftClass}`}
+              className={`${giftPanelClass} flex h-full flex-col overflow-hidden rounded-3xl ${cardHoverLiftClass}`}
             >
               <div className="relative aspect-[4/3] w-full shrink-0 overflow-hidden bg-surface-container">
                 <Image
