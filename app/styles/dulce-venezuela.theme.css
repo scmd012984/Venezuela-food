@@ -75,6 +75,10 @@
   --color-surface-tint: #5a4f4d;
   --color-on-tertiary-container: #ff9a94;
 
+  /* Chips / filtros UI — fondo plano suave (sin borde duro) */
+  --color-ui-chip: #f3dde2;
+  --color-ui-chip-hover: #e8d0d6;
+
   /* CTA — borgoña / guinda elegante (no rosa fucsia ni rojo saturado) */
   --color-cta-warm: #721c24;
   --color-cta-warm-hover: #5c061e;
@@ -113,4 +117,19 @@
     serif;
   --font-body: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-label: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Jerarquía: cuerpo ligero, UI/botones medios, titulares fuertes */
+  --font-weight-body: 400;
+  --font-weight-body-muted: 300;
+  --font-weight-ui: 500;
+  --font-weight-headline: 600;
+  --font-weight-display: 700;
+
+  /** Interlineado párrafos principales — lectura fluida */
+  --leading-body: 1.6;
+
+  /** Sombra de tarjetas — marrón lavado, casi invisible (efecto flotante) */
+  --shadow-card: 0 10px 30px rgba(60, 47, 47, 0.05);
+  --shadow-card-hover: 0 14px 36px rgba(60, 47, 47, 0.07);
+  --shadow-card-subtle: 0 4px 14px rgba(60, 47, 47, 0.04);
 }

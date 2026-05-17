@@ -1,4 +1,5 @@
 import { instagramFeedImageAlt, type InstagramFeedData } from "@/lib/instagram-feed";
+import { uiChipClass } from "./home-shared";
 
 const PLACEHOLDER_SLOTS = 6;
 
@@ -48,7 +49,7 @@ export function InstagramFeedSection({ data }: InstagramFeedSectionProps) {
           >
             Recién salido del horno (Instagram)
           </h2>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-on-surface-variant sm:text-base">
+          <p className="leading-body mt-2 max-w-xl text-sm text-on-surface-variant sm:text-base">
             {hasPhotos
               ? "Las últimas fotos de nuestros dulces y celebraciones. Toca una imagen para verla en Instagram."
               : "Conecta tu cuenta profesional para mostrar aquí las fotos más recientes. Mientras tanto, síguenos en Instagram para ver el día a día."}
@@ -58,7 +59,7 @@ export function InstagramFeedSection({ data }: InstagramFeedSectionProps) {
           href={profileUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-surface-elevated inline-flex shrink-0 items-center gap-2 self-start rounded-full border-2 border-chocolate/20 px-4 py-2.5 text-sm font-semibold text-chocolate-deep shadow-sm transition hover:border-chocolate/35 hover:bg-surface-container-low sm:self-auto dark:border-slate-600/50 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
+          className={`${uiChipClass} inline-flex shrink-0 items-center gap-2 self-start rounded-full px-4 py-2.5 sm:self-auto`}
         >
           <InstagramGlyph className="size-5 shrink-0" />
           @{handle}
@@ -73,7 +74,7 @@ export function InstagramFeedSection({ data }: InstagramFeedSectionProps) {
                 href={item.permalink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative aspect-square overflow-hidden rounded-2xl border border-outline-variant/45 bg-surface-container shadow-sm ring-1 ring-black/[0.03] transition duration-200 hover:-translate-y-0.5 hover:shadow-md dark:border-slate-600/50 dark:ring-white/[0.05]"
+                className="shadow-card-soft group relative aspect-square overflow-hidden rounded-2xl border border-outline-variant/45 bg-surface-container transition duration-200 hover:-translate-y-0.5 hover:shadow-[inset_0_1px_0_rgba(255,252,245,0.65),var(--shadow-card-hover)] dark:border-slate-600/50"
               >
                 {/* CDN de Instagram: <img> evita lista fija de hostnames en next/image */}
                 <img
@@ -101,7 +102,7 @@ export function InstagramFeedSection({ data }: InstagramFeedSectionProps) {
                 href={profileUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl border border-dashed border-outline-variant/55 bg-linear-to-br from-cta-warm-soft/80 via-surface-container-low to-surface-container transition hover:border-cta-warm/40 hover:shadow-sm dark:border-slate-600/55 dark:from-slate-800/80 dark:via-slate-900 dark:to-slate-900"
+                className="shadow-card-soft relative flex aspect-square items-center justify-center overflow-hidden rounded-2xl border border-dashed border-outline-variant/55 bg-linear-to-br from-cta-warm-soft/80 via-surface-container-low to-surface-container transition hover:border-cta-warm/40 dark:border-slate-600/55 dark:from-slate-800/80 dark:via-slate-900 dark:to-slate-900"
               >
                 <InstagramGlyph className="size-8 text-cta-warm/50 sm:size-9" />
                 <span className="sr-only">Abrir perfil de Instagram @{handle}</span>

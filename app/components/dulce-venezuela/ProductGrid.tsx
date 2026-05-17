@@ -120,14 +120,14 @@ export function ProductGrid() {
           <ProductBadgeStrip badges={tresLeches.badges} />
         </div>
         <div className="absolute inset-x-0 bottom-0 z-20 flex flex-col gap-4 p-4 sm:flex-row sm:items-end sm:justify-between sm:gap-5 sm:p-6 md:p-7">
-          <div className="gift-caption-box gift-caption-box--featured gift-caption-box--compact max-w-[min(100%,20rem)] space-y-1.5 rounded-2xl px-3.5 py-2.5 backdrop-blur-md backdrop-saturate-150 sm:max-w-xs sm:space-y-2 sm:px-4 sm:py-3">
+          <div className="gift-caption-box gift-caption-box--featured max-w-[min(100%,24rem)] space-y-1.5 rounded-2xl px-3.5 py-2.5 backdrop-blur-md backdrop-saturate-150 sm:max-w-md sm:space-y-2 sm:px-4 sm:py-3">
             <p className="type-eyebrow-gold text-[0.625rem] drop-shadow-[0_1px_6px_rgba(224,184,64,0.7)] sm:text-[0.6875rem]">
               Capricho artesanal
             </p>
             <h3 className="font-headline text-xl font-semibold leading-tight tracking-[-0.02em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)] sm:text-2xl">
               {tresLeches.name}
             </h3>
-            <p className="line-clamp-2 max-w-[18rem] font-headline text-sm font-medium italic leading-snug tracking-wide text-white/95 drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)] sm:text-[0.9375rem] sm:leading-relaxed">
+            <p className="leading-body text-pretty text-sm font-normal text-white/95 drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)] sm:text-[0.9375rem]">
               {tresLeches.description}
             </p>
           </div>

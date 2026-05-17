@@ -90,7 +90,7 @@ export function ClientTestimonials() {
         >
           Felicidad que se comparte
         </h2>
-        <p className="type-premium-body mx-auto mt-3 max-w-2xl text-base sm:text-lg">
+        <p className="type-premium-body leading-body mx-auto mt-3 max-w-2xl text-base sm:text-lg">
           Nuestros dulces acompañan bodas, cumpleaños y encuentros que se quedan
           en la memoria.
         </p>

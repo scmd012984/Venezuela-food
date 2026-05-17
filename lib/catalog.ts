@@ -49,7 +49,7 @@ export const CATALOG_PRODUCTS = {
     name: "Golfeado con queso blanco latino",
     unitPriceEuro: 4.2,
     imageUrl:
-      "https://images.unsplash.com/photo-1694632288834-17d86b340745?w=1600&q=88&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1694632288834-17d86b340745?w=1920&q=90&auto=format&fit=crop",
     description:
       "Rollos de canela y papelón con un toque de anís dulce, servidos con queso fresco fundido.",
     badges: ["nuevo", "favorito"],

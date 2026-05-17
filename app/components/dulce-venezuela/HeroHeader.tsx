@@ -1,7 +1,10 @@
 "use client";
 
+import { Search } from "lucide-react";
+import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
 import { CategoryFilterSection } from "./CategoryFilterSection";
 import { useCatalogSearch } from "./catalog-search-context";
+import { catalogSearchFieldClass } from "./home-shared";
 
 export function HeroHeader() {
   const { query, setQuery } = useCatalogSearch();
@@ -16,7 +19,7 @@ export function HeroHeader() {
         <h2 className="font-headline text-lg font-semibold tracking-tight text-chocolate-deep sm:text-xl">
           Explorar dulces
         </h2>
-        <p className="text-sm leading-relaxed text-on-surface-variant sm:text-base sm:leading-relaxed">
+        <p className="leading-body text-sm text-on-surface-variant sm:text-base">
           Busca por nombre o elige una categoría.
         </p>
       </div>
@@ -26,6 +29,11 @@ export function HeroHeader() {
           <label htmlFor="catalog-search" className="sr-only">
             Buscar en el catálogo
           </label>
+          <Search
+            className="pointer-events-none absolute left-3.5 top-1/2 size-[1.125rem] -translate-y-1/2 text-chocolate-ink sm:left-4 sm:size-5"
+            strokeWidth={LUCIDE_ICON_STROKE}
+            aria-hidden
+          />
           <input
             id="catalog-search"
             type="search"
@@ -34,7 +42,7 @@ export function HeroHeader() {
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Buscar delicias…"
             autoComplete="off"
-            className="bg-surface-elevated shadow-card-soft w-full rounded-3xl border border-outline-variant/60 py-3.5 pl-5 pr-5 text-base font-normal text-chocolate-ink placeholder:text-on-surface-variant/70 transition duration-200 placeholder:font-normal hover:border-chocolate/30 hover:shadow-[0_8px_28px_-12px_rgba(34,22,16,0.12)] focus:border-chocolate-deep focus:outline-none focus:ring-4 focus:ring-chocolate/15 dark:border-slate-600/50 dark:bg-slate-950 dark:text-vanilla-bright dark:hover:border-gold-bright/35 dark:placeholder:text-slate-500"
+            className={catalogSearchFieldClass}
           />
         </div>
         <CategoryFilterSection />

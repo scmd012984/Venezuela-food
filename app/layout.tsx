@@ -3,10 +3,11 @@ import { Fraunces, Inter, Playfair_Display } from "next/font/google";
 import { Providers } from "./providers";
 import "./globals.css";
 
+/** Sans limpia — párrafos, UI y botones (pesos ligeros en secundarios vía tema). */
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
 });
 

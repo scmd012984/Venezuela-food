@@ -8,28 +8,23 @@ import {
 import { CategoryProductsPanel } from "./CategoryProductsPanel";
 import { useCatalogSearch } from "./catalog-search-context";
 import { useCategoryPanelBridge } from "./category-panel-bridge";
+import {
+  categoryFilterTrackClass,
+  goldFilterChipClass,
+} from "./home-shared";
 
 const CLOSE_MS = 320;
-
-const filterTrackClass =
-  "w-full rounded-2xl border-2 border-outline-variant/65 bg-surface-container p-1 shadow-[inset_0_2px_8px_rgba(28,29,38,0.08)] dark:border-slate-600/55 dark:bg-slate-800/85";
-
-/** Categoría activa: toque cálido sutil (no relleno coral; jerarquía por debajo de CTAs) */
-const filterActiveClass =
-  "cursor-pointer rounded-xl border-2 border-cta-warm/35 bg-cta-warm-soft px-3 py-2 text-xs font-semibold text-chocolate-deep shadow-[0_2px_10px_-4px_rgba(114,28,36,0.1)] transition duration-200 hover:border-cta-warm/50 hover:bg-surface-elevated hover:shadow-[0_3px_14px_-4px_rgba(92,6,30,0.14)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-chocolate/20 focus-visible:ring-offset-2 active:scale-[0.98] sm:px-4 sm:py-2.5 sm:text-sm dark:border-cta-warm/35 dark:bg-slate-900/92 dark:text-vanilla-bright dark:shadow-[0_2px_12px_-4px_rgba(92,6,30,0.12)] dark:hover:border-cta-warm/45 dark:hover:bg-slate-800/95";
-
-/** Resto: borde fino, fondo casi neutro */
-const filterInactiveClass =
-  "cursor-pointer bg-surface-elevated-soft rounded-xl border border-outline-variant/55 px-3 py-2 text-xs font-medium text-on-surface-variant shadow-none transition duration-200 hover:border-chocolate/25 hover:bg-surface-container-low hover:text-chocolate-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-chocolate/25 focus-visible:ring-offset-2 active:scale-[0.98] sm:px-4 sm:py-2.5 sm:text-sm dark:border-slate-600/45 dark:bg-slate-900/55 dark:text-slate-300 dark:hover:border-chocolate/35 dark:hover:bg-slate-800/90 dark:hover:text-slate-50";
 
 const panelGridClass =
   "grid min-h-0 transition-[grid-template-rows] duration-300 ease-[cubic-bezier(0.33,1,0.68,1)] motion-reduce:transition-none motion-reduce:duration-0";
 
 export function CategoryFilterSection() {
   const { debouncedSearchQuery } = useCatalogSearch();
-  const { setOpenCatalogCategory } = useCategoryPanelBridge();
-  const [activeCategory, setActiveCategory] =
-    useState<CategoryLabel>("Todos");
+  const {
+    setOpenCatalogCategory,
+    activeCategory,
+    setActiveCategory,
+  } = useCategoryPanelBridge();
   const [panelCategory, setPanelCategory] = useState<CategoryLabel | null>(
     null,
   );
@@ -67,7 +62,7 @@ export function CategoryFilterSection() {
       setPanelCategory(tag);
       setPanelOpen(true);
     },
-    [panelCategory, panelOpen, clearCloseTimer, closePanel],
+    [panelCategory, panelOpen, clearCloseTimer, closePanel, setActiveCategory],
   );
 
   /** Desde accesos rápidos: siempre abre la categoría (no alterna cierre). */
@@ -78,7 +73,7 @@ export function CategoryFilterSection() {
       setPanelCategory(tag);
       setPanelOpen(true);
     },
-    [clearCloseTimer],
+    [clearCloseTimer, setActiveCategory],
   );
 
   useEffect(() => {
@@ -93,18 +88,18 @@ export function CategoryFilterSection() {
     setActiveCategory("Todos");
     setPanelCategory("Todos");
     setPanelOpen(true);
-  }, [debouncedSearchQuery, clearCloseTimer]);
+  }, [debouncedSearchQuery, clearCloseTimer, setActiveCategory]);
 
   return (
     <div className="flex min-w-0 flex-1 flex-col gap-1.5">
       <span
-        className="text-[11px] font-semibold uppercase tracking-[0.14em] text-on-surface-variant sm:text-xs"
+        className="text-[11px] font-medium uppercase tracking-[0.14em] text-chocolate-ink sm:text-xs"
         id="filter-cat-label"
       >
         Categoría
       </span>
       <fieldset
-        className={filterTrackClass}
+        className={categoryFilterTrackClass}
         aria-labelledby="filter-cat-label"
       >
         <legend className="sr-only">Filtrar por categoría</legend>
@@ -113,9 +108,7 @@ export function CategoryFilterSection() {
             <button
               key={tag}
               type="button"
-              className={
-                tag === activeCategory ? filterActiveClass : filterInactiveClass
-              }
+              className={goldFilterChipClass(tag === activeCategory)}
               aria-pressed={tag === activeCategory}
               onClick={() => openCategory(tag)}
             >

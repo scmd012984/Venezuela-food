@@ -1,9 +1,106 @@
 /* Dulce Venezuela — regalo, capricho y contraste premium */
 
+:root {
+  --gradient-gold-border: linear-gradient(
+    118deg,
+    var(--color-gold-flare) 0%,
+    var(--color-gold-shine) 18%,
+    var(--color-gold-bright) 42%,
+    #fff8e8 50%,
+    var(--color-gold-bright) 58%,
+    var(--color-gold-shine) 78%,
+    var(--color-gold-flare) 100%
+  );
+  --shadow-gold-metallic-inset:
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 95%, white),
+    inset 0 -1px 0 color-mix(in srgb, var(--color-gold-bright) 45%, transparent);
+  --shadow-gold-metallic-outer:
+    0 0 0 1px color-mix(in srgb, var(--color-gold-shine) 85%, transparent),
+    0 0 0 2.5px color-mix(in srgb, var(--color-gold-bright) 35%, transparent),
+    0 0 22px -2px color-mix(in srgb, var(--color-gold-bright) 82%, transparent),
+    0 0 42px -6px color-mix(in srgb, var(--color-gold-flare) 65%, transparent),
+    0 0 64px -12px color-mix(in srgb, var(--color-gold-shine) 50%, transparent);
+  --shadow-gold-metallic-inset-ring:
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 100%, white),
+    inset 0 0 0 2.5px color-mix(in srgb, var(--color-gold-flare) 95%, white),
+    inset 0 0 0 4px color-mix(in srgb, var(--color-gold-bright) 92%, var(--color-gold-shine)),
+    inset 0 0 0 5.5px color-mix(in srgb, var(--color-gold-shine) 78%, var(--color-gold));
+}
+
+/** Botones y CTAs — sans limpia, peso medio (no compite con titulares) */
+.btn-text {
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-ui);
+  letter-spacing: 0.02em;
+}
+
+/** Chips / filtros — minimalistas, sin borde; activo = borgoña + texto claro */
+.ui-chip-track {
+  border: none;
+  background: color-mix(in srgb, var(--color-ui-chip) 42%, var(--color-background));
+  box-shadow: none;
+}
+
+/** Contenedor de filtros de categoría — tono dorado alineado con la barra superior */
+.category-filter-track {
+  width: 100%;
+  border-radius: 1rem;
+  padding: 0.25rem;
+  border: 1px solid color-mix(in srgb, var(--color-gold-bright) 40%, var(--color-gold-deep));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-gold-flare) 28%, var(--color-background)) 0%,
+    color-mix(in srgb, var(--color-gold-shine) 45%, var(--color-background)) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 55%, white),
+    0 2px 8px rgba(60, 47, 47, 0.04);
+}
+
+.ui-chip {
+  border: none;
+  background-color: var(--color-ui-chip);
+  box-shadow: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    opacity 0.15s ease;
+}
+
+.ui-chip:hover:not(.ui-chip--active) {
+  background-color: var(--color-ui-chip-hover);
+}
+
+.ui-chip:active {
+  opacity: 0.92;
+}
+
+.ui-chip--active {
+  background-color: var(--color-cta-warm);
+  color: var(--color-on-cta-warm);
+}
+
+.ui-chip--active:hover {
+  background-color: var(--color-cta-warm-hover);
+}
+
+.dark .ui-chip-track {
+  background: color-mix(in srgb, var(--color-ui-chip) 12%, #1e1816);
+}
+
+.dark .ui-chip:not(.ui-chip--active) {
+  background-color: color-mix(in srgb, var(--color-ui-chip) 22%, #2a2220);
+  color: #e8e2dc;
+}
+
+.dark .ui-chip:hover:not(.ui-chip--active) {
+  background-color: color-mix(in srgb, var(--color-ui-chip) 32%, #352c2a);
+}
+
 .type-eyebrow-gold {
   font-family: var(--font-label);
   font-size: 0.6875rem;
-  font-weight: 600;
+  font-weight: var(--font-weight-ui);
   letter-spacing: 0.2em;
   text-transform: uppercase;
   background: linear-gradient(
@@ -23,7 +120,7 @@
 .type-eyebrow-gold-lg {
   font-family: var(--font-label);
   font-size: 0.8125rem;
-  font-weight: 700;
+  font-weight: var(--font-weight-ui);
   line-height: 1.4;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -50,23 +147,23 @@
 
 .type-premium-display {
   font-family: var(--font-display);
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-weight: var(--font-weight-display);
+  letter-spacing: -0.02em;
   line-height: 1.12;
   color: var(--color-chocolate-ink);
 }
 
 .type-premium-body {
   font-family: var(--font-body);
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  line-height: 1.65;
+  font-weight: var(--font-weight-body-muted);
+  letter-spacing: 0.015em;
+  line-height: var(--leading-body);
   color: var(--color-on-surface-variant);
 }
 
 .type-premium-product-title {
   font-family: var(--font-headline);
-  font-weight: 600;
+  font-weight: var(--font-weight-headline);
   letter-spacing: -0.02em;
   line-height: 1.2;
   color: var(--color-chocolate);
@@ -75,10 +172,10 @@
 .type-premium-product-desc {
   font-family: var(--font-body);
   font-size: 0.9375rem;
-  font-weight: 400;
+  font-weight: var(--font-weight-body-muted);
   font-style: italic;
   letter-spacing: 0.015em;
-  line-height: 1.6;
+  line-height: var(--leading-body);
   color: color-mix(in srgb, var(--color-chocolate-mid) 55%, var(--color-on-surface-variant));
 }
 
@@ -100,11 +197,230 @@
   border-left-width: 2px;
 }
 
-.ring-gold-frame {
+/** Fondo dorado compartido — barra superior y chips de acceso rápido */
+.topnav-gold-surface {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-gold-flare) 48%, var(--color-gold-shine)) 0%,
+    color-mix(in srgb, var(--color-gold-shine) 82%, var(--color-gold-soft)) 42%,
+    color-mix(in srgb, var(--color-gold-bright) 55%, var(--color-gold-muted)) 100%
+  );
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 80%, white);
+}
+
+.dark .topnav-gold-surface {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-gold-deep) 55%, #2a2220) 0%,
+    color-mix(in srgb, var(--color-gold) 40%, #1a120e) 100%
+  );
+}
+
+/** Barra de navegación superior */
+.topnav-gold-bar {
+  border-bottom: 1px solid color-mix(in srgb, var(--color-gold-bright) 58%, var(--color-gold-deep));
   box-shadow:
-    inset 0 0 0 2px color-mix(in srgb, var(--color-gold-flare) 70%, transparent),
-    inset 0 0 0 3.5px color-mix(in srgb, var(--color-gold-bright) 82%, var(--color-gold-deep)),
-    0 0 16px -3px color-mix(in srgb, var(--color-gold-bright) 58%, transparent);
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 80%, white),
+    0 4px 14px rgba(60, 47, 47, 0.05);
+  backdrop-filter: blur(12px) saturate(1.06);
+  -webkit-backdrop-filter: blur(12px) saturate(1.06);
+}
+
+.dark .topnav-gold-bar {
+  border-bottom-color: color-mix(in srgb, var(--color-gold-bright) 35%, transparent);
+}
+
+/** Campo «Buscar delicias» — mismo dorado, sombra y texto que los chips */
+.catalog-search-field {
+  color: var(--color-chocolate-ink);
+  border: 1px solid color-mix(in srgb, var(--color-gold-bright) 52%, var(--color-gold-deep));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-gold-flare) 48%, var(--color-gold-shine)) 0%,
+    color-mix(in srgb, var(--color-gold-shine) 82%, var(--color-gold-soft)) 42%,
+    color-mix(in srgb, var(--color-gold-bright) 55%, var(--color-gold-muted)) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 75%, white),
+    0 2px 8px rgba(60, 47, 47, 0.04);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+}
+
+.catalog-search-field::placeholder {
+  color: color-mix(in srgb, var(--color-chocolate-mid) 90%, var(--color-chocolate-ink));
+  opacity: 1;
+}
+
+.catalog-search-field:hover {
+  border-color: color-mix(in srgb, var(--color-gold-bright) 68%, var(--color-gold-deep));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 90%, white),
+    0 3px 12px rgba(60, 47, 47, 0.06);
+}
+
+.catalog-search-field:focus {
+  color: var(--color-chocolate-ink);
+  outline: none;
+  border-color: color-mix(in srgb, var(--color-gold-bright) 68%, var(--color-gold-deep));
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-gold-flare) 54%, var(--color-gold-shine)) 0%,
+    color-mix(in srgb, var(--color-gold-shine) 88%, var(--color-gold-soft)) 42%,
+    color-mix(in srgb, var(--color-gold-bright) 62%, var(--color-gold-muted)) 100%
+  );
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 90%, white),
+    0 3px 12px rgba(60, 47, 47, 0.06),
+    0 0 0 2px color-mix(in srgb, var(--color-chocolate-ink) 12%, transparent);
+}
+
+/** Botón de acceso rápido — mismo fondo dorado que la barra superior */
+.topnav-gold-chip {
+  border: 1px solid color-mix(in srgb, var(--color-gold-bright) 52%, var(--color-gold-deep));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 75%, white),
+    0 2px 8px rgba(60, 47, 47, 0.04);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+}
+
+.topnav-gold-chip:hover {
+  border-color: color-mix(in srgb, var(--color-gold-bright) 68%, var(--color-gold-deep));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 90%, white),
+    0 3px 12px rgba(60, 47, 47, 0.06);
+}
+
+.topnav-gold-chip.topnav-link:hover {
+  color: var(--color-chocolate-deep);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-gold-flare) 54%, var(--color-gold-shine)) 0%,
+    color-mix(in srgb, var(--color-gold-shine) 88%, var(--color-gold-soft)) 42%,
+    color-mix(in srgb, var(--color-gold-bright) 62%, var(--color-gold-muted)) 100%
+  );
+}
+
+.topnav-gold-chip.topnav-link--active {
+  color: var(--color-chocolate-ink);
+  font-weight: 600;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--color-gold-flare) 58%, var(--color-gold-shine)) 0%,
+    color-mix(in srgb, var(--color-gold-shine) 90%, var(--color-gold-soft)) 42%,
+    color-mix(in srgb, var(--color-gold-bright) 65%, var(--color-gold-muted)) 100%
+  );
+  border-color: color-mix(in srgb, var(--color-chocolate-ink) 28%, var(--color-gold-bright));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 85%, white),
+    inset 0 0 0 1px color-mix(in srgb, var(--color-chocolate-ink) 18%, transparent),
+    0 2px 10px rgba(60, 47, 47, 0.05);
+}
+
+/** Enlaces y carrito en barra dorada — mismo marrón que titulares (mesa dulce) */
+.topnav-link {
+  color: var(--color-chocolate-ink);
+  font-weight: 500;
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.topnav-link:hover {
+  color: var(--color-chocolate-deep);
+  background: color-mix(in srgb, var(--color-chocolate-ink) 7%, transparent);
+}
+
+.topnav-link--active {
+  color: var(--color-chocolate-ink);
+  font-weight: 600;
+  background: color-mix(in srgb, var(--color-chocolate-ink) 11%, transparent);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--color-chocolate-ink) 22%, transparent);
+}
+
+/** Nombre de marca en logo — legible sobre oro y bandera */
+.logo-brand-title {
+  color: var(--color-chocolate-ink);
+  text-shadow:
+    0 0 10px rgba(255, 252, 245, 0.92),
+    0 0 18px rgba(255, 248, 232, 0.75),
+    0 1px 0 rgba(255, 252, 245, 0.95),
+    0 1px 3px rgba(43, 27, 23, 0.28);
+}
+
+/** Logo «Dulce Venezuela» en nav — recuadro oro metálico (mismo sistema que tarjetas) */
+.logo-brand-frame {
+  border: 2.5px solid transparent;
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--color-gold-flare) 70%, var(--color-gold-shine)) 0%,
+      color-mix(in srgb, var(--color-gold-shine) 88%, var(--color-gold-soft)) 40%,
+      color-mix(in srgb, var(--color-gold-bright) 72%, var(--color-gold-muted)) 100%
+    )
+    padding-box,
+    var(--gradient-gold-border) border-box;
+  box-shadow: var(--shadow-gold-metallic-inset), var(--shadow-gold-metallic-outer);
+}
+
+.logo-brand-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 90%, white);
+}
+
+.dark .logo-brand-frame {
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--color-gold-deep) 35%, #1a120e) 0%,
+      color-mix(in srgb, var(--color-gold) 28%, #2a2220) 100%
+    )
+    padding-box,
+    var(--gradient-gold-border) border-box;
+}
+
+/** Aro interior sobre fotos — oro brillante (mismo lenguaje que mesa-dulce-caption) */
+.ring-gold-frame {
+  box-shadow: var(--shadow-gold-metallic-inset-ring), var(--shadow-gold-metallic-outer);
+}
+
+/** Rótulo «mesa dulce» sobre foto — borde de oro brillante (efecto metal) */
+.mesa-dulce-caption {
+  border: 2.5px solid transparent;
+  background:
+    linear-gradient(
+      color-mix(in srgb, var(--color-chocolate-deep) 90%, transparent),
+      color-mix(in srgb, #1a120e 85%, transparent)
+    )
+    padding-box,
+    var(--gradient-gold-border) border-box;
+  box-shadow: var(--shadow-gold-metallic-inset), var(--shadow-gold-metallic-outer);
+}
+
+.mesa-dulce-caption-text {
+  background: linear-gradient(
+    180deg,
+    var(--color-gold-flare) 0%,
+    var(--color-gold-shine) 35%,
+    var(--color-gold-bright) 72%,
+    var(--color-gold-muted) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.45))
+    drop-shadow(0 0 8px color-mix(in srgb, var(--color-gold-bright) 55%, transparent));
 }
 
 /** Anillo dorado grueso y brillante en botones CTA */
@@ -132,26 +448,30 @@
     0 0 52px -6px color-mix(in srgb, var(--color-gold-flare) 68%, transparent);
 }
 
+/** Marco exterior de tarjetas regalo — oro metálico brillante */
+.glass-panel.glass-panel-gold,
 .glass-panel-gold {
-  border: 2px solid color-mix(in srgb, var(--color-gold-bright) 88%, var(--color-gold-deep));
+  border: 2.5px solid transparent;
+  background:
+    color-mix(in srgb, #ffffff 80%, var(--color-background)) padding-box,
+    var(--gradient-gold-border) border-box;
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 95%, white),
-    inset 0 -2px 0 color-mix(in srgb, var(--color-gold) 38%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--color-gold-shine) 45%, transparent),
-    0 0 0 2px color-mix(in srgb, var(--color-gold-bright) 22%, transparent),
-    0 0 24px -5px color-mix(in srgb, var(--color-gold-bright) 52%, transparent),
-    0 10px 32px -12px rgba(90, 68, 24, 0.18);
+    var(--shadow-gold-metallic-inset),
+    inset 0 -2px 0 color-mix(in srgb, var(--color-gold) 32%, transparent),
+    var(--shadow-gold-metallic-outer),
+    var(--shadow-card);
 }
 
+.glass-panel.glass-panel-gold:hover,
 .glass-panel-gold:hover {
-  border-color: color-mix(in srgb, var(--color-gold-flare) 40%, var(--color-gold-bright));
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 100%, white),
-    inset 0 -2px 0 color-mix(in srgb, var(--color-gold) 45%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--color-gold-shine) 55%, transparent),
-    0 0 0 2px color-mix(in srgb, var(--color-gold-bright) 35%, transparent),
-    0 0 28px -4px color-mix(in srgb, var(--color-gold-bright) 62%, transparent),
-    0 16px 40px -14px rgba(90, 68, 24, 0.24);
+    inset 0 -2px 0 color-mix(in srgb, var(--color-gold) 40%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--color-gold-flare) 70%, transparent),
+    0 0 28px -2px color-mix(in srgb, var(--color-gold-bright) 88%, transparent),
+    0 0 48px -6px color-mix(in srgb, var(--color-gold-flare) 72%, transparent),
+    0 0 72px -12px color-mix(in srgb, var(--color-gold-shine) 55%, transparent),
+    var(--shadow-card-hover);
 }
 
 .price-premium {
@@ -236,13 +556,13 @@
 }
 
 .catalog-featured-tres-leches.glass-panel-gold {
-  border-width: 2.5px;
-  border-color: color-mix(in srgb, var(--color-gold-flare) 38%, var(--color-gold-bright));
+  border: 2.5px solid transparent;
+  background:
+    color-mix(in srgb, #ffffff 80%, var(--color-background)) padding-box,
+    var(--gradient-gold-border) border-box;
   box-shadow:
-    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 100%, white),
-    inset 0 -2px 0 color-mix(in srgb, var(--color-gold) 42%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--color-gold-shine) 55%, transparent),
-    0 0 0 2px color-mix(in srgb, var(--color-gold-bright) 28%, transparent),
-    0 0 32px -4px color-mix(in srgb, var(--color-gold-bright) 62%, transparent),
-    0 14px 44px -14px rgba(90, 68, 24, 0.22);
+    var(--shadow-gold-metallic-inset),
+    inset 0 -2px 0 color-mix(in srgb, var(--color-gold) 38%, transparent),
+    var(--shadow-gold-metallic-outer),
+    var(--shadow-card);
 }

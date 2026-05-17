@@ -93,7 +93,7 @@ export function CategoryProductsPanel({
                   Ningún resultado en{" "}
                   <span className="font-semibold">{category}</span>
                 </p>
-                <p className="max-w-sm text-sm leading-relaxed text-on-surface-variant">
+                <p className="leading-body max-w-sm text-sm text-on-surface-variant">
                   No encontramos «{filterTrim}» entre los dulces de esta categoría.
                   Prueba otras palabras o elige otra categoría.
                 </p>
@@ -103,7 +103,7 @@ export function CategoryProductsPanel({
                 <p className="text-base font-medium text-on-surface">
                   Aún no hay nada en esta categoría
                 </p>
-                <p className="max-w-sm text-sm leading-relaxed text-on-surface-variant">
+                <p className="leading-body max-w-sm text-sm text-on-surface-variant">
                   Pronto añadiremos productos aquí. Mientras tanto, revisa{" "}
                   <strong className="font-semibold text-on-surface">Todos</strong>{" "}
                   u otra categoría en la lista.

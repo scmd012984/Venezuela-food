@@ -45,7 +45,7 @@ export function CartDrawer() {
         onClick={closeDrawer}
       />
       <div
-        className="bg-surface-elevated-strong absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-outline-variant/40 shadow-[-8px_0_40px_-16px_rgba(34,22,16,0.14)] backdrop-blur-md dark:border-slate-600/50 dark:bg-slate-900"
+        className="bg-surface-elevated-strong absolute right-0 top-0 flex h-full w-full max-w-md flex-col border-l border-outline-variant/40 shadow-[-10px_0_30px_rgba(60,47,47,0.05)] backdrop-blur-md dark:border-slate-600/50 dark:bg-slate-900 dark:shadow-[-10px_0_30px_rgba(60,47,47,0.12)]"
         role="dialog"
         aria-modal="true"
         aria-labelledby="cart-drawer-title"
@@ -138,7 +138,7 @@ export function CartDrawer() {
           </div>
           <button
             type="button"
-            className="w-full rounded-full border-2 border-chocolate/20 py-3 text-sm font-semibold text-chocolate-deep transition hover:bg-chocolate-deep/8 dark:hover:bg-chocolate-deep/15"
+            className="btn-text w-full rounded-full border-2 border-chocolate/20 py-3 text-sm text-chocolate-deep transition hover:bg-chocolate-deep/8 dark:hover:bg-chocolate-deep/15"
             onClick={closeDrawer}
           >
             Seguir comprando

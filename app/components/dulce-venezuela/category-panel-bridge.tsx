@@ -6,6 +6,7 @@ import {
   useContext,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import type { CategoryLabel } from "@/lib/catalog-categories";
 
@@ -16,6 +17,8 @@ type CategoryPanelBridgeValue = {
   setOpenCatalogCategory: (fn: OpenCatalogCategoryFn | null) => void;
   /** Accesos rápidos / enlaces externos: abre el panel en esa categoría. */
   openCatalogCategory: (tag: CategoryLabel) => void;
+  activeCategory: CategoryLabel;
+  setActiveCategory: (tag: CategoryLabel) => void;
 };
 
 const CategoryPanelBridgeContext =
@@ -27,6 +30,8 @@ export function CategoryPanelBridgeProvider({
   children: React.ReactNode;
 }) {
   const openerRef = useRef<OpenCatalogCategoryFn | null>(null);
+  const [activeCategory, setActiveCategory] =
+    useState<CategoryLabel>("Todos");
 
   const setOpenCatalogCategory = useCallback(
     (fn: OpenCatalogCategoryFn | null) => {
@@ -40,8 +45,13 @@ export function CategoryPanelBridgeProvider({
   }, []);
 
   const value = useMemo(
-    () => ({ setOpenCatalogCategory, openCatalogCategory }),
-    [setOpenCatalogCategory, openCatalogCategory],
+    () => ({
+      setOpenCatalogCategory,
+      openCatalogCategory,
+      activeCategory,
+      setActiveCategory,
+    }),
+    [setOpenCatalogCategory, openCatalogCategory, activeCategory],
   );
 
   return (

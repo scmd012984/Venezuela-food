@@ -52,7 +52,7 @@ export function LandingHero() {
           >
             Repostería venezolana, hecha hoy.
           </h1>
-          <p className="type-premium-body max-w-md text-base sm:text-lg">
+          <p className="type-premium-body leading-body max-w-md text-base sm:text-lg">
             Cada pieza es un detalle para consentir — para regalar o para un
             capricho solo tuyo.
           </p>
