@@ -17,7 +17,7 @@ export function AdminSectionView({ section }: AdminSectionViewProps) {
         description={section.description}
         icon={section.icon}
       />
-      <AdminStatGrid stats={section.stats} />
+      <AdminStatGrid stats={section.stats} icon={section.icon} />
       <AdminCard title="Listado">
         <AdminDataTable
           columns={section.tableColumns}

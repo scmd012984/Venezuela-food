@@ -5,5 +5,9 @@ type AdminPageShellProps = {
 };
 
 export function AdminPageShell({ children }: AdminPageShellProps) {
-  return <div className="mx-auto max-w-6xl space-y-6">{children}</div>;
+  return (
+    <div className="mx-auto max-w-6xl space-y-6">
+      {children}
+    </div>
+  );
 }

@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import { adminPanelClass } from "@/app/components/admin/admin-styles";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
 
 type AdminPageHeaderProps = {
@@ -13,17 +14,28 @@ export function AdminPageHeader({
   icon: Icon,
 }: AdminPageHeaderProps) {
   return (
-    <header className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-      <div className="flex gap-4">
-        <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
-          <Icon className="size-5" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
+    <header
+      className={`relative overflow-hidden p-6 sm:p-8 ${adminPanelClass}`}
+    >
+      <div
+        className="admin-glow-gold pointer-events-none absolute -right-10 -top-10 size-44 rounded-full blur-2xl"
+        aria-hidden
+      />
+      <div
+        className="admin-glow-bone pointer-events-none absolute -bottom-16 left-1/4 size-36 rounded-full blur-2xl"
+        aria-hidden
+      />
+
+      <div className="relative flex flex-col gap-5 sm:flex-row sm:items-start">
+        <span className="admin-icon-feature size-14 shrink-0">
+          <Icon className="size-6" strokeWidth={LUCIDE_ICON_STROKE} aria-hidden />
         </span>
-        <div className="min-w-0">
-          <p className="text-sm font-medium text-primary">Vista previa</p>
-          <h1 className="mt-0.5 font-headline text-2xl font-semibold text-slate-900 sm:text-3xl">
+        <div className="min-w-0 flex-1">
+          <span className="admin-badge">Vista previa</span>
+          <h1 className="admin-text-heading mt-3 font-headline text-2xl font-semibold sm:text-3xl">
             {title}
           </h1>
-          <p className="mt-2 text-sm leading-relaxed text-slate-600 sm:text-base">
+          <p className="admin-text-muted mt-2 max-w-2xl text-sm leading-relaxed sm:text-base">
             {description}
           </p>
         </div>

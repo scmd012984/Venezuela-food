@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { AdminShell } from "@/app/components/admin/AdminShell";
+import "@/app/styles/admin.css";
 
 export const metadata: Metadata = {
   title: "Admin · Dulce Venezuela",
