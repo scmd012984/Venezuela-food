@@ -27,7 +27,7 @@ const catalogProductThumbHeight = "h-56 sm:h-64 md:h-64";
 
 function matchHighlightClass(active: boolean): string {
   return active
-    ? "z-[2] ring-2 ring-gold-bright/70 ring-offset-2 ring-offset-background shadow-[0_0_0_1px_rgba(201,162,39,0.25)] transition-shadow duration-300"
+    ? "z-[2] ring-[3px] ring-gold-bright ring-offset-2 ring-offset-background shadow-[0_0_0_2px_rgba(250,240,200,0.5),0_0_28px_-5px_rgba(224,184,64,0.5)] transition-shadow duration-300"
     : "";
 }
 
@@ -45,9 +45,9 @@ function productBadgeClass(kind: CatalogProductBadge): string {
     return `${base} bg-emerald-600/95 text-white ring-white/25`;
   }
   if (kind === "masVendido") {
-    return `${base} bg-chocolate text-gold-soft ring-gold-bright/40 shadow-[0_2px_12px_rgba(61,40,23,0.35)]`;
+    return `${base} bg-chocolate text-gold-soft ring-2 ring-gold-bright/70 shadow-[0_2px_12px_rgba(61,40,23,0.35),0_0_14px_-4px_rgba(224,184,64,0.35)]`;
   }
-  return `${base} bg-gold-soft/95 text-chocolate ring-gold-bright/50 shadow-[0_1px_8px_rgba(120,90,30,0.2)]`;
+  return `${base} bg-gold-soft/95 text-chocolate ring-2 ring-gold-bright/80 shadow-[0_1px_8px_rgba(120,90,30,0.2),0_0_14px_-4px_rgba(224,184,64,0.4)]`;
 }
 
 function ProductBadgeStrip({
@@ -121,7 +121,7 @@ export function ProductGrid() {
         </div>
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-6 p-6 sm:flex-row sm:items-end sm:justify-between sm:p-10">
           <div className="gift-caption-box max-w-xl space-y-3 rounded-3xl bg-black/50 px-5 py-4 backdrop-blur-md backdrop-saturate-125 sm:space-y-3 sm:px-6 sm:py-5">
-            <p className="type-eyebrow-gold text-gold-bright drop-shadow-[0_1px_4px_rgba(0,0,0,0.5)]">
+            <p className="type-eyebrow-gold drop-shadow-[0_1px_6px_rgba(224,184,64,0.65)]">
               Capricho artesanal
             </p>
             <h3 className="font-headline text-3xl font-semibold leading-tight tracking-[-0.02em] text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] sm:text-4xl">

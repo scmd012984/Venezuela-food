@@ -45,7 +45,7 @@ export function OccasionsCallout() {
     >
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
         <PartyPopper
-          className="size-10 shrink-0 text-gold-bright sm:size-12"
+          className="size-10 shrink-0 text-gold-bright drop-shadow-[0_0_10px_rgba(224,184,64,0.5)] sm:size-12"
           strokeWidth={LUCIDE_ICON_STROKE}
           aria-hidden
         />

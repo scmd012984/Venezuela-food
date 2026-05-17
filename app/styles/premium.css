@@ -6,7 +6,17 @@
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--color-gold-bright);
+  background: linear-gradient(
+    180deg,
+    var(--color-gold-flare) 0%,
+    var(--color-gold-shine) 28%,
+    var(--color-gold-bright) 55%,
+    var(--color-gold) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 1px color-mix(in srgb, var(--color-gold-bright) 55%, transparent));
 }
 
 .type-premium-display {
@@ -42,22 +52,51 @@
   color: color-mix(in srgb, var(--color-chocolate) 72%, var(--color-on-surface-variant));
 }
 
-.glass-panel-gold {
-  border: 1px solid color-mix(in srgb, var(--color-gold-bright) 42%, var(--color-outline-variant));
+/* Separadores y marcos dorados */
+.border-gold-separator {
+  border-color: color-mix(in srgb, var(--color-gold-bright) 72%, var(--color-gold-deep));
+  border-style: solid;
+}
+
+.border-gold-separator-t {
+  border-top-width: 2px;
+}
+
+.border-gold-separator-b {
+  border-bottom-width: 2px;
+}
+
+.border-gold-separator-l {
+  border-left-width: 2px;
+}
+
+.ring-gold-frame {
   box-shadow:
-    inset 0 1px 0 rgba(255, 252, 245, 0.95),
-    inset 0 0 0 1px color-mix(in srgb, var(--color-gold-soft) 65%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--color-gold) 12%, transparent),
-    0 8px 28px -12px rgba(90, 68, 24, 0.14);
+    inset 0 0 0 2px color-mix(in srgb, var(--color-gold-flare) 70%, transparent),
+    inset 0 0 0 3.5px color-mix(in srgb, var(--color-gold-bright) 82%, var(--color-gold-deep)),
+    0 0 16px -3px color-mix(in srgb, var(--color-gold-bright) 58%, transparent);
+}
+
+.glass-panel-gold {
+  border: 2px solid color-mix(in srgb, var(--color-gold-bright) 88%, var(--color-gold-deep));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 95%, white),
+    inset 0 -2px 0 color-mix(in srgb, var(--color-gold) 38%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--color-gold-shine) 45%, transparent),
+    0 0 0 2px color-mix(in srgb, var(--color-gold-bright) 22%, transparent),
+    0 0 24px -5px color-mix(in srgb, var(--color-gold-bright) 52%, transparent),
+    0 10px 32px -12px rgba(90, 68, 24, 0.18);
 }
 
 .glass-panel-gold:hover {
-  border-color: color-mix(in srgb, var(--color-gold-bright) 58%, var(--color-gold-muted));
+  border-color: color-mix(in srgb, var(--color-gold-flare) 40%, var(--color-gold-bright));
   box-shadow:
-    inset 0 1px 0 rgba(255, 253, 248, 1),
-    inset 0 0 0 1px color-mix(in srgb, var(--color-gold-soft) 80%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--color-gold-bright) 22%, transparent),
-    0 14px 36px -14px rgba(90, 68, 24, 0.2);
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 100%, white),
+    inset 0 -2px 0 color-mix(in srgb, var(--color-gold) 45%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--color-gold-shine) 55%, transparent),
+    0 0 0 2px color-mix(in srgb, var(--color-gold-bright) 35%, transparent),
+    0 0 28px -4px color-mix(in srgb, var(--color-gold-bright) 62%, transparent),
+    0 16px 40px -14px rgba(90, 68, 24, 0.24);
 }
 
 .price-premium {
@@ -67,11 +106,12 @@
   align-items: center;
   justify-content: center;
   border-radius: 1rem;
-  border: 1px solid color-mix(in srgb, var(--color-gold-bright) 45%, var(--color-gold-muted));
+  border: 2px solid color-mix(in srgb, var(--color-gold-bright) 85%, var(--color-gold-deep));
   background: linear-gradient(
     165deg,
-    #fffef9 0%,
-    color-mix(in srgb, var(--color-gold-soft) 35%, #ffffff) 100%
+    var(--color-vanilla-bright) 0%,
+    color-mix(in srgb, var(--color-gold-soft) 65%, var(--color-vanilla)) 50%,
+    color-mix(in srgb, var(--color-gold-muted) 45%, var(--color-vanilla)) 100%
   );
   padding-inline: 1rem;
   font-family: var(--font-headline);
@@ -81,8 +121,10 @@
   letter-spacing: -0.02em;
   color: var(--color-chocolate-deep);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    0 2px 10px -4px rgba(90, 68, 24, 0.15);
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-flare) 85%, white),
+    inset 0 -1px 0 color-mix(in srgb, var(--color-gold) 25%, transparent),
+    0 0 14px -4px color-mix(in srgb, var(--color-gold-bright) 48%, transparent),
+    0 2px 10px -4px rgba(90, 68, 24, 0.2);
 }
 
 @media (min-width: 640px) {
@@ -93,20 +135,29 @@
 }
 
 .premium-divider-gold {
-  height: 1px;
-  width: 3rem;
+  height: 2.5px;
+  width: 4rem;
+  border-radius: 2px;
   background: linear-gradient(
     90deg,
     transparent,
-    var(--color-gold-bright),
+    var(--color-gold-shine) 15%,
+    var(--color-gold-flare) 35%,
+    var(--color-gold-bright) 50%,
+    var(--color-gold-shine) 65%,
+    var(--color-gold-bright) 85%,
     transparent
   );
+  box-shadow:
+    0 0 12px color-mix(in srgb, var(--color-gold-bright) 65%, transparent),
+    0 0 4px color-mix(in srgb, var(--color-gold-shine) 80%, transparent);
 }
 
 .gift-caption-box {
-  border: 1px solid color-mix(in srgb, var(--color-gold-bright) 55%, rgba(255, 255, 255, 0.35));
+  border: 2px solid color-mix(in srgb, var(--color-gold-bright) 88%, var(--color-gold-shine));
   box-shadow:
-    inset 0 1px 0 rgba(255, 252, 245, 0.2),
+    inset 0 1px 0 color-mix(in srgb, var(--color-gold-shine) 50%, transparent),
     0 8px 32px -10px rgba(0, 0, 0, 0.45),
-    0 0 0 1px color-mix(in srgb, var(--color-gold) 15%, transparent);
+    0 0 0 1px color-mix(in srgb, var(--color-gold-bright) 35%, transparent),
+    0 0 20px -4px color-mix(in srgb, var(--color-gold-bright) 52%, transparent);
 }

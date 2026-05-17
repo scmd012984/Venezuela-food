@@ -8,11 +8,12 @@ export type CtaLink = {
 };
 
 /** Tarjeta tipo regalo: borde dorado y elevación cálida */
-export const giftPanelClass = "glass-panel glass-panel-gold shadow-card-soft";
+export const giftPanelClass =
+  "glass-panel glass-panel-gold shadow-card-soft shadow-card-gold";
 
 /** Elevación al pasar el ratón — acento dorado */
 export const cardHoverLiftClass =
-  "transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-0.5 hover:border-gold-bright/45 hover:shadow-[0_1px_0_rgba(255,255,255,0.85)_inset,0_14px_40px_-14px_rgba(120,90,30,0.22),0_4px_14px_-6px_rgba(61,40,23,0.1)]";
+  "transition-[transform,box-shadow,border-color] duration-300 hover:-translate-y-0.5 hover:shadow-[0_1px_0_rgba(255,248,220,0.95)_inset,0_0_0_2px_rgba(224,184,64,0.28),0_0_32px_-6px_rgba(224,184,64,0.48),0_16px_44px_-14px_rgba(120,90,30,0.26),0_4px_14px_-6px_rgba(61,40,23,0.12)]";
 
 export const premiumEyebrowClass = "type-eyebrow-gold";
 

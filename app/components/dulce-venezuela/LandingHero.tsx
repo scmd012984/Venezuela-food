@@ -24,7 +24,7 @@ export function LandingHero() {
       href: "#catalogo",
       label: "Ver catálogo",
       className:
-        "shadow-card-soft inline-flex h-12 min-h-12 items-center justify-center rounded-full bg-cta-warm px-8 text-sm font-semibold text-on-cta-warm ring-1 ring-gold-bright/30 transition duration-200 hover:-translate-y-0.5 hover:bg-cta-warm-hover hover:shadow-[0_12px_32px_-10px_rgba(196,29,82,0.48)] active:scale-[0.98]",
+        "shadow-card-soft inline-flex h-12 min-h-12 items-center justify-center rounded-full bg-cta-warm px-8 text-sm font-semibold text-on-cta-warm ring-2 ring-gold-bright/65 transition duration-200 hover:-translate-y-0.5 hover:bg-cta-warm-hover hover:ring-gold-shine/80 hover:shadow-[0_12px_32px_-10px_rgba(196,29,82,0.48),0_0_22px_-4px_rgba(224,184,64,0.45)] active:scale-[0.98]",
     },
     {
       href: waContactHref,
@@ -33,7 +33,7 @@ export function LandingHero() {
       target: openWhatsAppInNewTab ? "_blank" : undefined,
       rel: openWhatsAppInNewTab ? "noopener noreferrer" : undefined,
       className:
-        "inline-flex h-12 min-h-12 items-center justify-center rounded-full border-2 border-gold-bright/45 bg-white px-6 text-sm font-semibold text-chocolate shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-gold-bright/65 hover:bg-gold-soft active:scale-[0.98]",
+        "inline-flex h-12 min-h-12 items-center justify-center rounded-full border-[2.5px] border-gold-bright bg-white px-6 text-sm font-semibold text-chocolate shadow-[0_0_16px_-4px_rgba(224,184,64,0.35)] transition duration-200 hover:-translate-y-0.5 hover:border-gold-flare hover:bg-gold-soft hover:shadow-[0_0_24px_-4px_rgba(224,184,64,0.5)] active:scale-[0.98]",
     },
   ];
 

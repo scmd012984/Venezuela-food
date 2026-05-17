@@ -55,7 +55,7 @@ export function CategoryProductsPanel({
       role="region"
       aria-labelledby="category-panel-title"
     >
-      <div className="flex items-center justify-between gap-2 border-b border-gold-bright/25 bg-gold-soft/25 px-3 py-2.5 sm:px-4 sm:py-3 md:px-5 md:py-3.5">
+      <div className="border-gold-separator border-gold-separator-b flex items-center justify-between gap-2 bg-gold-soft/30 px-3 py-2.5 sm:px-4 sm:py-3 md:px-5 md:py-3.5">
         <h2
           id="category-panel-title"
           className="type-premium-product-title min-w-0 truncate text-base sm:text-lg md:text-xl"
@@ -126,9 +126,9 @@ export function CategoryProductsPanel({
               return (
                 <li
                   key={productId}
-                  className="flex min-h-0 min-w-0 items-start gap-3 rounded-xl border border-gold-bright/28 bg-surface-container-low/90 p-3 shadow-[inset_0_1px_0_rgba(255,252,245,0.9)] sm:gap-4 sm:rounded-2xl sm:p-4 md:gap-5 md:p-5"
+                  className="flex min-h-0 min-w-0 items-start gap-3 rounded-xl border-2 border-gold-bright/75 bg-surface-container-low/90 p-3 shadow-[inset_0_1px_0_rgba(255,248,220,0.9),0_0_16px_-5px_rgba(224,184,64,0.32)] sm:gap-4 sm:rounded-2xl sm:p-4 md:gap-5 md:p-5"
                 >
-                  <div className="group relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border border-gold-bright/35 bg-slate-200/80 shadow-[inset_0_1px_0_rgba(255,255,255,0.65)] min-[380px]:h-[5.25rem] min-[380px]:w-[5.25rem] min-[380px]:rounded-xl sm:h-24 sm:w-24 md:h-[7.25rem] md:w-[7.25rem] md:rounded-2xl lg:h-32 lg:w-32 dark:border-slate-600/50 dark:bg-slate-800/90">
+                  <div className="group relative h-20 w-20 shrink-0 overflow-hidden rounded-lg border-2 border-gold-bright/80 bg-slate-200/80 shadow-[inset_0_1px_0_rgba(255,248,220,0.85),0_0_14px_-4px_rgba(224,184,64,0.38)] min-[380px]:h-[5.25rem] min-[380px]:w-[5.25rem] min-[380px]:rounded-xl sm:h-24 sm:w-24 md:h-[7.25rem] md:w-[7.25rem] md:rounded-2xl lg:h-32 lg:w-32 dark:border-slate-600/50 dark:bg-slate-800/90">
                     <CatalogProductImage
                       productId={productId as CatalogProductId}
                       src={p.imageUrl}
