@@ -1,11 +1,17 @@
-/* Tema Dulce Venezuela — fondo crema orgánico (#FFFDF5) + acentos */
+/* Tema Dulce Venezuela — vainilla suave + acentos cálidos */
 
 @theme {
-  /* Neutros cálidos (papel / crema, sin gris azulado) */
+  /* Vainilla (más cálida que crema casi blanco #FFFDF5) */
+  --color-vanilla: #f5ebe0;
+  --color-vanilla-deep: #ede0cf;
+  --color-vanilla-muted: #e6d9c8;
+  --color-vanilla-bright: #faf4eb;
+
+  /* Neutros cálidos (papel / vainilla, sin gris azulado) */
   --color-surface-dim: #cfc5b6;
   --color-on-error: #ffffff;
-  --color-surface-container-lowest: #fffdf8;
-  --color-surface-container-high: #e5dccf;
+  --color-surface-container-lowest: #faf4eb;
+  --color-surface-container-high: #e2d6c4;
   --color-on-primary-container: #9eb2ff;
   --color-surface-container-highest: #dbd1c2;
   --color-on-secondary-container: #5a4d00;
@@ -15,27 +21,27 @@
   --color-on-background: #1c1a17;
   --color-on-primary: #ffffff;
   --color-tertiary-fixed: #ffdad7;
-  --color-surface-variant: #eae2d6;
+  --color-surface-variant: #e8dece;
   --color-on-secondary-fixed: #221b00;
   --color-inverse-on-surface: #faf7f0;
   --color-on-primary-fixed: #001550;
   --color-tertiary: #5a0009;
   --color-inverse-primary: #b6c4ff;
-  --color-surface-container-low: #f8f3ea;
+  --color-surface-container-low: #f0e6d6;
   --color-outline: #887f72;
   --color-on-primary-fixed-variant: #133ca8;
   --color-primary-fixed-dim: #b6c4ff;
   --color-error-container: #ffdad6;
-  --color-background: #fffdf5;
-  --color-surface: #fffdf5;
+  --color-background: #f5ebe0;
+  --color-surface: #f7f0e4;
   --color-on-error-container: #93000a;
   --color-primary: #0c2463;
   --color-secondary: #6b5a00;
   --color-on-tertiary: #ffffff;
   --color-error: #b3261e;
   --color-secondary-fixed-dim: #e0bc00;
-  --color-surface-container: #efe7db;
-  --color-surface-bright: #fffef8;
+  --color-surface-container: #ebe1d2;
+  --color-surface-bright: #fcf7ee;
   --color-inverse-surface: #2c2925;
   --color-on-surface: #1c1a17;
   --color-on-secondary-fixed-variant: #544600;
@@ -56,11 +62,14 @@
   --color-cta-warm-soft: #fff0f5;
   --color-on-cta-warm: #ffffff;
 
-  /* Regalo / premium — dorado horneado + chocolate */
-  --color-gold: #a67c00;
-  --color-gold-bright: #c9a227;
-  --color-gold-soft: #f8ecd4;
-  --color-gold-muted: #e5d4a8;
+  /* Regalo / premium — oro metálico + chocolate */
+  --color-gold-deep: #5c4308;
+  --color-gold: #a67c0a;
+  --color-gold-bright: #e0b840;
+  --color-gold-shine: #faf0c8;
+  --color-gold-flare: #fff8e0;
+  --color-gold-soft: #faf0d4;
+  --color-gold-muted: #edd06a;
   --color-chocolate: #4a3228;
   --color-chocolate-deep: #3d2817;
 

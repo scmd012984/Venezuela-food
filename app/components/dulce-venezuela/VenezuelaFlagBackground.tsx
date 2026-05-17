@@ -44,7 +44,7 @@ export function VenezuelaFlagBackground() {
       </svg>
 
       <div className="absolute inset-0 bg-background/88 backdrop-blur-[3px] saturate-[1.02]" />
-      <div className="absolute inset-0 bg-linear-to-b from-[#fffdf5]/45 via-transparent to-[#f3ebe0]/40" />
+      <div className="absolute inset-0 bg-linear-to-b from-vanilla-bright/50 via-transparent to-vanilla-deep/45" />
     </div>
   );
 }
