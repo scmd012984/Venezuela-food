@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useId, useState } from "react";
 import { ADMIN_NAV_ITEMS } from "@/app/components/admin/admin-nav";
+import { getAdminSectionByPath } from "@/lib/admin/sections";
 import { LUCIDE_ICON_STROKE } from "@/lib/lucide-icon-stroke";
 
 type AdminShellProps = {
@@ -15,6 +16,8 @@ export function AdminShell({ children }: AdminShellProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const pathname = usePathname();
   const navId = useId();
+  const activeSection = getAdminSectionByPath(pathname);
+  const headerTitle = activeSection?.title ?? "Panel de administración";
 
   useEffect(() => {
     if (!sidebarOpen) return;
@@ -65,55 +68,49 @@ export function AdminShell({ children }: AdminShellProps) {
           <ul className="space-y-0.5">
             {ADMIN_NAV_ITEMS.map((item) => {
               const Icon = item.icon;
-              const isActive = !item.disabled && pathname === item.href;
-              const className = item.disabled
-                ? "flex cursor-not-allowed items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-slate-400"
-                : isActive
-                  ? "flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2.5 text-sm font-semibold text-primary"
-                  : "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-primary";
-
-              const content = (
-                <>
-                  <Icon
-                    className="size-5 shrink-0"
-                    strokeWidth={LUCIDE_ICON_STROKE}
-                    aria-hidden
-                  />
-                  <span className="truncate">{item.label}</span>
-                  {item.disabled ? (
-                    <span className="ml-auto rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide text-slate-400">
-                      Pronto
-                    </span>
-                  ) : null}
-                </>
-              );
+              const isActive = pathname === item.href;
+              const className = isActive
+                ? "flex items-center gap-3 rounded-lg bg-primary/10 px-3 py-2.5 text-sm font-semibold text-primary"
+                : "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-primary";
 
               return (
-                <li key={item.label}>
-                  {item.disabled ? (
-                    <span className={className} aria-disabled>
-                      {content}
-                    </span>
-                  ) : (
-                    <Link
-                      href={item.href}
-                      className={className}
-                      onClick={() => {
-                        if (window.matchMedia("(max-width: 1023px)").matches) {
-                          setSidebarOpen(false);
-                        }
-                      }}
-                    >
-                      {content}
-                    </Link>
-                  )}
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className={className}
+                    aria-current={isActive ? "page" : undefined}
+                    onClick={() => {
+                      if (window.matchMedia("(max-width: 1023px)").matches) {
+                        setSidebarOpen(false);
+                      }
+                    }}
+                  >
+                    <Icon
+                      className="size-5 shrink-0"
+                      strokeWidth={LUCIDE_ICON_STROKE}
+                      aria-hidden
+                    />
+                    <span className="truncate">{item.label}</span>
+                  </Link>
                 </li>
               );
             })}
           </ul>
         </nav>
 
-        <div className="border-t border-slate-200 p-3">
+        <div className="space-y-2 border-t border-slate-200 p-3">
+          <Link
+            href="/admin"
+            className={[
+              "flex items-center justify-center rounded-lg px-3 py-2 text-sm font-medium transition",
+              pathname === "/admin"
+                ? "bg-primary/10 text-primary"
+                : "border border-slate-200 text-slate-600 hover:border-primary/30 hover:bg-primary/5 hover:text-primary",
+            ].join(" ")}
+            aria-current={pathname === "/admin" ? "page" : undefined}
+          >
+            Panel
+          </Link>
           <Link
             href="/"
             className="flex items-center justify-center rounded-lg border border-slate-200 px-3 py-2 text-sm font-medium text-slate-600 transition hover:border-primary/30 hover:bg-primary/5 hover:text-primary"
@@ -137,7 +134,7 @@ export function AdminShell({ children }: AdminShellProps) {
           </button>
           <div className="min-w-0 flex-1">
             <h1 className="truncate font-headline text-base font-semibold text-slate-900 sm:text-lg">
-              Panel de administración
+              {headerTitle}
             </h1>
           </div>
         </header>
